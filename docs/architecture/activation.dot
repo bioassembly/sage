@@ -1,0 +1,29 @@
+digraph "activation" {
+  graph [rankdir=TB, bgcolor="white", pad="0.22", ranksep="0.40", nodesep="0.28", outputorder="edgesfirst"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=13, fontcolor="#173341", color="#52737d", fillcolor="#eff5f7", margin="0.17,0.12", penwidth=1.2];
+  edge [fontname="Helvetica", fontsize=10, fontcolor="#315765", color="#63818b", arrowsize=0.7];
+  choose [label="1 · Select the client and destination", fillcolor="#d7eee6"];
+  pre [label="2 · Validate the profile and packages"];
+  stage [label="3 · Stage settings, skills and hooks\nRead existing files and ownership"];
+  stop [label="4a · Report the plan or conflict\nEnd before applying files", fillcolor="#fcf1d9"];
+  journal [label="4b · Write a private journal\nPrevious and intended states"];
+  apply [label="5 · Apply staged entries"];
+  fail [label="6a · Roll back completed writes", fillcolor="#fcf1d9"];
+  restart [label="6b · Restart the native client", fillcolor="#dcebf8", URL="index.html#routing", target="_top"];
+  restore [label="7 · Compare files with the journal"];
+  keep [label="8a · Preserve later edits\nReport the conflicting path", fillcolor="#fcf1d9"];
+  undo [label="8b · Restore previous entries\nApply in reverse order", fillcolor="#dcebf8"];
+  { rank=same; stop; journal; }
+  { rank=same; fail; restart; }
+  { rank=same; keep; undo; }
+  choose -> pre;
+  pre -> stage [label="valid"];
+  stage -> stop [label="dry run or conflict"];
+  stage -> journal [label="apply"];
+  journal -> apply;
+  apply -> fail [label="write fails"];
+  apply -> restart [label="success"];
+  restart -> restore [label="restore requested"];
+  restore -> keep [label="conflict"];
+  restore -> undo [label="compatible"];
+}

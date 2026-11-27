@@ -1,0 +1,26 @@
+digraph "language-tools" {
+  graph [rankdir=TB, bgcolor="white", pad="0.22", ranksep="0.40", nodesep="0.28", outputorder="edgesfirst"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=13, fontcolor="#173341", color="#52737d", fillcolor="#eff5f7", margin="0.17,0.12", penwidth=1.2];
+  edge [fontname="Helvetica", fontsize=10, fontcolor="#315765", color="#63818b", arrowsize=0.7];
+  start [label="1 · Read the client’s tool selections", fillcolor="#d7eee6"];
+  mcp [label="2a · Resolve MCP registrations\nDefaults and explicit opt-ins"];
+  lsp [label="2b · Resolve language servers\nCommands, extensions and package pins"];
+  cfg [label="3a · Merge native MCP settings\nRetain user registrations and toggles"];
+  native [label="3b · Set native LSP commands\nOpenCode only"];
+  provision [label="3c · Check local executables\nsage.py lsp CLIENT"];
+  use [label="4a · Invoke an enabled MCP service\nDocumentation or semantic tools", fillcolor="#dcebf8"];
+  ready [label="4b · Make the executable available\nUse PATH or request installation"];
+  lang [label="5 · Open a matching file in OpenCode\nStart its registered language server", fillcolor="#dcebf8"];
+  { rank=same; mcp; lsp; }
+  { rank=same; cfg; native; provision; }
+  { rank=same; use; ready; }
+  start -> mcp [label="MCP selected"];
+  start -> lsp [label="LSP selected"];
+  mcp -> cfg [label="install"];
+  lsp -> native [label="OpenCode install"];
+  lsp -> provision [label="explicit LSP command"];
+  cfg -> use [label="session calls service"];
+  provision -> ready [label="already present or --install"];
+  native -> lang [label="file extension matches"];
+  ready -> lang [label="OpenCode can find binary"];
+}

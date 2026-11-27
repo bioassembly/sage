@@ -1,0 +1,659 @@
+{
+  "biopython": {
+    "category": "bioinformatics",
+    "summary": "FASTA/GenBank/PDB parsing, phylogenetics, BLAST and NCBI Entrez",
+    "files": [
+      "*.fasta",
+      "*.fa",
+      "*.fna",
+      "*.faa",
+      "*.gb",
+      "*.gbk",
+      "*.pdb"
+    ],
+    "deps": [
+      "biopython"
+    ],
+    "patterns": [
+      "\\bbiopython\\b",
+      "\\bbio\\.entrez\\b",
+      "\\b(fasta|genbank|pdb|blast|phylogenet|motif)\\b"
+    ]
+  },
+  "codebase-design": {
+    "category": "architecture",
+    "summary": "Deep modules, interface seams, testability and AI-navigable architecture",
+    "patterns": [
+      "\\bmodule design\\b",
+      "\\barchitecture\\b",
+      "\\binterface seam\\b",
+      "\\brefactor\\b"
+    ]
+  },
+  "differential-review": {
+    "category": "security",
+    "summary": "Security-focused diff, blast radius and git blame regression review",
+    "patterns": [
+      "\\bdifferential review\\b",
+      "\\bdiff review\\b",
+      "\\bblast radius\\b",
+      "\\bpr security\\b"
+    ]
+  },
+  "doctor": {
+    "category": "meta",
+    "summary": "Check the installed client profile and language tool availability",
+    "patterns": [
+      "^/doctor\\b",
+      "\\bharness health\\b",
+      "\\bdoctor diagnostics\\b"
+    ]
+  },
+  "domain-modeling": {
+    "category": "architecture",
+    "summary": "Domain glossary (GLOSSARY.md) and architecture decision records (ADRs)",
+    "patterns": [
+      "\\bdomain[- ]model(?:ing)?\\b",
+      "\\b(?:build|create|define|draft|edit|maintain|record|refine|revise|update|write)\\b(?:\\s+[\\w-]+){0,5}\\s+(?:glossary|adrs?|architecture decision records?|domain terminology|ubiquitous language)\\b",
+      "\\badd\\b[^.!?\\n]{0,60}\\bto (?:the |our )?glossary\\b"
+    ]
+  },
+  "fair-data-principles": {
+    "category": "bioinformatics",
+    "summary": "FAIR dataset packaging, metadata dictionaries and scientific provenance",
+    "files": [
+      "codemeta.json",
+      "ro-crate-metadata.json",
+      "datapackage.json"
+    ],
+    "patterns": [
+      "\\bfair data\\b",
+      "\\bro-crate\\b",
+      "\\bmetadata dictionary\\b",
+      "\\b(zenodo|figshare|ena|sra)\\b"
+    ]
+  },
+  "first-principles-explainer": {
+    "category": "science",
+    "summary": "First-principles breakdowns of complex pipelines and discrepancies",
+    "patterns": [
+      "\\bfirst principles\\b",
+      "\\bexplain why\\b",
+      "\\bdiscrepancy\\b",
+      "\\bfrom scratch intuition\\b"
+    ]
+  },
+  "github-repo-best-practices": {
+    "category": "planning",
+    "summary": "Top-standard README, citation, community health and release layout",
+    "files": [
+      "CITATION.cff",
+      ".github/PULL_REQUEST_TEMPLATE.md"
+    ],
+    "patterns": [
+      "\\baudit.*repo\\b",
+      "\\bwrite.*readme\\b",
+      "\\bcitation\\.cff\\b",
+      "\\brelease setup\\b"
+    ]
+  },
+  "grill-with-docs": {
+    "category": "architecture",
+    "summary": "Design interview maintaining glossary and significant ADRs",
+    "companions": [
+      "grilling",
+      "domain-modeling"
+    ],
+    "invocation_aliases": [
+      "sage-grill-with-docs",
+      "design interview"
+    ]
+  },
+  "grilling": {
+    "category": "architecture",
+    "summary": "Interactive design questioning to resolve tradeoffs",
+    "patterns": [
+      "\\bgrill me\\b",
+      "\\bgrilling\\b"
+    ]
+  },
+  "mcp-builder": {
+    "category": "tooling",
+    "summary": "Design and evaluate FastMCP / TypeScript MCP servers",
+    "deps": [
+      "fastmcp",
+      "@modelcontextprotocol/sdk"
+    ],
+    "patterns": [
+      "\\bmcp server\\b",
+      "\\bfastmcp\\b",
+      "\\bmodel context protocol\\b",
+      "\\bmcp tool\\b"
+    ]
+  },
+  "nextflow": {
+    "category": "bioinformatics",
+    "summary": "Nextflow DSL2 / nf-core pipelines and HPC/SLURM workflows",
+    "files": [
+      "*.nf",
+      "nextflow.config",
+      "nf-test.config",
+      "modules.json"
+    ],
+    "dirs": [
+      "subworkflows",
+      "conf"
+    ],
+    "deps": [
+      "nextflow"
+    ],
+    "patterns": [
+      "\\bnextflow\\b",
+      "\\bnf-core\\b",
+      "\\bdsl2\\b",
+      "\\bnf-test\\b",
+      "\\bslurm\\b"
+    ],
+    "companions": [
+      "fair-data-principles"
+    ]
+  },
+  "overnight-explorer": {
+    "category": "research",
+    "summary": "Deep unattended multi-branch exploration and reproducible logs",
+    "patterns": [
+      "\\bovernight\\b",
+      "\\bwhile i('m| am)? (away|asleep)\\b",
+      "\\bautonomous exploration\\b"
+    ]
+  },
+  "pdf-inplace-editing": {
+    "category": "documents",
+    "summary": "Zero-drift PDF editing and true anonymization/redaction",
+    "patterns": [
+      "\\bpdf\\b",
+      "\\bredact\\b",
+      "\\banonymiz"
+    ]
+  },
+  "pipeline-sketch-results": {
+    "category": "science",
+    "summary": "Package pipeline outputs into clean numbered deliverables",
+    "patterns": [
+      "\\bresults/? folder\\b",
+      "\\bclient-facing\\b",
+      "\\bpublish pipeline results\\b",
+      "\\bdeliverable\\b"
+    ]
+  },
+  "pysam": {
+    "category": "bioinformatics",
+    "summary": "SAM/BAM/CRAM, VCF/BCF, FASTQ, tabix, pileup and coverage workflows",
+    "files": [
+      "*.bam",
+      "*.cram",
+      "*.sam",
+      "*.vcf",
+      "*.vcf.gz",
+      "*.bcf",
+      "*.fastq",
+      "*.fastq.gz",
+      "*.fq",
+      "*.fq.gz",
+      "*.bed"
+    ],
+    "deps": [
+      "pysam",
+      "cyvcf2",
+      "htslib"
+    ],
+    "patterns": [
+      "\\bpysam\\b",
+      "\\bhtslib\\b",
+      "\\b(bam|cram|sam|vcf|bcf|fastq|tabix|pileup)\\b",
+      "\\bpromethion\\b",
+      "\\brev(io)?\\b",
+      "\\bepi2me\\b"
+    ]
+  },
+  "read-only": {
+    "category": "meta",
+    "summary": "Strictly read-only codebase inspection mode",
+    "patterns": [
+      "^/read-only\\b",
+      "\\bread[- ]only mode\\b",
+      "\\bno edits\\b"
+    ]
+  },
+  "red-team": {
+    "category": "meta",
+    "summary": "Check an implementation plan for failure modes and untested assumptions",
+    "patterns": [
+      "^/(?:sage-)?red-team\\b",
+      "\\bstress[- ]test (?:the |this )?plan\\b",
+      "\\bred[- ]team (?:the |this )?plan\\b"
+    ]
+  },
+  "review": {
+    "category": "quality",
+    "summary": "Review a diff for concrete defects and regressions",
+    "patterns": [
+      "^/sage-review\\b",
+      "\\breview (?:the |this )?(?:diff|pull request|changes)\\b"
+    ]
+  },
+  "sage-binary-inspection": {
+    "category": "tooling",
+    "summary": "Inspect binaries, bytecode, wheels or minified bundles cleanly",
+    "patterns": [
+      "\\breverse[- ]engineer\\b",
+      "\\bdecompil",
+      "\\bdisassembl",
+      "\\bbytecode\\b",
+      "\\bminified bundle\\b"
+    ]
+  },
+  "sage-explain": {
+    "category": "science",
+    "summary": "First-principles explanations of algorithms and discrepancies",
+    "patterns": [
+      "\\bfirst principles\\b",
+      "\\bexplain why\\b",
+      "\\bdiscrepancy\\b"
+    ]
+  },
+  "sage-fair-data": {
+    "category": "science",
+    "summary": "FAIR data/metadata packaging and scientific reproducibility",
+    "files": [
+      "codemeta.json",
+      "ro-crate-metadata.json",
+      "datapackage.json"
+    ],
+    "patterns": [
+      "\\bfair data\\b",
+      "\\bro-crate\\b",
+      "\\bmetadata dictionary\\b"
+    ]
+  },
+  "sage-genomics": {
+    "category": "bioinformatics",
+    "summary": "Nextflow/nf-core, BAM/CRAM/VCF/FASTQ and QC genomics workflows",
+    "files": [
+      "*.nf",
+      "nextflow.config",
+      "nf-test.config",
+      "*.bam",
+      "*.cram",
+      "*.vcf",
+      "*.vcf.gz",
+      "*.fastq",
+      "*.fastq.gz",
+      "*.fq",
+      "*.fq.gz"
+    ],
+    "deps": [
+      "nextflow",
+      "pysam",
+      "cyvcf2"
+    ],
+    "patterns": [
+      "\\bnextflow\\b",
+      "\\bnf-core\\b",
+      "\\bpysam\\b",
+      "\\b(bam|cram|vcf|fastq|pileup|slurm)\\b",
+      "\\bpromethion\\b"
+    ],
+    "companions": [
+      "sage-fair-data"
+    ]
+  },
+  "sage-git-worktrees": {
+    "category": "git",
+    "summary": "Isolated git worktrees for parallel work",
+    "patterns": [
+      "\\bworktree\\b",
+      "\\bisolated branch\\b"
+    ]
+  },
+  "sage-harness-eval": {
+    "category": "meta",
+    "summary": "Evaluate harness and prompt changes with assertions",
+    "dirs": [
+      "evals"
+    ],
+    "files": [
+      "SKILL.md",
+      "third_party/lock.json"
+    ],
+    "patterns": [
+      "\\bevaluate skill\\b",
+      "\\ba/b compare\\b",
+      "\\bharness eval\\b"
+    ]
+  },
+  "sage-mcp-builder": {
+    "category": "tooling",
+    "summary": "MCP server design and protocol evaluation",
+    "deps": [
+      "fastmcp",
+      "@modelcontextprotocol/sdk"
+    ],
+    "patterns": [
+      "\\bmcp server\\b",
+      "\\bfastmcp\\b",
+      "\\bmodel context protocol\\b"
+    ]
+  },
+  "sage-overnight": {
+    "category": "research",
+    "summary": "Unattended deep exploration with verified findings logs",
+    "patterns": [
+      "\\bovernight\\b",
+      "\\bwhile i('m| am)? (away|asleep)\\b",
+      "\\bautonomous exploration\\b"
+    ]
+  },
+  "sage-pdf-editing": {
+    "category": "documents",
+    "summary": "In-place PDF editing and true anonymization/redaction",
+    "patterns": [
+      "\\bpdf\\b",
+      "\\bredact\\b",
+      "\\banonymiz"
+    ]
+  },
+  "sage-results-package": {
+    "category": "science",
+    "summary": "Package pipeline outputs into clean client deliverables",
+    "patterns": [
+      "\\bresults/? folder\\b",
+      "\\bclient-facing\\b",
+      "\\bdeliverable\\b"
+    ]
+  },
+  "sage-scientific-report": {
+    "category": "science",
+    "summary": "Statistical figures, Quarto/scientific report QC and bias checks",
+    "files": [
+      "*.qmd",
+      "*.Rmd",
+      "_quarto.yml"
+    ],
+    "deps": [
+      "matplotlib",
+      "seaborn",
+      "plotly",
+      "scipy",
+      "statsmodels"
+    ],
+    "patterns": [
+      "\\bquarto\\b",
+      "\\b\\.qmd\\b",
+      "\\b(volcano|heatmap|boxplot|violin|p[- ]?value)\\b",
+      "\\bscientific report\\b"
+    ],
+    "companions": [
+      "sage-fair-data"
+    ]
+  },
+  "sage-security-audit": {
+    "category": "security",
+    "summary": "Web/API security audit for auth, injection, XSS, CSRF and SSRF",
+    "patterns": [
+      "\\bsecurity (audit|review|scan)\\b",
+      "\\bowasp\\b",
+      "\\b(xss|csrf|ssrf|sql injection)\\b"
+    ]
+  },
+  "sage-sequence-analysis": {
+    "category": "bioinformatics",
+    "summary": "FASTA/GenBank/PDB parsing, BLAST, motifs and phylogenetics",
+    "files": [
+      "*.fasta",
+      "*.fa",
+      "*.fna",
+      "*.faa",
+      "*.gb",
+      "*.gbk",
+      "*.pdb"
+    ],
+    "deps": [
+      "biopython"
+    ],
+    "patterns": [
+      "\\bbiopython\\b",
+      "\\b(fasta|genbank|pdb|blast|phylogenet|motif)\\b"
+    ]
+  },
+  "sage-spec": {
+    "category": "planning",
+    "summary": "Requirements and functional specifications",
+    "files": [
+      "PRD.md",
+      "SPEC.md"
+    ],
+    "patterns": [
+      "\\bwrite a spec\\b",
+      "\\bprd\\b",
+      "\\bfunctional spec\\b"
+    ]
+  },
+  "sage-tickets": {
+    "category": "planning",
+    "summary": "Vertical-slice task and issue breakdown",
+    "patterns": [
+      "\\bbreak into tickets\\b",
+      "\\bvertical slice\\b",
+      "\\bgithub issues\\b"
+    ]
+  },
+  "sage-web-scraping": {
+    "category": "web",
+    "summary": "Structured extraction from web pages and APIs",
+    "deps": [
+      "beautifulsoup4",
+      "scrapy",
+      "cheerio",
+      "puppeteer"
+    ],
+    "patterns": [
+      "\\bscrap(e|ing)\\b",
+      "\\bcrawl(ing|er)?\\b"
+    ]
+  },
+  "sage-webapp-testing": {
+    "category": "web",
+    "summary": "Local browser UI verification and Playwright debugging",
+    "files": [
+      "playwright.config.*",
+      "cypress.config.*"
+    ],
+    "deps": [
+      "playwright",
+      "@playwright/test",
+      "cypress"
+    ],
+    "patterns": [
+      "\\bplaywright\\b",
+      "\\bbrowser test\\b",
+      "\\bweb ?app\\b",
+      "\\be2e\\b",
+      "\\bscreenshot\\b"
+    ]
+  },
+  "security-audit": {
+    "category": "security",
+    "summary": "OWASP Top-10 audit for auth, injection, XSS, CSRF, SSRF and secrets",
+    "patterns": [
+      "\\bsecurity (audit|review|scan)\\b",
+      "\\bowasp\\b",
+      "\\b(xss|csrf|ssrf|sql injection|idor)\\b",
+      "\\bharden\\b"
+    ]
+  },
+  "setup-matt-pocock-skills": {
+    "category": "planning",
+    "summary": "Initialize project workflow labels/conventions for spec-to-issue flow"
+  },
+  "skill-evaluation": {
+    "category": "meta",
+    "summary": "Benchmark skills and prompts with A/B assertions",
+    "dirs": [
+      "evals"
+    ],
+    "patterns": [
+      "\\bevaluate skill\\b",
+      "\\ba/b compare\\b",
+      "\\bskill[- ]evaluation\\b"
+    ]
+  },
+  "skill-maker": {
+    "category": "meta",
+    "summary": "Author or refine skills with focused triggers and validation",
+    "files": [
+      "SKILL.md",
+      "third_party/lock.json"
+    ],
+    "patterns": [
+      "\\b(author|create|write|improve) a? ?skill\\b",
+      "\\bskill[- ]maker\\b"
+    ]
+  },
+  "statistical-data-visualization": {
+    "category": "science",
+    "summary": "Statistical plot correctness, bias checks and bioinformatics figures",
+    "files": [
+      "*.qmd",
+      "*.Rmd",
+      "_quarto.yml"
+    ],
+    "deps": [
+      "matplotlib",
+      "seaborn",
+      "plotly",
+      "ggplot2",
+      "scipy",
+      "statsmodels"
+    ],
+    "patterns": [
+      "\\b(volcano|heatmap|boxplot|violin|scatter|pca|umap)\\b",
+      "\\bvisuali[sz]ation\\b",
+      "\\bquarto\\b",
+      "\\bp[- ]?value\\b"
+    ]
+  },
+  "to-spec": {
+    "category": "planning",
+    "summary": "Flesh out specifications/PRDs from rough feature ideas"
+  },
+  "to-tickets": {
+    "category": "planning",
+    "summary": "Break specs/PRDs into vertical-slice implementation issues"
+  },
+  "token-efficiency": {
+    "category": "meta",
+    "summary": "Diagnose context bloat and reduce harness token overhead",
+    "files": [
+      "token_audit.py",
+      "shared-sync.json"
+    ],
+    "patterns": [
+      "\\btoken efficiency\\b",
+      "\\btoken overhead\\b",
+      "\\bburning tokens\\b",
+      "\\bcontext bloat\\b"
+    ]
+  },
+  "using-git-worktrees": {
+    "category": "git",
+    "summary": "Isolated git worktrees for parallel feature work",
+    "patterns": [
+      "\\bworktree\\b",
+      "\\bisolated branch\\b"
+    ]
+  },
+  "variant-analysis": {
+    "category": "security",
+    "summary": "Find sibling bug variants across a codebase via patterns/CodeQL/Semgrep",
+    "files": [
+      "*.ql",
+      ".semgrep.yml",
+      ".semgrep.yaml"
+    ],
+    "patterns": [
+      "\\bvariant analysis\\b",
+      "\\bother instances\\b",
+      "\\bsame bug\\b",
+      "\\bcodeql\\b",
+      "\\bsemgrep\\b"
+    ]
+  },
+  "vercel-react-best-practices": {
+    "category": "web",
+    "summary": "React and Next.js performance, server/client boundaries and bundling",
+    "files": [
+      "next.config.*"
+    ],
+    "deps": [
+      "react",
+      "next"
+    ],
+    "patterns": [
+      "\\breact\\b",
+      "\\bnext\\.?js\\b",
+      "\\bhydration\\b",
+      "\\bserver component\\b",
+      "\\buseeffect\\b"
+    ]
+  },
+  "web-scraping": {
+    "category": "web",
+    "summary": "Extract structured data from web pages and APIs",
+    "deps": [
+      "beautifulsoup4",
+      "scrapy",
+      "cheerio",
+      "puppeteer"
+    ],
+    "patterns": [
+      "\\bscrap(e|ing)\\b",
+      "\\bcrawl(ing|er)?\\b",
+      "\\bextract (table|data) from (web|site|html)\\b"
+    ]
+  },
+  "webapp-testing": {
+    "category": "web",
+    "summary": "Playwright browser verification, screenshots and local web UI debugging",
+    "files": [
+      "playwright.config.*",
+      "cypress.config.*"
+    ],
+    "deps": [
+      "playwright",
+      "@playwright/test",
+      "cypress"
+    ],
+    "patterns": [
+      "\\bplaywright\\b",
+      "\\bbrowser test\\b",
+      "\\bweb ?app\\b",
+      "\\be2e\\b",
+      "\\bscreenshot\\b",
+      "\\bfrontend bug\\b"
+    ]
+  },
+  "workflow-graph": {
+    "category": "architecture",
+    "summary": "Trace repository workflows into editable Graphviz diagrams and offline SVG previews",
+    "files": [
+      "*.dot",
+      "*.gv"
+    ],
+    "patterns": [
+      "\\bgraphviz\\b",
+      "\\b(workflow|architecture|pipeline|control.flow|data.flow)\\s+(graph|diagram)s?\\b",
+      "\\b(map|diagram|visuali[sz]e)\\b.{0,45}\\b(workflow|architecture|control flow|data flow)\\b"
+    ]
+  }
+}

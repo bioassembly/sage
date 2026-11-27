@@ -1,0 +1,28 @@
+name: Validate SAGE
+on: [push, pull_request]
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: sudo apt-get update && sudo apt-get install -y graphviz
+      - run: npm install --global @openai/codex@0.171.0
+      - run: python3 sage.py check
+      - run: python3 sage.py eval-routing
+      - run: python3 sage.py graph --check
+      - run: python3 -m unittest discover -s tests -v
+      - name: Provision and exercise native language servers
+        run: |
+          python3 sage.py lsp opencode --install --prefix "$RUNNER_TEMP/sage-lsp"
+          PATH="$RUNNER_TEMP/sage-lsp/bin:$PATH" python3 tests/smoke_lsp.py opencode
+      - run: node --test clients/opencode/router.test.mjs library/runtime/rtk/opencode/rtk.test.mjs
+      - run: python3 tests/smoke_codex.py
+      - name: Check source layout
+        run: test -z "$(git ls-files -s | awk '$1 == 120000')"

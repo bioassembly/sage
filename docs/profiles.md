@@ -1,0 +1,11 @@
+# Profile and installation contracts
+
+A profile selects ordered lists of core skills, catalog skills, default MCP servers, optional MCP servers and LSP servers. Each selection resolves directly to a canonical entry under `library/`. Catalog skills require a routing rule. A profile can override rule fields or clear an inherited field with JSON null. The functional index derives its availability columns from these same profiles.
+
+Installation builds a native config in memory. Codex uses its app-server to merge TOML. OpenCode and Antigravity merge JSON and preserve existing settings. The default OpenCode profile configures context limits and language tools. Its local provider preset requires an explicit provider option. A role brief is library documentation and has no native registration.
+
+In the default catalog install, Codex routes at session start and on user prompts. OpenCode and Antigravity use their native plugin events. SAGE reads the skill's `disable-model-invocation` frontmatter and `agents/openai.yaml` implicit-invocation policy when compiling the manifest. Either policy can require a direct request. Use `$grill-with-docs` or “Run a design interview” to request the interview and its glossary and questioning companions. The compiled rules accept literal invocation aliases and give a direct request priority over incidental words in the same prompt. [Codex hook events](https://developers.openai.com/codex/hooks/) · [Routing cases](../evals/routing.json)
+
+Activation stages files, saves a private before/after journal and rolls back completed writes if a write fails. Restore preflights conflicts across the journal and can resume after an interruption. During an upgrade, a matching journal can release a former agent override or restore the personal file it replaced. Unrecorded definitions, edits made after installation and ambiguous ownership stay with the user.
+
+The shared index checker enforces a purpose and group for every capability. The numbered diagrams link to implementation evidence. Profile integration tests exercise an isolated install and restore. Native smoke checks exercise client discovery, and the LSP checks request an initialization handshake from the selected executables. [Numbered architecture](architecture/README.md)

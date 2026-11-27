@@ -1,0 +1,4 @@
+interface:
+  display_name: "Workflow Graph"
+  short_description: "Trace repository workflows into editable diagrams"
+  default_prompt: "Use $workflow-graph to map this repository from entry points to outputs and render an offline architecture guide."

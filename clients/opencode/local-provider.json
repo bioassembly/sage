@@ -1,0 +1,29 @@
+{
+  "provider": {
+    "strata": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Local OpenAI-Compatible Provider",
+      "options": {
+        "baseURL": "__BASE_URL__",
+        "apiKey": "__UNSLOTH_API_KEY__"
+      },
+      "models": {
+        "qwen3.8-flash-next-iq3_s": {
+          "name": "Configured Local Model",
+          "tool_call": true,
+          "temperature": true,
+          "reasoning": true,
+          "limit": {
+            "context": 262144,
+            "output": 262144
+          },
+          "options": {
+            "reasoningEffort": "xhigh"
+          }
+        }
+      }
+    }
+  },
+  "model": "strata/qwen3.8-flash-next-iq3_s",
+  "small_model": "strata/qwen3.8-flash-next-iq3_s"
+}

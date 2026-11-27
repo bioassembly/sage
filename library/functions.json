@@ -1,0 +1,133 @@
+{
+  "Token savings and context": {
+    "skill": {
+      "token-efficiency": "Measure token use and reduce excess context with targeted retrieval and bounded output.",
+      "ponytail": "Keep implementation and responses small enough for the task.",
+      "checkpoint": "Save the state needed to resume after compaction or interruption."
+    },
+    "tool": {
+      "rtk": "Filter repetitive terminal output before it enters the model context.",
+      "token-audit": "Measure input, cached input, output and reasoning tokens in local Codex session logs."
+    }
+  },
+  "Planning and design": {
+    "skill": {
+      "agentic-coding": "Take a scoped implementation from inspection through verification.",
+      "codebase-design": "Find opportunities for deeper modules and smaller interfaces.",
+      "sage-design": "Design a module interface and check consequential trade-offs.",
+      "domain-modeling": "Document domain terminology and architecture decisions.",
+      "grill-with-docs": "Interview a design while maintaining the glossary and decision records.",
+      "grilling": "Resolve a design decision through one focused question at a time.",
+      "to-spec": "Turn agreed requirements into a verifiable implementation specification.",
+      "sage-spec": "Define an outcome, its constraints and acceptance checks.",
+      "to-tickets": "Slice a specification into independently actionable work items.",
+      "sage-tickets": "Split a specification into verifiable tickets with dependencies."
+    }
+  },
+  "Debugging, tests and review": {
+    "skill": {
+      "sage-debug": "Reproduce a defect and verify its root cause and fix.",
+      "systematic-debugging": "Trace a failure to its source before implementing a repair.",
+      "sage-test-design": "Choose behavior-focused tests and useful regression cases.",
+      "test-driven-development": "Build a change through a failing test, implementation and refactoring.",
+      "verification-before-completion": "Run the checks that substantiate a completion claim.",
+      "review": "Review a working diff for concrete defects and regressions.",
+      "sage-review": "Review a change or pull request and report actionable findings.",
+      "red-team": "Stress-test a design or plan for failure modes and mistaken assumptions."
+    }
+  },
+  "Code navigation and language intelligence": {
+    "skill": {
+      "read-only": "Trace a code path and answer questions without editing the project."
+    },
+    "mcp": {
+      "serena": "Find definitions, references and symbols in a project using semantic tools."
+    },
+    "lsp": {
+      "pyright": "Python type diagnostics and symbol navigation.",
+      "typescript": "JavaScript, JSX, TypeScript and TSX diagnostics and navigation.",
+      "bash": "Shell script definitions, completions and diagnostics.",
+      "yaml": "YAML schema completion and validation.",
+      "json": "JSON and JSONC schema completion and validation.",
+      "marksman": "Markdown and Quarto document symbols, headings and links.",
+      "php": "PHP symbol navigation, completion and diagnostics.",
+      "tailwind": "Tailwind CSS class completion and diagnostics in templates."
+    }
+  },
+  "Documentation, research and visualization": {
+    "skill": {
+      "workflow-graph": "Trace source-backed workflow steps and publish numbered, navigable Graphviz diagrams.",
+      "first-principles-explainer": "Explain a concept from its assumptions with worked examples.",
+      "sage-explain": "Explain an implementation or result from first principles.",
+      "overnight-explorer": "Organize a bounded sequence of research questions and record evidence.",
+      "sage-overnight": "Run an extended investigation with checkpoints and stopping conditions.",
+      "pdf-inplace-editing": "Edit or redact a PDF while preserving its page layout.",
+      "sage-pdf-editing": "Apply localized PDF changes and verify the rendered result.",
+      "web-scraping": "Extract structured data from web pages with a reproducible method.",
+      "sage-web-scraping": "Collect web data with bounded requests and validate the extracted records."
+    },
+    "mcp": {
+      "context7": "Look up version-specific library and framework documentation.",
+      "deepwiki": "Explore indexed public repository documentation and architecture."
+    }
+  },
+  "Git and repository maintenance": {
+    "skill": {
+      "git-commit-convention": "Prepare a scoped commit using the repository's conventions.",
+      "sage-git-commit": "Verify and stage authorized changes before committing or pushing.",
+      "using-git-worktrees": "Set up an isolated Git worktree for parallel development.",
+      "sage-git-worktrees": "Create and verify a worktree with the repository's setup.",
+      "github-repo-best-practices": "Audit and improve contributor documentation, CI and release hygiene.",
+      "sage-repo-maintenance": "Make a repository easier to reproduce, maintain and release."
+    }
+  },
+  "Skills, integrations and evaluation": {
+    "skill": {
+      "doctor": "Check a SAGE profile, its installed files and language tools.",
+      "mcp-builder": "Design and evaluate a Model Context Protocol server.",
+      "sage-mcp-builder": "Implement a small MCP tool surface and verify the client contract.",
+      "skill-acquisition": "Find, vet and install a reusable skill when the library has a gap.",
+      "skill-maker": "Author a skill with clear triggers, resources and acceptance checks.",
+      "skill-evaluation": "Compare skills or prompts on repeatable cases with measured outcomes.",
+      "sage-harness-eval": "Measure a harness or routing change against a fixed baseline.",
+      "setup-matt-pocock-skills": "Configure project-specific conventions used by Matt Pocock's skills."
+    }
+  },
+  "Web applications": {
+    "skill": {
+      "vercel-react-best-practices": "Find concrete rendering, bundle and data-loading improvements in React.",
+      "webapp-testing": "Exercise a running web application with browser automation.",
+      "sage-webapp-testing": "Verify visible web behavior and capture reproducible browser evidence."
+    }
+  },
+  "Security review and static inspection": {
+    "skill": {
+      "security-audit": "Review application controls and document defensive remediation.",
+      "sage-security-audit": "Inspect a codebase for security risks and recommend fixes.",
+      "differential-review": "Assess the security impact of a code change using its history and tests.",
+      "variant-analysis": "Find related instances of a known defect for remediation.",
+      "sage-binary-inspection": "Identify the format and dependencies of an artifact using static evidence."
+    },
+    "mcp": {
+      "rea": "Inspect packaged artifacts and binary metadata when source is unavailable."
+    }
+  },
+  "Scientific workflows, data and reporting": {
+    "skill": {
+      "nextflow": "Inspect and maintain Nextflow pipelines and their process boundaries.",
+      "pysam": "Work with alignment and variant files using pysam.",
+      "biopython": "Read, transform and validate biological data formats with Biopython.",
+      "sage-genomics": "Inspect sequencing pipelines, file processing and QC outputs.",
+      "sage-sequence-analysis": "Read and validate sequence data with reproducible analysis steps.",
+      "fair-data-principles": "Check scientific data for findability, accessibility and reuse.",
+      "sage-fair-data": "Document scientific inputs, identifiers, metadata and provenance.",
+      "statistical-data-visualization": "Choose appropriate statistical plots and check how they encode data.",
+      "pipeline-sketch-results": "Package workflow results with the figures and context needed to interpret them.",
+      "sage-results-package": "Assemble reproducible outputs, figures and provenance into a results package.",
+      "sage-scientific-report": "Produce a scientific report with traceable analyses and figures."
+    },
+    "brief": {
+      "scientific-workflows": "Give the active assistant or a user-selected native agent a sequencing QC review brief."
+    }
+  }
+}

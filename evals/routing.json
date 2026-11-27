@@ -1,0 +1,23 @@
+[
+  {"id":"plan-critique","prompt":"Stress-test this plan.","expect":["red-team"]},
+  {"id":"critique-in-python-repo","files":["pyproject.toml","src/app.py"],"prompt":"Stress-test this plan.","expect":["red-team"]},
+  {"id":"design-interview","prompt":"Run a design interview on this proposal.","expect":["grill-with-docs","grilling","domain-modeling"]},
+  {"id":"named-interview","prompt":"/sage-grill-with-docs review the proposal","expect":["grill-with-docs","grilling","domain-modeling"]},
+  {"id":"command-template","prompt":"Apply the `grill-with-docs` skill in the active session.","expect":["grill-with-docs","grilling","domain-modeling"]},
+  {"id":"named-skill-with-context","prompt":"Use $grill-with-docs to stress-test this plan.","expect":["grill-with-docs","grilling","domain-modeling"]},
+  {"id":"interview-question","prompt":"What does a design interview involve?","expect":[]},
+  {"id":"declined-interview","prompt":"Don't run grill-with-docs for this.","expect":[]},
+  {"id":"skill-path","prompt":"Open library/skills/grill-with-docs/SKILL.md.","expect":[]},
+  {"id":"longer-name","prompt":"/grill-with-docs-extra","expect":[]},
+  {"id":"update-glossary","prompt":"Update the glossary with the agreed terms.","expect":["domain-modeling"]},
+  {"id":"read-glossary","prompt":"Look up a word in the glossary.","expect":[]},
+  {"id":"passive-docs","files":["GLOSSARY.md","docs/adr/example.md","CLAUDE.md"],"prompt":"Fix a typo in the README.","expect":[]},
+  {"id":"passive-spec","clients":["opencode","antigravity"],"files":["PRD.md","SPEC.md"],"prompt":"Fix a typo in the README.","expect":[]},
+  {"id":"explicit-spec","clients":["opencode","antigravity"],"prompt":"$to-spec","expect":["to-spec"]},
+  {"id":"explicit-tickets","clients":["opencode","antigravity"],"prompt":"Please run the to-tickets skill.","expect":["to-tickets"]},
+  {"id":"setup-mention","clients":["opencode","antigravity"],"prompt":"What does the ready-for-agent label mean?","expect":[]},
+  {"id":"explicit-setup","clients":["opencode","antigravity"],"prompt":"/setup-matt-pocock-skills","expect":["setup-matt-pocock-skills"]},
+  {"id":"plain-typo","prompt":"Fix a typo in the README.","expect":[]},
+  {"id":"workflow-graph","prompt":"Draw a workflow graph of this repo.","expect":["workflow-graph"]},
+  {"id":"module-design","clients":["opencode","antigravity"],"prompt":"Review the module design.","expect":["codebase-design"]}
+]

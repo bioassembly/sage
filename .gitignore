@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.state/
+.venv/
+.env*
+**/skills.local/
+**/REGISTRY.local.md

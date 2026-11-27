@@ -1,0 +1,155 @@
+<!-- workflow-graph source=89cab6209eaffa14274f98fbf89ed04c70984374c7fa4251e5605ca05e2f5e88 svg=9a3e8d8937f1acf185a8294e8a8ba348956f9e3bec6ea047b8413cee812f93bb -->
+<svg width="974pt" height="483pt"
+ viewBox="0.00 0.00 974.18 482.68" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(15.84 466.84)">
+<title>routing</title>
+<polygon fill="white" stroke="transparent" points="-15.84,15.84 -15.84,-466.84 958.34,-466.84 958.34,15.84 -15.84,15.84"/>
+<!-- start&#45;&gt;core -->
+<g id="edge1" class="edge">
+<title>start&#45;&gt;core</title>
+<path fill="none" stroke="#63818b" d="M296,-414.98C275.15,-403.89 247.81,-389.35 225.73,-377.6"/>
+<polygon fill="#63818b" stroke="#63818b" points="226.69,-375.34 219.36,-374.21 224.39,-379.66 226.69,-375.34"/>
+<text text-anchor="middle" x="289" y="-392" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">core path</text>
+</g>
+<!-- start&#45;&gt;manifest -->
+<g id="edge2" class="edge">
+<title>start&#45;&gt;manifest</title>
+<path fill="none" stroke="#63818b" d="M369.75,-414.98C397.53,-403.66 434.13,-388.74 463.24,-376.87"/>
+<polygon fill="#63818b" stroke="#63818b" points="464.54,-378.99 470.09,-374.08 462.69,-374.45 464.54,-378.99"/>
+<text text-anchor="middle" x="461.5" y="-392" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">catalog path</text>
+</g>
+<!-- core&#45;&gt;use -->
+<g id="edge12" class="edge">
+<title>core&#45;&gt;use</title>
+<path fill="none" stroke="#63818b" d="M149.97,-337.79C127.06,-324.33 102,-303.17 102,-275 102,-275 102,-275 102,-109 102,-90.16 106.28,-69.48 110.67,-53.23"/>
+<polygon fill="#63818b" stroke="#63818b" points="113.14,-53.5 112.68,-46.1 108.42,-52.17 113.14,-53.5"/>
+<text text-anchor="middle" x="124.5" y="-194.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">core skill</text>
+</g>
+<!-- manifest&#45;&gt;codex -->
+<g id="edge3" class="edge">
+<title>manifest&#45;&gt;codex</title>
+<path fill="none" stroke="#63818b" d="M459.53,-337.94C424.99,-326.7 379.25,-311.83 340.9,-299.36"/>
+<polygon fill="#63818b" stroke="#63818b" points="341.25,-296.89 333.83,-297.06 339.73,-301.55 341.25,-296.89"/>
+<text text-anchor="middle" x="427.5" y="-315" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">Codex</text>
+</g>
+<!-- manifest&#45;&gt;open -->
+<g id="edge4" class="edge">
+<title>manifest&#45;&gt;open</title>
+<path fill="none" stroke="#63818b" d="M521.33,-337.64C526.71,-327.64 533.6,-314.82 539.74,-303.38"/>
+<polygon fill="#63818b" stroke="#63818b" points="541.91,-304.53 543.07,-297.2 537.6,-302.21 541.91,-304.53"/>
+<text text-anchor="middle" x="559.5" y="-315" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">OpenCode</text>
+</g>
+<!-- manifest&#45;&gt;agy -->
+<g id="edge5" class="edge">
+<title>manifest&#45;&gt;agy</title>
+<path fill="none" stroke="#63818b" d="M579.19,-337.94C624.06,-326.54 683.69,-311.39 733.22,-298.82"/>
+<polygon fill="#63818b" stroke="#63818b" points="733.96,-301.16 740.14,-297.06 732.75,-296.41 733.96,-301.16"/>
+<text text-anchor="middle" x="705.5" y="-315" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">Antigravity</text>
+</g>
+<!-- codex&#45;&gt;match -->
+<g id="edge6" class="edge">
+<title>codex&#45;&gt;match</title>
+<path fill="none" stroke="#63818b" d="M339.66,-250.9C369.78,-241.86 404.73,-231.38 435.53,-222.14"/>
+<polygon fill="#63818b" stroke="#63818b" points="436.44,-224.43 442.44,-220.07 435.03,-219.73 436.44,-224.43"/>
+</g>
+<!-- open&#45;&gt;match -->
+<g id="edge7" class="edge">
+<title>open&#45;&gt;match</title>
+<path fill="none" stroke="#63818b" d="M543.51,-250.9C539.58,-243.34 535.12,-234.77 530.95,-226.76"/>
+<polygon fill="#63818b" stroke="#63818b" points="532.95,-225.28 527.54,-220.2 528.6,-227.54 532.95,-225.28"/>
+</g>
+<!-- agy&#45;&gt;match -->
+<g id="edge8" class="edge">
+<title>agy&#45;&gt;match</title>
+<path fill="none" stroke="#63818b" d="M735.37,-250.9C697.34,-241.73 653.13,-231.07 614.41,-221.73"/>
+<polygon fill="#63818b" stroke="#63818b" points="614.62,-219.26 607.24,-220 613.47,-224.03 614.62,-219.26"/>
+</g>
+<!-- match&#45;&gt;none -->
+<g id="edge9" class="edge">
+<title>match&#45;&gt;none</title>
+<path fill="none" stroke="#63818b" d="M451.81,-174C417.37,-162.19 374.83,-147.61 339.35,-135.45"/>
+<polygon fill="#63818b" stroke="#63818b" points="339.77,-133.01 332.35,-133.06 338.18,-137.64 339.77,-133.01"/>
+<text text-anchor="middle" x="442" y="-151" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">no new match</text>
+</g>
+<!-- match&#45;&gt;found -->
+<g id="edge10" class="edge">
+<title>match&#45;&gt;found</title>
+<path fill="none" stroke="#63818b" d="M516,-173.67C516,-161.85 516,-147.34 516,-135.25"/>
+<polygon fill="#63818b" stroke="#63818b" points="518.45,-135.08 516,-128.08 513.55,-135.08 518.45,-135.08"/>
+<text text-anchor="middle" x="531.5" y="-151" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">match</text>
+</g>
+<!-- found&#45;&gt;use -->
+<g id="edge11" class="edge">
+<title>found&#45;&gt;use</title>
+<path fill="none" stroke="#63818b" d="M436.34,-91.9C376.96,-79.16 295.14,-61.59 229.6,-47.52"/>
+<polygon fill="#63818b" stroke="#63818b" points="229.86,-45.07 222.5,-46 228.83,-49.87 229.86,-45.07"/>
+<text text-anchor="middle" x="372" y="-64" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">catalog skill</text>
+</g>
+<!-- start -->
+<g id="node1" class="node">
+<title>start</title>
+<path fill="#d7eee6" stroke="#52737d" stroke-width="1.2" d="M411,-451C411,-451 245,-451 245,-451 239,-451 233,-445 233,-439 233,-439 233,-427 233,-427 233,-421 239,-415 245,-415 245,-415 411,-415 411,-415 417,-415 423,-421 423,-427 423,-427 423,-439 423,-439 423,-445 417,-451 411,-451"/>
+<text text-anchor="middle" x="328" y="-429.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">1 · Start a native session</text>
+</g>
+<!-- core -->
+<g id="node2" class="node">
+<title>core</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M296.5,-374C296.5,-374 77.5,-374 77.5,-374 71.5,-374 65.5,-368 65.5,-362 65.5,-362 65.5,-350 65.5,-350 65.5,-344 71.5,-338 77.5,-338 77.5,-338 296.5,-338 296.5,-338 302.5,-338 308.5,-344 308.5,-350 308.5,-350 308.5,-362 308.5,-362 308.5,-368 302.5,-374 296.5,-374"/>
+<text text-anchor="middle" x="187" y="-352.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">2a · Discover installed core skills</text>
+</g>
+<!-- manifest -->
+<g id="node3" class="node">
+<title>manifest</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M641,-374C641,-374 383,-374 383,-374 377,-374 371,-368 371,-362 371,-362 371,-350 371,-350 371,-344 377,-338 383,-338 383,-338 641,-338 641,-338 647,-338 653,-344 653,-350 653,-350 653,-362 653,-362 653,-368 647,-374 641,-374"/>
+<text text-anchor="middle" x="512" y="-352.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">2b · Read the catalog routing manifest</text>
+</g>
+<!-- codex -->
+<g id="node4" class="node">
+<title>codex</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M386.5,-297C386.5,-297 145.5,-297 145.5,-297 139.5,-297 133.5,-291 133.5,-285 133.5,-285 133.5,-263 133.5,-263 133.5,-257 139.5,-251 145.5,-251 145.5,-251 386.5,-251 386.5,-251 392.5,-251 398.5,-257 398.5,-263 398.5,-263 398.5,-285 398.5,-285 398.5,-291 392.5,-297 386.5,-297"/>
+<text text-anchor="middle" x="266" y="-277.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3a · Codex</text>
+<text text-anchor="middle" x="266" y="-263.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">SessionStart and UserPromptSubmit</text>
+</g>
+<!-- open -->
+<g id="node5" class="node">
+<title>open</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M679,-297C679,-297 431,-297 431,-297 425,-297 419,-291 419,-285 419,-285 419,-263 419,-263 419,-257 425,-251 431,-251 431,-251 679,-251 679,-251 685,-251 691,-257 691,-263 691,-263 691,-285 691,-285 691,-291 685,-297 679,-297"/>
+<text text-anchor="middle" x="555" y="-277.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3b · OpenCode</text>
+<text text-anchor="middle" x="555" y="-263.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Workspace and prompt plugin events</text>
+</g>
+<!-- agy -->
+<g id="node6" class="node">
+<title>agy</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M930.5,-297C930.5,-297 723.5,-297 723.5,-297 717.5,-297 711.5,-291 711.5,-285 711.5,-285 711.5,-263 711.5,-263 711.5,-257 717.5,-251 723.5,-251 723.5,-251 930.5,-251 930.5,-251 936.5,-251 942.5,-257 942.5,-263 942.5,-263 942.5,-285 942.5,-285 942.5,-291 936.5,-297 930.5,-297"/>
+<text text-anchor="middle" x="827" y="-277.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3c · Antigravity</text>
+<text text-anchor="middle" x="827" y="-263.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">SessionStart and PreInvocation</text>
+</g>
+<!-- match -->
+<g id="node7" class="node">
+<title>match</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M665,-220C665,-220 367,-220 367,-220 361,-220 355,-214 355,-208 355,-208 355,-186 355,-186 355,-180 361,-174 367,-174 367,-174 665,-174 665,-174 671,-174 677,-180 677,-186 677,-186 677,-208 677,-208 677,-214 671,-220 665,-220"/>
+<text text-anchor="middle" x="516" y="-200.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">4 · Match requests and workspace signals</text>
+<text text-anchor="middle" x="516" y="-186.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Apply invocation policy and add companions</text>
+</g>
+<!-- none -->
+<g id="node8" class="node">
+<title>none</title>
+<path fill="#fcf1d9" stroke="#52737d" stroke-width="1.2" d="M352.5,-133C352.5,-133 183.5,-133 183.5,-133 177.5,-133 171.5,-127 171.5,-121 171.5,-121 171.5,-99 171.5,-99 171.5,-93 177.5,-87 183.5,-87 183.5,-87 352.5,-87 352.5,-87 358.5,-87 364.5,-93 364.5,-99 364.5,-99 364.5,-121 364.5,-121 364.5,-127 358.5,-133 352.5,-133"/>
+<text text-anchor="middle" x="268" y="-113.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">5a · Continue the session</text>
+<text text-anchor="middle" x="268" y="-99.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">No new matching skill</text>
+</g>
+<!-- found -->
+<g id="node9" class="node">
+<title>found</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M635,-128C635,-128 397,-128 397,-128 391,-128 385,-122 385,-116 385,-116 385,-104 385,-104 385,-98 391,-92 397,-92 397,-92 635,-92 635,-92 641,-92 647,-98 647,-104 647,-104 647,-116 647,-116 647,-122 641,-128 635,-128"/>
+<text text-anchor="middle" x="516" y="-106.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">5b · Surface matching catalog skills</text>
+</g>
+<!-- use -->
+<g id="node10" class="node">
+<title>use</title>
+<path fill="#dcebf8" stroke="#52737d" stroke-width="1.2" d="M228,-46C228,-46 12,-46 12,-46 6,-46 0,-40 0,-34 0,-34 0,-12 0,-12 0,-6 6,0 12,0 12,0 228,0 228,0 234,0 240,-6 240,-12 240,-12 240,-34 240,-34 240,-40 234,-46 228,-46"/>
+<text text-anchor="middle" x="120" y="-26.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">6 · Read the applicable skill</text>
+<text text-anchor="middle" x="120" y="-12.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Open supporting files as needed</text>
+</g>
+</g>
+</svg>

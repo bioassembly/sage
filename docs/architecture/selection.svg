@@ -1,0 +1,95 @@
+<!-- workflow-graph source=17f42d861fc324f47393eec66eccd1aa9b649a5a908f707df4e21a6ecff1e15a svg=7c05523a96f3cfbc71f3647c822a09dbc0c2deb8ef2bb5b308a0ce2ea382d2e9 -->
+<svg width="586pt" height="406pt"
+ viewBox="0.00 0.00 585.68 405.68" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(15.84 389.84)">
+<title>selection</title>
+<polygon fill="white" stroke="transparent" points="-15.84,15.84 -15.84,-389.84 569.84,-389.84 569.84,15.84 -15.84,15.84"/>
+<!-- browse&#45;&gt;select -->
+<g id="edge1" class="edge">
+<title>browse&#45;&gt;select</title>
+<path fill="none" stroke="#63818b" d="M280.5,-327.9C280.5,-320.49 280.5,-312.11 280.5,-304.24"/>
+<polygon fill="#63818b" stroke="#63818b" points="282.95,-304.2 280.5,-297.2 278.05,-304.2 282.95,-304.2"/>
+</g>
+<!-- select&#45;&gt;rules -->
+<g id="edge2" class="edge">
+<title>select&#45;&gt;rules</title>
+<path fill="none" stroke="#63818b" d="M243.3,-250.89C224.1,-239.48 200.58,-225.49 180.59,-213.61"/>
+<polygon fill="#63818b" stroke="#63818b" points="181.78,-211.47 174.51,-210 179.28,-215.68 181.78,-211.47"/>
+<text text-anchor="middle" x="243" y="-228" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">skill input</text>
+</g>
+<!-- select&#45;&gt;servers -->
+<g id="edge3" class="edge">
+<title>select&#45;&gt;servers</title>
+<path fill="none" stroke="#63818b" d="M317.96,-250.89C337.29,-239.48 360.98,-225.49 381.11,-213.61"/>
+<polygon fill="#63818b" stroke="#63818b" points="382.45,-215.67 387.23,-210 379.96,-211.45 382.45,-215.67"/>
+<text text-anchor="middle" x="384" y="-228" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">tool input</text>
+</g>
+<!-- rules&#45;&gt;sync -->
+<g id="edge4" class="edge">
+<title>rules&#45;&gt;sync</title>
+<path fill="none" stroke="#63818b" d="M179.63,-163.9C195.92,-155.36 214.68,-145.52 231.56,-136.67"/>
+<polygon fill="#63818b" stroke="#63818b" points="233.11,-138.62 238.18,-133.2 230.84,-134.28 233.11,-138.62"/>
+</g>
+<!-- servers&#45;&gt;sync -->
+<g id="edge5" class="edge">
+<title>servers&#45;&gt;sync</title>
+<path fill="none" stroke="#63818b" d="M382.07,-163.9C365.52,-155.28 346.45,-145.35 329.33,-136.43"/>
+<polygon fill="#63818b" stroke="#63818b" points="330.46,-134.26 323.12,-133.2 328.2,-138.6 330.46,-134.26"/>
+</g>
+<!-- sync&#45;&gt;active -->
+<g id="edge6" class="edge">
+<title>sync&#45;&gt;active</title>
+<path fill="none" stroke="#63818b" d="M280.5,-86.67C280.5,-76.52 280.5,-64.37 280.5,-53.48"/>
+<polygon fill="#63818b" stroke="#63818b" points="282.95,-53.18 280.5,-46.18 278.05,-53.18 282.95,-53.18"/>
+<text text-anchor="middle" x="309.5" y="-64" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">when ready</text>
+</g>
+<!-- browse -->
+<g id="node1" class="node">
+<title>browse</title>
+<path fill="#d7eee6" stroke="#52737d" stroke-width="1.2" d="M392,-374C392,-374 169,-374 169,-374 163,-374 157,-368 157,-362 157,-362 157,-340 157,-340 157,-334 163,-328 169,-328 169,-328 392,-328 392,-328 398,-328 404,-334 404,-340 404,-340 404,-362 404,-362 404,-368 398,-374 392,-374"/>
+<text text-anchor="middle" x="280.5" y="-354.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">1 · Find the capability by purpose</text>
+<text text-anchor="middle" x="280.5" y="-340.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">library/INDEX.md</text>
+</g>
+<!-- select -->
+<g id="node2" class="node">
+<title>select</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M387.5,-297C387.5,-297 173.5,-297 173.5,-297 167.5,-297 161.5,-291 161.5,-285 161.5,-285 161.5,-263 161.5,-263 161.5,-257 167.5,-251 173.5,-251 173.5,-251 387.5,-251 387.5,-251 393.5,-251 399.5,-257 399.5,-263 399.5,-263 399.5,-285 399.5,-285 399.5,-291 393.5,-297 387.5,-297"/>
+<text text-anchor="middle" x="280.5" y="-277.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">2 · Edit a client profile</text>
+<text text-anchor="middle" x="280.5" y="-263.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Choose tiers and tool selections</text>
+</g>
+<!-- rules -->
+<g id="node3" class="node">
+<title>rules</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M263,-210C263,-210 12,-210 12,-210 6,-210 0,-204 0,-198 0,-198 0,-176 0,-176 0,-170 6,-164 12,-164 12,-164 263,-164 263,-164 269,-164 275,-170 275,-176 275,-176 275,-198 275,-198 275,-204 269,-210 263,-210"/>
+<text text-anchor="middle" x="137.5" y="-190.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3a · Resolve core and catalog</text>
+<text text-anchor="middle" x="137.5" y="-176.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Apply client&#45;specific routing overrides</text>
+</g>
+<!-- servers -->
+<g id="node4" class="node">
+<title>servers</title>
+<g id="a_node4"><a xlink:href="index.html#language-tools" xlink:title="3b · Resolve selected tools\nCheck MCP pins and LSP definitions" target="_top">
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M542,-210C542,-210 307,-210 307,-210 301,-210 295,-204 295,-198 295,-198 295,-176 295,-176 295,-170 301,-164 307,-164 307,-164 542,-164 542,-164 548,-164 554,-170 554,-176 554,-176 554,-198 554,-198 554,-204 548,-210 542,-210"/>
+<text text-anchor="middle" x="424.5" y="-190.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3b · Resolve selected tools</text>
+<text text-anchor="middle" x="424.5" y="-176.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Check MCP pins and LSP definitions</text>
+</a>
+</g>
+</g>
+<!-- sync -->
+<g id="node5" class="node">
+<title>sync</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M393.5,-133C393.5,-133 167.5,-133 167.5,-133 161.5,-133 155.5,-127 155.5,-121 155.5,-121 155.5,-99 155.5,-99 155.5,-93 161.5,-87 167.5,-87 167.5,-87 393.5,-87 393.5,-87 399.5,-87 405.5,-93 405.5,-99 405.5,-99 405.5,-121 405.5,-121 405.5,-127 399.5,-133 393.5,-133"/>
+<text text-anchor="middle" x="280.5" y="-113.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">4 · Refresh and check the index</text>
+<text text-anchor="middle" x="280.5" y="-99.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">sage.py sync, then sage.py check</text>
+</g>
+<!-- active -->
+<g id="node6" class="node">
+<title>active</title>
+<g id="a_node6"><a xlink:href="index.html#activation" xlink:title="5 · Activate the selected profile\nsage.py install CLIENT" target="_top">
+<path fill="#dcebf8" stroke="#52737d" stroke-width="1.2" d="M386,-46C386,-46 175,-46 175,-46 169,-46 163,-40 163,-34 163,-34 163,-12 163,-12 163,-6 169,0 175,0 175,0 386,0 386,0 392,0 398,-6 398,-12 398,-12 398,-34 398,-34 398,-40 392,-46 386,-46"/>
+<text text-anchor="middle" x="280.5" y="-26.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">5 · Activate the selected profile</text>
+<text text-anchor="middle" x="280.5" y="-12.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">sage.py install CLIENT</text>
+</a>
+</g>
+</g>
+</g>
+</svg>

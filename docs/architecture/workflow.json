@@ -1,0 +1,117 @@
+{
+  "title": "SAGE architecture",
+  "numbered": true,
+  "views": [
+    {
+      "id": "overview",
+      "title": "From profile to native session",
+      "description": "Choose the client you want to use. The profile and library are both inputs to installation. Once the client starts, follow the skill path, the tool path or both, according to the task.",
+      "evidence": [
+        {
+          "label": "Functional index",
+          "path": "../../library/INDEX.md"
+        },
+        {
+          "label": "Profile resolution",
+          "path": "../../library/profiles.py"
+        },
+        {
+          "label": "Commands",
+          "path": "../../sage.py"
+        }
+      ]
+    },
+    {
+      "id": "selection",
+      "title": "Select capabilities by purpose",
+      "description": "A maintainer can start with the functional index and edit one client profile. Catalog entries also need a routing rule. The index shows the resulting availability across clients, and the installer reads the profile directly.",
+      "evidence": [
+        {
+          "label": "Functional groups",
+          "path": "../../library/functions.json"
+        },
+        {
+          "label": "Profile validation",
+          "path": "../../library/profiles.py"
+        },
+        {
+          "label": "Index generator",
+          "path": "../../library/index.py"
+        },
+        {
+          "label": "Example profile",
+          "path": "../../clients/opencode/profile.json"
+        }
+      ]
+    },
+    {
+      "id": "activation",
+      "title": "Install, upgrade and restore",
+      "description": "Step 4a ends a dry run. On an actual install, follow 4b and 5. An upgrade also checks restore journals for agent settings written by an earlier installation. Step 7 is optional.",
+      "evidence": [
+        {
+          "label": "Codex installer",
+          "path": "../../clients/codex/installer.py"
+        },
+        {
+          "label": "JSON client installer",
+          "path": "../../library/scripts/install_client.py"
+        },
+        {
+          "label": "Agent migration",
+          "path": "../../library/scripts/agent_migration.py"
+        },
+        {
+          "label": "Restore journal",
+          "path": "../../library/scripts/client_state.py"
+        }
+      ]
+    },
+    {
+      "id": "routing",
+      "title": "Discover skills during a session",
+      "description": "The default install exposes core skills at launch. Each client routes workspace signals and user prompts. Explicit-only skills require a direct request, which can also activate their companion skills.",
+      "evidence": [
+        {
+          "label": "Match rules",
+          "path": "../../library/routing.json"
+        },
+        {
+          "label": "Routing evaluation cases",
+          "path": "../../evals/routing.json"
+        },
+        {
+          "label": "Python hook",
+          "path": "../../library/runtime/skill_router/route_skills.py"
+        },
+        {
+          "label": "OpenCode plugin",
+          "path": "../../clients/opencode/router.ts"
+        }
+      ]
+    },
+    {
+      "id": "language-tools",
+      "title": "Use MCP services and language servers",
+      "description": "Follow the MCP or LSP branch for the capability you need. OpenCode starts a configured LSP for matching files. Codex and Antigravity can provision executables and use Serena when enabled. Serena reads its own project language settings.",
+      "evidence": [
+        {
+          "label": "MCP definitions",
+          "path": "../../library/mcp/servers.json"
+        },
+        {
+          "label": "LSP definitions",
+          "path": "../../library/lsp/servers.json"
+        },
+        {
+          "label": "Executable provisioning",
+          "path": "../../library/lsp/provision.py"
+        },
+        {
+          "label": "LSP handshake checks",
+          "path": "../../tests/smoke_lsp.py"
+        }
+      ]
+    }
+  ]
+}

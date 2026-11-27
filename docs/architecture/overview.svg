@@ -1,0 +1,137 @@
+<!-- workflow-graph source=c3ffdede03353de3584b812cc89b1e8183306bb5b5e007846211a9580a8a0ea3 svg=ac969ddba1cba17337a9f71551f58feb640a8f4f7f2eedb4298d1b367a5f7b6a -->
+<svg width="598pt" height="503pt"
+ viewBox="0.00 0.00 597.68 502.68" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(15.84 486.84)">
+<title>overview</title>
+<polygon fill="white" stroke="transparent" points="-15.84,15.84 -15.84,-486.84 581.84,-486.84 581.84,15.84 -15.84,15.84"/>
+<!-- choose&#45;&gt;profile -->
+<g id="edge1" class="edge">
+<title>choose&#45;&gt;profile</title>
+<path fill="none" stroke="#63818b" d="M240.92,-424.89C223.49,-413.58 202.16,-399.74 183.95,-387.92"/>
+<polygon fill="#63818b" stroke="#63818b" points="185.11,-385.76 177.91,-384 182.44,-389.87 185.11,-385.76"/>
+<text text-anchor="middle" x="247.5" y="-402" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">profile input</text>
+</g>
+<!-- choose&#45;&gt;lib -->
+<g id="edge2" class="edge">
+<title>choose&#45;&gt;lib</title>
+<path fill="none" stroke="#63818b" d="M309.34,-424.89C326.91,-413.58 348.4,-399.74 366.74,-387.92"/>
+<polygon fill="#63818b" stroke="#63818b" points="368.28,-389.85 372.84,-384 365.62,-385.73 368.28,-389.85"/>
+<text text-anchor="middle" x="378.5" y="-402" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">shared input</text>
+</g>
+<!-- profile&#45;&gt;resolve -->
+<g id="edge3" class="edge">
+<title>profile&#45;&gt;resolve</title>
+<path fill="none" stroke="#63818b" d="M178.08,-337.89C195.51,-326.58 216.84,-312.74 235.05,-300.92"/>
+<polygon fill="#63818b" stroke="#63818b" points="236.56,-302.87 241.09,-297 233.89,-298.76 236.56,-302.87"/>
+<text text-anchor="middle" x="240.5" y="-315" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">selection</text>
+</g>
+<!-- lib&#45;&gt;resolve -->
+<g id="edge4" class="edge">
+<title>lib&#45;&gt;resolve</title>
+<path fill="none" stroke="#63818b" d="M372.66,-337.89C355.09,-326.58 333.6,-312.74 315.26,-300.92"/>
+<polygon fill="#63818b" stroke="#63818b" points="316.38,-298.73 309.16,-297 313.72,-302.85 316.38,-298.73"/>
+<text text-anchor="middle" x="374" y="-315" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">definitions</text>
+</g>
+<!-- resolve&#45;&gt;install -->
+<g id="edge5" class="edge">
+<title>resolve&#45;&gt;install</title>
+<path fill="none" stroke="#63818b" d="M275,-250.9C275,-243.49 275,-235.11 275,-227.24"/>
+<polygon fill="#63818b" stroke="#63818b" points="277.45,-227.2 275,-220.2 272.55,-227.2 277.45,-227.2"/>
+</g>
+<!-- install&#45;&gt;session -->
+<g id="edge6" class="edge">
+<title>install&#45;&gt;session</title>
+<path fill="none" stroke="#63818b" d="M275,-173.67C275,-163.52 275,-151.37 275,-140.48"/>
+<polygon fill="#63818b" stroke="#63818b" points="277.45,-140.18 275,-133.18 272.55,-140.18 277.45,-140.18"/>
+<text text-anchor="middle" x="291.5" y="-151" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">restart</text>
+</g>
+<!-- session&#45;&gt;skills -->
+<g id="edge7" class="edge">
+<title>session&#45;&gt;skills</title>
+<path fill="none" stroke="#63818b" d="M237.02,-86.89C217.42,-75.48 193.4,-61.49 173,-49.61"/>
+<polygon fill="#63818b" stroke="#63818b" points="174.07,-47.4 166.79,-46 171.61,-51.64 174.07,-47.4"/>
+<text text-anchor="middle" x="243.5" y="-64" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">skills needed</text>
+</g>
+<!-- session&#45;&gt;tools -->
+<g id="edge8" class="edge">
+<title>session&#45;&gt;tools</title>
+<path fill="none" stroke="#63818b" d="M313.24,-86.89C332.97,-75.48 357.16,-61.49 377.7,-49.61"/>
+<polygon fill="#63818b" stroke="#63818b" points="379.12,-51.63 383.95,-46 376.67,-47.38 379.12,-51.63"/>
+<text text-anchor="middle" x="389" y="-64" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">tools needed</text>
+</g>
+<!-- choose -->
+<g id="node1" class="node">
+<title>choose</title>
+<path fill="#d7eee6" stroke="#52737d" stroke-width="1.2" d="M382,-471C382,-471 168,-471 168,-471 162,-471 156,-465 156,-459 156,-459 156,-437 156,-437 156,-431 162,-425 168,-425 168,-425 382,-425 382,-425 388,-425 394,-431 394,-437 394,-437 394,-459 394,-459 394,-465 388,-471 382,-471"/>
+<text text-anchor="middle" x="275" y="-451.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">1 · Choose a client</text>
+<text text-anchor="middle" x="275" y="-437.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Codex, OpenCode or Antigravity</text>
+</g>
+<!-- profile -->
+<g id="node2" class="node">
+<title>profile</title>
+<g id="a_node2"><a xlink:href="index.html#selection" xlink:title="2a · Read its profile\nCore, catalog, MCP and LSP" target="_top">
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M236,-384C236,-384 52,-384 52,-384 46,-384 40,-378 40,-372 40,-372 40,-350 40,-350 40,-344 46,-338 52,-338 52,-338 236,-338 236,-338 242,-338 248,-344 248,-350 248,-350 248,-372 248,-372 248,-378 242,-384 236,-384"/>
+<text text-anchor="middle" x="144" y="-364.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">2a · Read its profile</text>
+<text text-anchor="middle" x="144" y="-350.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Core, catalog, MCP and LSP</text>
+</a>
+</g>
+</g>
+<!-- lib -->
+<g id="node3" class="node">
+<title>lib</title>
+<g id="a_node3"><a xlink:href="index.html#selection" xlink:title="2b · Read the library\nPackages, rules and server definitions" target="_top">
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M533.5,-384C533.5,-384 280.5,-384 280.5,-384 274.5,-384 268.5,-378 268.5,-372 268.5,-372 268.5,-350 268.5,-350 268.5,-344 274.5,-338 280.5,-338 280.5,-338 533.5,-338 533.5,-338 539.5,-338 545.5,-344 545.5,-350 545.5,-350 545.5,-372 545.5,-372 545.5,-378 539.5,-384 533.5,-384"/>
+<text text-anchor="middle" x="407" y="-364.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">2b · Read the library</text>
+<text text-anchor="middle" x="407" y="-350.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Packages, rules and server definitions</text>
+</a>
+</g>
+</g>
+<!-- resolve -->
+<g id="node4" class="node">
+<title>resolve</title>
+<g id="a_node4"><a xlink:href="index.html#selection" xlink:title="3 · Resolve the selection\nValidate names, rules and tool pins" target="_top">
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M392.5,-297C392.5,-297 157.5,-297 157.5,-297 151.5,-297 145.5,-291 145.5,-285 145.5,-285 145.5,-263 145.5,-263 145.5,-257 151.5,-251 157.5,-251 157.5,-251 392.5,-251 392.5,-251 398.5,-251 404.5,-257 404.5,-263 404.5,-263 404.5,-285 404.5,-285 404.5,-291 398.5,-297 392.5,-297"/>
+<text text-anchor="middle" x="275" y="-277.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3 · Resolve the selection</text>
+<text text-anchor="middle" x="275" y="-263.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Validate names, rules and tool pins</text>
+</a>
+</g>
+</g>
+<!-- install -->
+<g id="node5" class="node">
+<title>install</title>
+<g id="a_node5"><a xlink:href="index.html#activation" xlink:title="4 · Install in the client home\nMerge settings and journal changes" target="_top">
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M394,-220C394,-220 156,-220 156,-220 150,-220 144,-214 144,-208 144,-208 144,-186 144,-186 144,-180 150,-174 156,-174 156,-174 394,-174 394,-174 400,-174 406,-180 406,-186 406,-186 406,-208 406,-208 406,-214 400,-220 394,-220"/>
+<text text-anchor="middle" x="275" y="-200.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">4 · Install in the client home</text>
+<text text-anchor="middle" x="275" y="-186.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Merge settings and journal changes</text>
+</a>
+</g>
+</g>
+<!-- session -->
+<g id="node6" class="node">
+<title>session</title>
+<path fill="#dcebf8" stroke="#52737d" stroke-width="1.2" d="M379,-133C379,-133 171,-133 171,-133 165,-133 159,-127 159,-121 159,-121 159,-99 159,-99 159,-93 165,-87 171,-87 171,-87 379,-87 379,-87 385,-87 391,-93 391,-99 391,-99 391,-121 391,-121 391,-127 385,-133 379,-133"/>
+<text text-anchor="middle" x="275" y="-113.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">5 · Start the native client</text>
+<text text-anchor="middle" x="275" y="-99.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Use its agents and permissions</text>
+</g>
+<!-- skills -->
+<g id="node7" class="node">
+<title>skills</title>
+<g id="a_node7"><a xlink:href="index.html#routing" xlink:title="6a · Discover relevant skills\nCore discovery and catalog routing" target="_top">
+<path fill="#dcebf8" stroke="#52737d" stroke-width="1.2" d="M246,-46C246,-46 12,-46 12,-46 6,-46 0,-40 0,-34 0,-34 0,-12 0,-12 0,-6 6,0 12,0 12,0 246,0 246,0 252,0 258,-6 258,-12 258,-12 258,-34 258,-34 258,-40 252,-46 246,-46"/>
+<text text-anchor="middle" x="129" y="-26.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">6a · Discover relevant skills</text>
+<text text-anchor="middle" x="129" y="-12.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Core discovery and catalog routing</text>
+</a>
+</g>
+</g>
+<!-- tools -->
+<g id="node8" class="node">
+<title>tools</title>
+<g id="a_node8"><a xlink:href="index.html#language-tools" xlink:title="6b · Use selected tools\nMCP services and language intelligence" target="_top">
+<path fill="#dcebf8" stroke="#52737d" stroke-width="1.2" d="M554,-46C554,-46 290,-46 290,-46 284,-46 278,-40 278,-34 278,-34 278,-12 278,-12 278,-6 284,0 290,0 290,0 554,0 554,0 560,0 566,-6 566,-12 566,-12 566,-34 566,-34 566,-40 560,-46 554,-46"/>
+<text text-anchor="middle" x="422" y="-26.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">6b · Use selected tools</text>
+<text text-anchor="middle" x="422" y="-12.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">MCP services and language intelligence</text>
+</a>
+</g>
+</g>
+</g>
+</svg>

@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SAGE architecture</title><style>
+:root{color-scheme:light;font:16px/1.5 system-ui,sans-serif;color:#173044;background:#f4f7f8}
+*{box-sizing:border-box}body{max-width:76rem;margin:auto;padding:1.5rem clamp(.75rem,3vw,3rem)}
+h1,h2{line-height:1.15}a{color:#11597a;text-underline-offset:.18em}
+nav,footer{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem}
+section{margin:2rem 0;padding:clamp(.75rem,2vw,1.5rem);background:white;border:1px solid #b9cbd2;border-radius:.5rem}
+section:target{outline:2px solid #237969}section p{max-width:70ch}
+.figure{overflow:auto;margin:1rem 0}.figure svg{display:block;width:100%;height:auto;min-width:35rem}
+:focus-visible{outline:3px solid #b14d11;outline-offset:3px}
+@media print{body{background:white}nav,footer{display:none}section{break-inside:avoid}.figure svg{min-width:0}}
+</style><main><h1>SAGE architecture</h1><p>Start at step 1 in each view. Letters share a stage. Follow the arrow labels to choose a branch.</p><nav aria-label="Workflow views"><a href="#overview">View 1 · From profile to native session</a> <a href="#selection">View 2 · Select capabilities by purpose</a> <a href="#activation">View 3 · Install, upgrade and restore</a> <a href="#routing">View 4 · Discover skills during a session</a> <a href="#language-tools">View 5 · Use MCP services and language servers</a></nav>
+<section id="overview" tabindex="-1"><h2>View 1 · From profile to native session</h2><p>Choose the client you want to use. The profile and library are both inputs to installation. Once the client starts, follow the skill path, the tool path or both, according to the task.</p><div class="figure"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="598pt" height="503pt" viewBox="0.00 0.00 597.68 502.68" aria-label="Choose the client you want to use. The profile and library are both inputs to installation. Once the client starts, follow the skill path, the tool path or both, according to the task." role="group">
+<g id="overview--graph0" class="graph" transform="scale(1 1) rotate(0) translate(15.84 486.84)">
+<title>overview</title>
+<polygon fill="white" stroke="transparent" points="-15.84,15.84 -15.84,-486.84 581.84,-486.84 581.84,15.84 -15.84,15.84" />
+
+<g id="overview--edge1" class="edge">
+<title>choose-&gt;profile</title>
+<path fill="none" stroke="#63818b" d="M240.92,-424.89C223.49,-413.58 202.16,-399.74 183.95,-387.92" />
+<polygon fill="#63818b" stroke="#63818b" points="185.11,-385.76 177.91,-384 182.44,-389.87 185.11,-385.76" />
+<text text-anchor="middle" x="247.5" y="-402" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">profile input</text>
+</g>
+
+<g id="overview--edge2" class="edge">
+<title>choose-&gt;lib</title>
+<path fill="none" stroke="#63818b" d="M309.34,-424.89C326.91,-413.58 348.4,-399.74 366.74,-387.92" />
+<polygon fill="#63818b" stroke="#63818b" points="368.28,-389.85 372.84,-384 365.62,-385.73 368.28,-389.85" />
+<text text-anchor="middle" x="378.5" y="-402" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">shared input</text>
+</g>
+
+<g id="overview--edge3" class="edge">
+<title>profile-&gt;resolve</title>
+<path fill="none" stroke="#63818b" d="M178.08,-337.89C195.51,-326.58 216.84,-312.74 235.05,-300.92" />
+<polygon fill="#63818b" stroke="#63818b" points="236.56,-302.87 241.09,-297 233.89,-298.76 236.56,-302.87" />
+<text text-anchor="middle" x="240.5" y="-315" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">selection</text>
+</g>
+
+<g id="overview--edge4" class="edge">
+<title>lib-&gt;resolve</title>
+<path fill="none" stroke="#63818b" d="M372.66,-337.89C355.09,-326.58 333.6,-312.74 315.26,-300.92" />
+<polygon fill="#63818b" stroke="#63818b" points="316.38,-298.73 309.16,-297 313.72,-302.85 316.38,-298.73" />
+<text text-anchor="middle" x="374" y="-315" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">definitions</text>
+</g>
+
+<g id="overview--edge5" class="edge">
+<title>resolve-&gt;install</title>
+<path fill="none" stroke="#63818b" d="M275,-250.9C275,-243.49 275,-235.11 275,-227.24" />
+<polygon fill="#63818b" stroke="#63818b" points="277.45,-227.2 275,-220.2 272.55,-227.2 277.45,-227.2" />
+</g>
+
+<g id="overview--edge6" class="edge">
+<title>install-&gt;session</title>
+<path fill="none" stroke="#63818b" d="M275,-173.67C275,-163.52 275,-151.37 275,-140.48" />
+<polygon fill="#63818b" stroke="#63818b" points="277.45,-140.18 275,-133.18 272.55,-140.18 277.45,-140.18" />
+<text text-anchor="middle" x="291.5" y="-151" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">restart</text>
+</g>
+
+<g id="overview--edge7" class="edge">
+<title>session-&gt;skills</title>
+<path fill="none" stroke="#63818b" d="M237.02,-86.89C217.42,-75.48 193.4,-61.49 173,-49.61" />
+<polygon fill="#63818b" stroke="#63818b" points="174.07,-47.4 166.79,-46 171.61,-51.64 174.07,-47.4" />
+<text text-anchor="middle" x="243.5" y="-64" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">skills needed</text>
+</g>
+
+<g id="overview--edge8" class="edge">
+<title>session-&gt;tools</title>
+<path fill="none" stroke="#63818b" d="M313.24,-86.89C332.97,-75.48 357.16,-61.49 377.7,-49.61" />
+<polygon fill="#63818b" stroke="#63818b" points="379.12,-51.63 383.95,-46 376.67,-47.38 379.12,-51.63" />
+<text text-anchor="middle" x="389" y="-64" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">tools needed</text>
+</g>
+
+<g id="overview--node1" class="node">
+<title>choose</title>
+<path fill="#d7eee6" stroke="#52737d" stroke-width="1.2" d="M382,-471C382,-471 168,-471 168,-471 162,-471 156,-465 156,-459 156,-459 156,-437 156,-437 156,-431 162,-425 168,-425 168,-425 382,-425 382,-425 388,-425 394,-431 394,-437 394,-437 394,-459 394,-459 394,-465 388,-471 382,-471" />
+<text text-anchor="middle" x="275" y="-451.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">1 · Choose a client</text>
+<text text-anchor="middle" x="275" y="-437.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Codex, OpenCode or Antigravity</text>
+</g>
+
+<g id="overview--node2" class="node">
+<title>profile</title>
+<g id="overview--a_node2"><a xlink:href="#selection" xlink:title="2a · Read its profile\nCore, catalog, MCP and LSP" target="_top">
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M236,-384C236,-384 52,-384 52,-384 46,-384 40,-378 40,-372 40,-372 40,-350 40,-350 40,-344 46,-338 52,-338 52,-338 236,-338 236,-338 242,-338 248,-344 248,-350 248,-350 248,-372 248,-372 248,-378 242,-384 236,-384" />
+<text text-anchor="middle" x="144" y="-364.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">2a · Read its profile</text>
+<text text-anchor="middle" x="144" y="-350.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Core, catalog, MCP and LSP</text>
+</a>
+</g>
+</g>
+
+<g id="overview--node3" class="node">
+<title>lib</title>
+<g id="overview--a_node3"><a xlink:href="#selection" xlink:title="2b · Read the library\nPackages, rules and server definitions" target="_top">
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M533.5,-384C533.5,-384 280.5,-384 280.5,-384 274.5,-384 268.5,-378 268.5,-372 268.5,-372 268.5,-350 268.5,-350 268.5,-344 274.5,-338 280.5,-338 280.5,-338 533.5,-338 533.5,-338 539.5,-338 545.5,-344 545.5,-350 545.5,-350 545.5,-372 545.5,-372 545.5,-378 539.5,-384 533.5,-384" />
+<text text-anchor="middle" x="407" y="-364.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">2b · Read the library</text>
+<text text-anchor="middle" x="407" y="-350.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Packages, rules and server definitions</text>
+</a>
+</g>
+</g>
+
+<g id="overview--node4" class="node">
+<title>resolve</title>
+<g id="overview--a_node4"><a xlink:href="#selection" xlink:title="3 · Resolve the selection\nValidate names, rules and tool pins" target="_top">
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M392.5,-297C392.5,-297 157.5,-297 157.5,-297 151.5,-297 145.5,-291 145.5,-285 145.5,-285 145.5,-263 145.5,-263 145.5,-257 151.5,-251 157.5,-251 157.5,-251 392.5,-251 392.5,-251 398.5,-251 404.5,-257 404.5,-263 404.5,-263 404.5,-285 404.5,-285 404.5,-291 398.5,-297 392.5,-297" />
+<text text-anchor="middle" x="275" y="-277.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3 · Resolve the selection</text>
+<text text-anchor="middle" x="275" y="-263.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Validate names, rules and tool pins</text>
+</a>
+</g>
+</g>
+
+<g id="overview--node5" class="node">
+<title>install</title>
+<g id="overview--a_node5"><a xlink:href="#activation" xlink:title="4 · Install in the client home\nMerge settings and journal changes" target="_top">
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M394,-220C394,-220 156,-220 156,-220 150,-220 144,-214 144,-208 144,-208 144,-186 144,-186 144,-180 150,-174 156,-174 156,-174 394,-174 394,-174 400,-174 406,-180 406,-186 406,-186 406,-208 406,-208 406,-214 400,-220 394,-220" />
+<text text-anchor="middle" x="275" y="-200.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">4 · Install in the client home</text>
+<text text-anchor="middle" x="275" y="-186.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Merge settings and journal changes</text>
+</a>
+</g>
+</g>
+
+<g id="overview--node6" class="node">
+<title>session</title>
+<path fill="#dcebf8" stroke="#52737d" stroke-width="1.2" d="M379,-133C379,-133 171,-133 171,-133 165,-133 159,-127 159,-121 159,-121 159,-99 159,-99 159,-93 165,-87 171,-87 171,-87 379,-87 379,-87 385,-87 391,-93 391,-99 391,-99 391,-121 391,-121 391,-127 385,-133 379,-133" />
+<text text-anchor="middle" x="275" y="-113.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">5 · Start the native client</text>
+<text text-anchor="middle" x="275" y="-99.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Use its agents and permissions</text>
+</g>
+
+<g id="overview--node7" class="node">
+<title>skills</title>
+<g id="overview--a_node7"><a xlink:href="#routing" xlink:title="6a · Discover relevant skills\nCore discovery and catalog routing" target="_top">
+<path fill="#dcebf8" stroke="#52737d" stroke-width="1.2" d="M246,-46C246,-46 12,-46 12,-46 6,-46 0,-40 0,-34 0,-34 0,-12 0,-12 0,-6 6,0 12,0 12,0 246,0 246,0 252,0 258,-6 258,-12 258,-12 258,-34 258,-34 258,-40 252,-46 246,-46" />
+<text text-anchor="middle" x="129" y="-26.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">6a · Discover relevant skills</text>
+<text text-anchor="middle" x="129" y="-12.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Core discovery and catalog routing</text>
+</a>
+</g>
+</g>
+
+<g id="overview--node8" class="node">
+<title>tools</title>
+<g id="overview--a_node8"><a xlink:href="#language-tools" xlink:title="6b · Use selected tools\nMCP services and language intelligence" target="_top">
+<path fill="#dcebf8" stroke="#52737d" stroke-width="1.2" d="M554,-46C554,-46 290,-46 290,-46 284,-46 278,-40 278,-34 278,-34 278,-12 278,-12 278,-6 284,0 290,0 290,0 554,0 554,0 560,0 566,-6 566,-12 566,-12 566,-34 566,-34 566,-40 560,-46 554,-46" />
+<text text-anchor="middle" x="422" y="-26.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">6b · Use selected tools</text>
+<text text-anchor="middle" x="422" y="-12.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">MCP services and language intelligence</text>
+</a>
+</g>
+</g>
+</g>
+</svg></div><footer><a href="overview.dot">Editable DOT</a> <a href="overview.svg">Full-size SVG</a> <a href="../../library/INDEX.md">Functional index</a> <a href="../../library/profiles.py">Profile resolution</a> <a href="../../sage.py">Commands</a></footer></section>
+<section id="selection" tabindex="-1"><h2>View 2 · Select capabilities by purpose</h2><p>A maintainer can start with the functional index and edit one client profile. Catalog entries also need a routing rule. The index shows the resulting availability across clients, and the installer reads the profile directly.</p><div class="figure"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="586pt" height="406pt" viewBox="0.00 0.00 585.68 405.68" aria-label="A maintainer can start with the functional index and edit one client profile. Catalog entries also need a routing rule. The index shows the resulting availability across clients, and the installer reads the profile directly." role="group">
+<g id="selection--graph0" class="graph" transform="scale(1 1) rotate(0) translate(15.84 389.84)">
+<title>selection</title>
+<polygon fill="white" stroke="transparent" points="-15.84,15.84 -15.84,-389.84 569.84,-389.84 569.84,15.84 -15.84,15.84" />
+
+<g id="selection--edge1" class="edge">
+<title>browse-&gt;select</title>
+<path fill="none" stroke="#63818b" d="M280.5,-327.9C280.5,-320.49 280.5,-312.11 280.5,-304.24" />
+<polygon fill="#63818b" stroke="#63818b" points="282.95,-304.2 280.5,-297.2 278.05,-304.2 282.95,-304.2" />
+</g>
+
+<g id="selection--edge2" class="edge">
+<title>select-&gt;rules</title>
+<path fill="none" stroke="#63818b" d="M243.3,-250.89C224.1,-239.48 200.58,-225.49 180.59,-213.61" />
+<polygon fill="#63818b" stroke="#63818b" points="181.78,-211.47 174.51,-210 179.28,-215.68 181.78,-211.47" />
+<text text-anchor="middle" x="243" y="-228" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">skill input</text>
+</g>
+
+<g id="selection--edge3" class="edge">
+<title>select-&gt;servers</title>
+<path fill="none" stroke="#63818b" d="M317.96,-250.89C337.29,-239.48 360.98,-225.49 381.11,-213.61" />
+<polygon fill="#63818b" stroke="#63818b" points="382.45,-215.67 387.23,-210 379.96,-211.45 382.45,-215.67" />
+<text text-anchor="middle" x="384" y="-228" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">tool input</text>
+</g>
+
+<g id="selection--edge4" class="edge">
+<title>rules-&gt;sync</title>
+<path fill="none" stroke="#63818b" d="M179.63,-163.9C195.92,-155.36 214.68,-145.52 231.56,-136.67" />
+<polygon fill="#63818b" stroke="#63818b" points="233.11,-138.62 238.18,-133.2 230.84,-134.28 233.11,-138.62" />
+</g>
+
+<g id="selection--edge5" class="edge">
+<title>servers-&gt;sync</title>
+<path fill="none" stroke="#63818b" d="M382.07,-163.9C365.52,-155.28 346.45,-145.35 329.33,-136.43" />
+<polygon fill="#63818b" stroke="#63818b" points="330.46,-134.26 323.12,-133.2 328.2,-138.6 330.46,-134.26" />
+</g>
+
+<g id="selection--edge6" class="edge">
+<title>sync-&gt;active</title>
+<path fill="none" stroke="#63818b" d="M280.5,-86.67C280.5,-76.52 280.5,-64.37 280.5,-53.48" />
+<polygon fill="#63818b" stroke="#63818b" points="282.95,-53.18 280.5,-46.18 278.05,-53.18 282.95,-53.18" />
+<text text-anchor="middle" x="309.5" y="-64" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">when ready</text>
+</g>
+
+<g id="selection--node1" class="node">
+<title>browse</title>
+<path fill="#d7eee6" stroke="#52737d" stroke-width="1.2" d="M392,-374C392,-374 169,-374 169,-374 163,-374 157,-368 157,-362 157,-362 157,-340 157,-340 157,-334 163,-328 169,-328 169,-328 392,-328 392,-328 398,-328 404,-334 404,-340 404,-340 404,-362 404,-362 404,-368 398,-374 392,-374" />
+<text text-anchor="middle" x="280.5" y="-354.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">1 · Find the capability by purpose</text>
+<text text-anchor="middle" x="280.5" y="-340.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">library/INDEX.md</text>
+</g>
+
+<g id="selection--node2" class="node">
+<title>select</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M387.5,-297C387.5,-297 173.5,-297 173.5,-297 167.5,-297 161.5,-291 161.5,-285 161.5,-285 161.5,-263 161.5,-263 161.5,-257 167.5,-251 173.5,-251 173.5,-251 387.5,-251 387.5,-251 393.5,-251 399.5,-257 399.5,-263 399.5,-263 399.5,-285 399.5,-285 399.5,-291 393.5,-297 387.5,-297" />
+<text text-anchor="middle" x="280.5" y="-277.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">2 · Edit a client profile</text>
+<text text-anchor="middle" x="280.5" y="-263.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Choose tiers and tool selections</text>
+</g>
+
+<g id="selection--node3" class="node">
+<title>rules</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M263,-210C263,-210 12,-210 12,-210 6,-210 0,-204 0,-198 0,-198 0,-176 0,-176 0,-170 6,-164 12,-164 12,-164 263,-164 263,-164 269,-164 275,-170 275,-176 275,-176 275,-198 275,-198 275,-204 269,-210 263,-210" />
+<text text-anchor="middle" x="137.5" y="-190.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3a · Resolve core and catalog</text>
+<text text-anchor="middle" x="137.5" y="-176.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Apply client-specific routing overrides</text>
+</g>
+
+<g id="selection--node4" class="node">
+<title>servers</title>
+<g id="selection--a_node4"><a xlink:href="#language-tools" xlink:title="3b · Resolve selected tools\nCheck MCP pins and LSP definitions" target="_top">
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M542,-210C542,-210 307,-210 307,-210 301,-210 295,-204 295,-198 295,-198 295,-176 295,-176 295,-170 301,-164 307,-164 307,-164 542,-164 542,-164 548,-164 554,-170 554,-176 554,-176 554,-198 554,-198 554,-204 548,-210 542,-210" />
+<text text-anchor="middle" x="424.5" y="-190.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3b · Resolve selected tools</text>
+<text text-anchor="middle" x="424.5" y="-176.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Check MCP pins and LSP definitions</text>
+</a>
+</g>
+</g>
+
+<g id="selection--node5" class="node">
+<title>sync</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M393.5,-133C393.5,-133 167.5,-133 167.5,-133 161.5,-133 155.5,-127 155.5,-121 155.5,-121 155.5,-99 155.5,-99 155.5,-93 161.5,-87 167.5,-87 167.5,-87 393.5,-87 393.5,-87 399.5,-87 405.5,-93 405.5,-99 405.5,-99 405.5,-121 405.5,-121 405.5,-127 399.5,-133 393.5,-133" />
+<text text-anchor="middle" x="280.5" y="-113.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">4 · Refresh and check the index</text>
+<text text-anchor="middle" x="280.5" y="-99.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">sage.py sync, then sage.py check</text>
+</g>
+
+<g id="selection--node6" class="node">
+<title>active</title>
+<g id="selection--a_node6"><a xlink:href="#activation" xlink:title="5 · Activate the selected profile\nsage.py install CLIENT" target="_top">
+<path fill="#dcebf8" stroke="#52737d" stroke-width="1.2" d="M386,-46C386,-46 175,-46 175,-46 169,-46 163,-40 163,-34 163,-34 163,-12 163,-12 163,-6 169,0 175,0 175,0 386,0 386,0 392,0 398,-6 398,-12 398,-12 398,-34 398,-34 398,-40 392,-46 386,-46" />
+<text text-anchor="middle" x="280.5" y="-26.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">5 · Activate the selected profile</text>
+<text text-anchor="middle" x="280.5" y="-12.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">sage.py install CLIENT</text>
+</a>
+</g>
+</g>
+</g>
+</svg></div><footer><a href="selection.dot">Editable DOT</a> <a href="selection.svg">Full-size SVG</a> <a href="../../library/functions.json">Functional groups</a> <a href="../../library/profiles.py">Profile validation</a> <a href="../../library/index.py">Index generator</a> <a href="../../clients/opencode/profile.json">Example profile</a></footer></section>
+<section id="activation" tabindex="-1"><h2>View 3 · Install, upgrade and restore</h2><p>Step 4a ends a dry run. On an actual install, follow 4b and 5. An upgrade also checks restore journals for agent settings written by an earlier installation. Step 7 is optional.</p><div class="figure"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="820pt" height="617pt" viewBox="0.00 0.00 820.18 616.68" aria-label="Step 4a ends a dry run. On an actual install, follow 4b and 5. An upgrade also checks restore journals for agent settings written by an earlier installation. Step 7 is optional." role="group">
+<g id="activation--graph0" class="graph" transform="scale(1 1) rotate(0) translate(15.84 600.84)">
+<title>activation</title>
+<polygon fill="white" stroke="transparent" points="-15.84,15.84 -15.84,-600.84 804.34,-600.84 804.34,15.84 -15.84,15.84" />
+
+<g id="activation--edge1" class="edge">
+<title>choose-&gt;pre</title>
+<path fill="none" stroke="#63818b" d="M169.5,-548.92C169.5,-541.81 169.5,-533.42 169.5,-525.66" />
+<polygon fill="#63818b" stroke="#63818b" points="171.95,-525.19 169.5,-518.19 167.05,-525.19 171.95,-525.19" />
+</g>
+
+<g id="activation--edge2" class="edge">
+<title>pre-&gt;stage</title>
+<path fill="none" stroke="#63818b" d="M169.5,-481.64C169.5,-471.92 169.5,-459.53 169.5,-448.34" />
+<polygon fill="#63818b" stroke="#63818b" points="171.95,-448.2 169.5,-441.2 167.05,-448.2 171.95,-448.2" />
+<text text-anchor="middle" x="182" y="-459" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">valid</text>
+</g>
+
+<g id="activation--edge3" class="edge">
+<title>stage-&gt;stop</title>
+<path fill="none" stroke="#63818b" d="M155.05,-394.67C148.23,-384.13 140.01,-371.43 132.77,-360.23" />
+<polygon fill="#63818b" stroke="#63818b" points="134.71,-358.73 128.85,-354.18 130.6,-361.39 134.71,-358.73" />
+<text text-anchor="middle" x="188.5" y="-372" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">dry run or conflict</text>
+</g>
+
+<g id="activation--edge4" class="edge">
+<title>stage-&gt;journal</title>
+<path fill="none" stroke="#63818b" d="M218.4,-394.89C244.08,-383.28 275.64,-369.01 302.2,-357" />
+<polygon fill="#63818b" stroke="#63818b" points="303.47,-359.12 308.84,-354 301.45,-354.65 303.47,-359.12" />
+<text text-anchor="middle" x="288.5" y="-372" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">apply</text>
+</g>
+
+<g id="activation--edge5" class="edge">
+<title>journal-&gt;apply</title>
+<path fill="none" stroke="#63818b" d="M357.5,-307.85C357.5,-300.4 357.5,-292.05 357.5,-284.43" />
+<polygon fill="#63818b" stroke="#63818b" points="359.95,-284.12 357.5,-277.12 355.05,-284.12 359.95,-284.12" />
+</g>
+
+<g id="activation--edge6" class="edge">
+<title>apply-&gt;fail</title>
+<path fill="none" stroke="#63818b" d="M349.1,-240.98C344.08,-230.79 337.62,-217.7 332.11,-206.53" />
+<polygon fill="#63818b" stroke="#63818b" points="334.28,-205.4 328.99,-200.21 329.89,-207.57 334.28,-205.4" />
+<text text-anchor="middle" x="365" y="-218" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">write fails</text>
+</g>
+
+<g id="activation--edge7" class="edge">
+<title>apply-&gt;restart</title>
+<path fill="none" stroke="#63818b" d="M404.7,-240.98C436.37,-229.56 478.17,-214.49 511.22,-202.57" />
+<polygon fill="#63818b" stroke="#63818b" points="512.37,-204.76 518.13,-200.08 510.71,-200.15 512.37,-204.76" />
+<text text-anchor="middle" x="493" y="-218" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">success</text>
+</g>
+
+<g id="activation--edge8" class="edge">
+<title>restart-&gt;restore</title>
+<path fill="none" stroke="#63818b" d="M565.5,-163.98C565.5,-154.08 565.5,-141.43 565.5,-130.47" />
+<polygon fill="#63818b" stroke="#63818b" points="567.95,-130.21 565.5,-123.21 563.05,-130.21 567.95,-130.21" />
+<text text-anchor="middle" x="609" y="-141" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">restore requested</text>
+</g>
+
+<g id="activation--edge9" class="edge">
+<title>restore-&gt;keep</title>
+<path fill="none" stroke="#63818b" d="M541.04,-86.84C525.89,-76.21 506.13,-62.34 489.03,-50.34" />
+<polygon fill="#63818b" stroke="#63818b" points="490,-48.02 482.86,-46.01 487.18,-52.03 490,-48.02" />
+<text text-anchor="middle" x="536.5" y="-64" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">conflict</text>
+</g>
+
+<g id="activation--edge10" class="edge">
+<title>restore-&gt;undo</title>
+<path fill="none" stroke="#63818b" d="M590.17,-86.84C605.59,-76.11 625.74,-62.09 643.1,-50.02" />
+<polygon fill="#63818b" stroke="#63818b" points="644.52,-52.02 648.86,-46.01 641.72,-47.99 644.52,-52.02" />
+<text text-anchor="middle" x="653" y="-64" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">compatible</text>
+</g>
+
+<g id="activation--node1" class="node">
+<title>choose</title>
+<path fill="#d7eee6" stroke="#52737d" stroke-width="1.2" d="M289,-585C289,-585 50,-585 50,-585 44,-585 38,-579 38,-573 38,-573 38,-561 38,-561 38,-555 44,-549 50,-549 50,-549 289,-549 289,-549 295,-549 301,-555 301,-561 301,-561 301,-573 301,-573 301,-579 295,-585 289,-585" />
+<text text-anchor="middle" x="169.5" y="-563.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">1 · Select the client and destination</text>
+</g>
+
+<g id="activation--node2" class="node">
+<title>pre</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M292.5,-518C292.5,-518 46.5,-518 46.5,-518 40.5,-518 34.5,-512 34.5,-506 34.5,-506 34.5,-494 34.5,-494 34.5,-488 40.5,-482 46.5,-482 46.5,-482 292.5,-482 292.5,-482 298.5,-482 304.5,-488 304.5,-494 304.5,-494 304.5,-506 304.5,-506 304.5,-512 298.5,-518 292.5,-518" />
+<text text-anchor="middle" x="169.5" y="-496.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">2 · Validate the profile and packages</text>
+</g>
+
+<g id="activation--node3" class="node">
+<title>stage</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M285.5,-441C285.5,-441 53.5,-441 53.5,-441 47.5,-441 41.5,-435 41.5,-429 41.5,-429 41.5,-407 41.5,-407 41.5,-401 47.5,-395 53.5,-395 53.5,-395 285.5,-395 285.5,-395 291.5,-395 297.5,-401 297.5,-407 297.5,-407 297.5,-429 297.5,-429 297.5,-435 291.5,-441 285.5,-441" />
+<text text-anchor="middle" x="169.5" y="-421.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3 · Stage settings, skills and hooks</text>
+<text text-anchor="middle" x="169.5" y="-407.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Read existing files and ownership</text>
+</g>
+
+<g id="activation--node4" class="node">
+<title>stop</title>
+<path fill="#fcf1d9" stroke="#52737d" stroke-width="1.2" d="M217,-354C217,-354 12,-354 12,-354 6,-354 0,-348 0,-342 0,-342 0,-320 0,-320 0,-314 6,-308 12,-308 12,-308 217,-308 217,-308 223,-308 229,-314 229,-320 229,-320 229,-342 229,-342 229,-348 223,-354 217,-354" />
+<text text-anchor="middle" x="114.5" y="-334.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">4a · Report the plan or conflict</text>
+<text text-anchor="middle" x="114.5" y="-320.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">End before applying files</text>
+</g>
+
+<g id="activation--node5" class="node">
+<title>journal</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M454,-354C454,-354 261,-354 261,-354 255,-354 249,-348 249,-342 249,-342 249,-320 249,-320 249,-314 255,-308 261,-308 261,-308 454,-308 454,-308 460,-308 466,-314 466,-320 466,-320 466,-342 466,-342 466,-348 460,-354 454,-354" />
+<text text-anchor="middle" x="357.5" y="-334.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">4b · Write a private journal</text>
+<text text-anchor="middle" x="357.5" y="-320.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Previous and intended states</text>
+</g>
+
+<g id="activation--node6" class="node">
+<title>apply</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M437,-277C437,-277 278,-277 278,-277 272,-277 266,-271 266,-265 266,-265 266,-253 266,-253 266,-247 272,-241 278,-241 278,-241 437,-241 437,-241 443,-241 449,-247 449,-253 449,-253 449,-265 449,-265 449,-271 443,-277 437,-277" />
+<text text-anchor="middle" x="357.5" y="-255.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">5 · Apply staged entries</text>
+</g>
+
+<g id="activation--node7" class="node">
+<title>fail</title>
+<path fill="#fcf1d9" stroke="#52737d" stroke-width="1.2" d="M425.5,-200C425.5,-200 215.5,-200 215.5,-200 209.5,-200 203.5,-194 203.5,-188 203.5,-188 203.5,-176 203.5,-176 203.5,-170 209.5,-164 215.5,-164 215.5,-164 425.5,-164 425.5,-164 431.5,-164 437.5,-170 437.5,-176 437.5,-176 437.5,-188 437.5,-188 437.5,-194 431.5,-200 425.5,-200" />
+<text text-anchor="middle" x="320.5" y="-178.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">6a · Roll back completed writes</text>
+</g>
+
+<g id="activation--node8" class="node">
+<title>restart</title>
+<g id="activation--a_node8"><a xlink:href="#routing" xlink:title="6b · Restart the native client" target="_top">
+<path fill="#dcebf8" stroke="#52737d" stroke-width="1.2" d="M661,-200C661,-200 470,-200 470,-200 464,-200 458,-194 458,-188 458,-188 458,-176 458,-176 458,-170 464,-164 470,-164 470,-164 661,-164 661,-164 667,-164 673,-170 673,-176 673,-176 673,-188 673,-188 673,-194 667,-200 661,-200" />
+<text text-anchor="middle" x="565.5" y="-178.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">6b · Restart the native client</text>
+</a>
+</g>
+</g>
+
+<g id="activation--node9" class="node">
+<title>restore</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M677,-123C677,-123 454,-123 454,-123 448,-123 442,-117 442,-111 442,-111 442,-99 442,-99 442,-93 448,-87 454,-87 454,-87 677,-87 677,-87 683,-87 689,-93 689,-99 689,-99 689,-111 689,-111 689,-117 683,-123 677,-123" />
+<text text-anchor="middle" x="565.5" y="-101.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">7 · Compare files with the journal</text>
+</g>
+
+<g id="activation--node10" class="node">
+<title>keep</title>
+<path fill="#fcf1d9" stroke="#52737d" stroke-width="1.2" d="M540.5,-46C540.5,-46 362.5,-46 362.5,-46 356.5,-46 350.5,-40 350.5,-34 350.5,-34 350.5,-12 350.5,-12 350.5,-6 356.5,0 362.5,0 362.5,0 540.5,0 540.5,0 546.5,0 552.5,-6 552.5,-12 552.5,-12 552.5,-34 552.5,-34 552.5,-40 546.5,-46 540.5,-46" />
+<text text-anchor="middle" x="451.5" y="-26.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">8a · Preserve later edits</text>
+<text text-anchor="middle" x="451.5" y="-12.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Report the conflicting path</text>
+</g>
+
+<g id="activation--node11" class="node">
+<title>undo</title>
+<path fill="#dcebf8" stroke="#52737d" stroke-width="1.2" d="M776.5,-46C776.5,-46 584.5,-46 584.5,-46 578.5,-46 572.5,-40 572.5,-34 572.5,-34 572.5,-12 572.5,-12 572.5,-6 578.5,0 584.5,0 584.5,0 776.5,0 776.5,0 782.5,0 788.5,-6 788.5,-12 788.5,-12 788.5,-34 788.5,-34 788.5,-40 782.5,-46 776.5,-46" />
+<text text-anchor="middle" x="680.5" y="-26.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">8b · Restore previous entries</text>
+<text text-anchor="middle" x="680.5" y="-12.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Apply in reverse order</text>
+</g>
+</g>
+</svg></div><footer><a href="activation.dot">Editable DOT</a> <a href="activation.svg">Full-size SVG</a> <a href="../../clients/codex/installer.py">Codex installer</a> <a href="../../library/scripts/install_client.py">JSON client installer</a> <a href="../../library/scripts/agent_migration.py">Agent migration</a> <a href="../../library/scripts/client_state.py">Restore journal</a></footer></section>
+<section id="routing" tabindex="-1"><h2>View 4 · Discover skills during a session</h2><p>The default install exposes core skills at launch. Each client routes workspace signals and user prompts. Explicit-only skills require a direct request, which can also activate their companion skills.</p><div class="figure"><svg xmlns="http://www.w3.org/2000/svg" width="974pt" height="483pt" viewBox="0.00 0.00 974.18 482.68" aria-label="The default install exposes core skills at launch. Each client routes workspace signals and user prompts. Explicit-only skills require a direct request, which can also activate their companion skills." role="group">
+<g id="routing--graph0" class="graph" transform="scale(1 1) rotate(0) translate(15.84 466.84)">
+<title>routing</title>
+<polygon fill="white" stroke="transparent" points="-15.84,15.84 -15.84,-466.84 958.34,-466.84 958.34,15.84 -15.84,15.84" />
+
+<g id="routing--edge1" class="edge">
+<title>start-&gt;core</title>
+<path fill="none" stroke="#63818b" d="M296,-414.98C275.15,-403.89 247.81,-389.35 225.73,-377.6" />
+<polygon fill="#63818b" stroke="#63818b" points="226.69,-375.34 219.36,-374.21 224.39,-379.66 226.69,-375.34" />
+<text text-anchor="middle" x="289" y="-392" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">core path</text>
+</g>
+
+<g id="routing--edge2" class="edge">
+<title>start-&gt;manifest</title>
+<path fill="none" stroke="#63818b" d="M369.75,-414.98C397.53,-403.66 434.13,-388.74 463.24,-376.87" />
+<polygon fill="#63818b" stroke="#63818b" points="464.54,-378.99 470.09,-374.08 462.69,-374.45 464.54,-378.99" />
+<text text-anchor="middle" x="461.5" y="-392" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">catalog path</text>
+</g>
+
+<g id="routing--edge12" class="edge">
+<title>core-&gt;use</title>
+<path fill="none" stroke="#63818b" d="M149.97,-337.79C127.06,-324.33 102,-303.17 102,-275 102,-275 102,-275 102,-109 102,-90.16 106.28,-69.48 110.67,-53.23" />
+<polygon fill="#63818b" stroke="#63818b" points="113.14,-53.5 112.68,-46.1 108.42,-52.17 113.14,-53.5" />
+<text text-anchor="middle" x="124.5" y="-194.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">core skill</text>
+</g>
+
+<g id="routing--edge3" class="edge">
+<title>manifest-&gt;codex</title>
+<path fill="none" stroke="#63818b" d="M459.53,-337.94C424.99,-326.7 379.25,-311.83 340.9,-299.36" />
+<polygon fill="#63818b" stroke="#63818b" points="341.25,-296.89 333.83,-297.06 339.73,-301.55 341.25,-296.89" />
+<text text-anchor="middle" x="427.5" y="-315" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">Codex</text>
+</g>
+
+<g id="routing--edge4" class="edge">
+<title>manifest-&gt;open</title>
+<path fill="none" stroke="#63818b" d="M521.33,-337.64C526.71,-327.64 533.6,-314.82 539.74,-303.38" />
+<polygon fill="#63818b" stroke="#63818b" points="541.91,-304.53 543.07,-297.2 537.6,-302.21 541.91,-304.53" />
+<text text-anchor="middle" x="559.5" y="-315" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">OpenCode</text>
+</g>
+
+<g id="routing--edge5" class="edge">
+<title>manifest-&gt;agy</title>
+<path fill="none" stroke="#63818b" d="M579.19,-337.94C624.06,-326.54 683.69,-311.39 733.22,-298.82" />
+<polygon fill="#63818b" stroke="#63818b" points="733.96,-301.16 740.14,-297.06 732.75,-296.41 733.96,-301.16" />
+<text text-anchor="middle" x="705.5" y="-315" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">Antigravity</text>
+</g>
+
+<g id="routing--edge6" class="edge">
+<title>codex-&gt;match</title>
+<path fill="none" stroke="#63818b" d="M339.66,-250.9C369.78,-241.86 404.73,-231.38 435.53,-222.14" />
+<polygon fill="#63818b" stroke="#63818b" points="436.44,-224.43 442.44,-220.07 435.03,-219.73 436.44,-224.43" />
+</g>
+
+<g id="routing--edge7" class="edge">
+<title>open-&gt;match</title>
+<path fill="none" stroke="#63818b" d="M543.51,-250.9C539.58,-243.34 535.12,-234.77 530.95,-226.76" />
+<polygon fill="#63818b" stroke="#63818b" points="532.95,-225.28 527.54,-220.2 528.6,-227.54 532.95,-225.28" />
+</g>
+
+<g id="routing--edge8" class="edge">
+<title>agy-&gt;match</title>
+<path fill="none" stroke="#63818b" d="M735.37,-250.9C697.34,-241.73 653.13,-231.07 614.41,-221.73" />
+<polygon fill="#63818b" stroke="#63818b" points="614.62,-219.26 607.24,-220 613.47,-224.03 614.62,-219.26" />
+</g>
+
+<g id="routing--edge9" class="edge">
+<title>match-&gt;none</title>
+<path fill="none" stroke="#63818b" d="M451.81,-174C417.37,-162.19 374.83,-147.61 339.35,-135.45" />
+<polygon fill="#63818b" stroke="#63818b" points="339.77,-133.01 332.35,-133.06 338.18,-137.64 339.77,-133.01" />
+<text text-anchor="middle" x="442" y="-151" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">no new match</text>
+</g>
+
+<g id="routing--edge10" class="edge">
+<title>match-&gt;found</title>
+<path fill="none" stroke="#63818b" d="M516,-173.67C516,-161.85 516,-147.34 516,-135.25" />
+<polygon fill="#63818b" stroke="#63818b" points="518.45,-135.08 516,-128.08 513.55,-135.08 518.45,-135.08" />
+<text text-anchor="middle" x="531.5" y="-151" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">match</text>
+</g>
+
+<g id="routing--edge11" class="edge">
+<title>found-&gt;use</title>
+<path fill="none" stroke="#63818b" d="M436.34,-91.9C376.96,-79.16 295.14,-61.59 229.6,-47.52" />
+<polygon fill="#63818b" stroke="#63818b" points="229.86,-45.07 222.5,-46 228.83,-49.87 229.86,-45.07" />
+<text text-anchor="middle" x="372" y="-64" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">catalog skill</text>
+</g>
+
+<g id="routing--node1" class="node">
+<title>start</title>
+<path fill="#d7eee6" stroke="#52737d" stroke-width="1.2" d="M411,-451C411,-451 245,-451 245,-451 239,-451 233,-445 233,-439 233,-439 233,-427 233,-427 233,-421 239,-415 245,-415 245,-415 411,-415 411,-415 417,-415 423,-421 423,-427 423,-427 423,-439 423,-439 423,-445 417,-451 411,-451" />
+<text text-anchor="middle" x="328" y="-429.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">1 · Start a native session</text>
+</g>
+
+<g id="routing--node2" class="node">
+<title>core</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M296.5,-374C296.5,-374 77.5,-374 77.5,-374 71.5,-374 65.5,-368 65.5,-362 65.5,-362 65.5,-350 65.5,-350 65.5,-344 71.5,-338 77.5,-338 77.5,-338 296.5,-338 296.5,-338 302.5,-338 308.5,-344 308.5,-350 308.5,-350 308.5,-362 308.5,-362 308.5,-368 302.5,-374 296.5,-374" />
+<text text-anchor="middle" x="187" y="-352.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">2a · Discover installed core skills</text>
+</g>
+
+<g id="routing--node3" class="node">
+<title>manifest</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M641,-374C641,-374 383,-374 383,-374 377,-374 371,-368 371,-362 371,-362 371,-350 371,-350 371,-344 377,-338 383,-338 383,-338 641,-338 641,-338 647,-338 653,-344 653,-350 653,-350 653,-362 653,-362 653,-368 647,-374 641,-374" />
+<text text-anchor="middle" x="512" y="-352.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">2b · Read the catalog routing manifest</text>
+</g>
+
+<g id="routing--node4" class="node">
+<title>codex</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M386.5,-297C386.5,-297 145.5,-297 145.5,-297 139.5,-297 133.5,-291 133.5,-285 133.5,-285 133.5,-263 133.5,-263 133.5,-257 139.5,-251 145.5,-251 145.5,-251 386.5,-251 386.5,-251 392.5,-251 398.5,-257 398.5,-263 398.5,-263 398.5,-285 398.5,-285 398.5,-291 392.5,-297 386.5,-297" />
+<text text-anchor="middle" x="266" y="-277.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3a · Codex</text>
+<text text-anchor="middle" x="266" y="-263.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">SessionStart and UserPromptSubmit</text>
+</g>
+
+<g id="routing--node5" class="node">
+<title>open</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M679,-297C679,-297 431,-297 431,-297 425,-297 419,-291 419,-285 419,-285 419,-263 419,-263 419,-257 425,-251 431,-251 431,-251 679,-251 679,-251 685,-251 691,-257 691,-263 691,-263 691,-285 691,-285 691,-291 685,-297 679,-297" />
+<text text-anchor="middle" x="555" y="-277.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3b · OpenCode</text>
+<text text-anchor="middle" x="555" y="-263.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Workspace and prompt plugin events</text>
+</g>
+
+<g id="routing--node6" class="node">
+<title>agy</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M930.5,-297C930.5,-297 723.5,-297 723.5,-297 717.5,-297 711.5,-291 711.5,-285 711.5,-285 711.5,-263 711.5,-263 711.5,-257 717.5,-251 723.5,-251 723.5,-251 930.5,-251 930.5,-251 936.5,-251 942.5,-257 942.5,-263 942.5,-263 942.5,-285 942.5,-285 942.5,-291 936.5,-297 930.5,-297" />
+<text text-anchor="middle" x="827" y="-277.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3c · Antigravity</text>
+<text text-anchor="middle" x="827" y="-263.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">SessionStart and PreInvocation</text>
+</g>
+
+<g id="routing--node7" class="node">
+<title>match</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M665,-220C665,-220 367,-220 367,-220 361,-220 355,-214 355,-208 355,-208 355,-186 355,-186 355,-180 361,-174 367,-174 367,-174 665,-174 665,-174 671,-174 677,-180 677,-186 677,-186 677,-208 677,-208 677,-214 671,-220 665,-220" />
+<text text-anchor="middle" x="516" y="-200.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">4 · Match requests and workspace signals</text>
+<text text-anchor="middle" x="516" y="-186.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Apply invocation policy and add companions</text>
+</g>
+
+<g id="routing--node8" class="node">
+<title>none</title>
+<path fill="#fcf1d9" stroke="#52737d" stroke-width="1.2" d="M352.5,-133C352.5,-133 183.5,-133 183.5,-133 177.5,-133 171.5,-127 171.5,-121 171.5,-121 171.5,-99 171.5,-99 171.5,-93 177.5,-87 183.5,-87 183.5,-87 352.5,-87 352.5,-87 358.5,-87 364.5,-93 364.5,-99 364.5,-99 364.5,-121 364.5,-121 364.5,-127 358.5,-133 352.5,-133" />
+<text text-anchor="middle" x="268" y="-113.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">5a · Continue the session</text>
+<text text-anchor="middle" x="268" y="-99.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">No new matching skill</text>
+</g>
+
+<g id="routing--node9" class="node">
+<title>found</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M635,-128C635,-128 397,-128 397,-128 391,-128 385,-122 385,-116 385,-116 385,-104 385,-104 385,-98 391,-92 397,-92 397,-92 635,-92 635,-92 641,-92 647,-98 647,-104 647,-104 647,-116 647,-116 647,-122 641,-128 635,-128" />
+<text text-anchor="middle" x="516" y="-106.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">5b · Surface matching catalog skills</text>
+</g>
+
+<g id="routing--node10" class="node">
+<title>use</title>
+<path fill="#dcebf8" stroke="#52737d" stroke-width="1.2" d="M228,-46C228,-46 12,-46 12,-46 6,-46 0,-40 0,-34 0,-34 0,-12 0,-12 0,-6 6,0 12,0 12,0 228,0 228,0 234,0 240,-6 240,-12 240,-12 240,-34 240,-34 240,-40 234,-46 228,-46" />
+<text text-anchor="middle" x="120" y="-26.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">6 · Read the applicable skill</text>
+<text text-anchor="middle" x="120" y="-12.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Open supporting files as needed</text>
+</g>
+</g>
+</svg></div><footer><a href="routing.dot">Editable DOT</a> <a href="routing.svg">Full-size SVG</a> <a href="../../library/routing.json">Match rules</a> <a href="../../evals/routing.json">Routing evaluation cases</a> <a href="../../library/runtime/skill_router/route_skills.py">Python hook</a> <a href="../../clients/opencode/router.ts">OpenCode plugin</a></footer></section>
+<section id="language-tools" tabindex="-1"><h2>View 5 · Use MCP services and language servers</h2><p>Follow the MCP or LSP branch for the capability you need. OpenCode starts a configured LSP for matching files. Codex and Antigravity can provision executables and use Serena when enabled. Serena reads its own project language settings.</p><div class="figure"><svg xmlns="http://www.w3.org/2000/svg" width="829pt" height="416pt" viewBox="0.00 0.00 829.18 415.68" aria-label="Follow the MCP or LSP branch for the capability you need. OpenCode starts a configured LSP for matching files. Codex and Antigravity can provision executables and use Serena when enabled. Serena reads its own project language settings." role="group">
+<g id="language-tools--graph0" class="graph" transform="scale(1 1) rotate(0) translate(15.84 399.84)">
+<title>language-tools</title>
+<polygon fill="white" stroke="transparent" points="-15.84,15.84 -15.84,-399.84 813.34,-399.84 813.34,15.84 -15.84,15.84" />
+
+<g id="language-tools--edge1" class="edge">
+<title>start-&gt;mcp</title>
+<path fill="none" stroke="#63818b" d="M245.75,-347.84C226.6,-336.97 201.5,-322.73 180.03,-310.55" />
+<polygon fill="#63818b" stroke="#63818b" points="181.09,-308.33 173.79,-307.01 178.67,-312.59 181.09,-308.33" />
+<text text-anchor="middle" x="252.5" y="-325" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">MCP selected</text>
+</g>
+
+<g id="language-tools--edge2" class="edge">
+<title>start-&gt;lsp</title>
+<path fill="none" stroke="#63818b" d="M306.46,-347.84C325.75,-336.97 351.03,-322.73 372.65,-310.55" />
+<polygon fill="#63818b" stroke="#63818b" points="374.04,-312.58 378.94,-307.01 371.64,-308.31 374.04,-312.58" />
+<text text-anchor="middle" x="383" y="-325" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">LSP selected</text>
+</g>
+
+<g id="language-tools--edge3" class="edge">
+<title>mcp-&gt;cfg</title>
+<path fill="none" stroke="#63818b" d="M135,-260.67C135,-250.52 135,-238.37 135,-227.48" />
+<polygon fill="#63818b" stroke="#63818b" points="137.45,-227.18 135,-220.18 132.55,-227.18 137.45,-227.18" />
+<text text-anchor="middle" x="150.5" y="-238" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">install</text>
+</g>
+
+<g id="language-tools--edge4" class="edge">
+<title>lsp-&gt;native</title>
+<path fill="none" stroke="#63818b" d="M416.16,-260.67C415.32,-250.42 414.31,-238.13 413.4,-227.17" />
+<polygon fill="#63818b" stroke="#63818b" points="415.84,-226.96 412.83,-220.18 410.96,-227.36 415.84,-226.96" />
+<text text-anchor="middle" x="457" y="-238" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">OpenCode install</text>
+</g>
+
+<g id="language-tools--edge5" class="edge">
+<title>lsp-&gt;provision</title>
+<path fill="none" stroke="#63818b" d="M481.15,-261C515.04,-249.19 556.9,-234.61 591.8,-222.45" />
+<polygon fill="#63818b" stroke="#63818b" points="592.88,-224.67 598.69,-220.06 591.27,-220.04 592.88,-224.67" />
+<text text-anchor="middle" x="609.5" y="-238" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">explicit LSP command</text>
+</g>
+
+<g id="language-tools--edge6" class="edge">
+<title>cfg-&gt;use</title>
+<path fill="none" stroke="#63818b" d="M135,-173.67C135,-163.52 135,-151.37 135,-140.48" />
+<polygon fill="#63818b" stroke="#63818b" points="137.45,-140.18 135,-133.18 132.55,-140.18 137.45,-140.18" />
+<text text-anchor="middle" x="185.5" y="-151" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">session calls service</text>
+</g>
+
+<g id="language-tools--edge8" class="edge">
+<title>native-&gt;lang</title>
+<path fill="none" stroke="#63818b" d="M412.02,-173.84C413.13,-151.79 415.13,-117.01 418,-87 419.06,-75.94 420.52,-63.83 421.91,-53.21" />
+<polygon fill="#63818b" stroke="#63818b" points="424.36,-53.38 422.85,-46.12 419.5,-52.74 424.36,-53.38" />
+<text text-anchor="middle" x="474" y="-107.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">file extension matches</text>
+</g>
+
+<g id="language-tools--edge7" class="edge">
+<title>provision-&gt;ready</title>
+<path fill="none" stroke="#63818b" d="M663.84,-173.67C664.68,-163.42 665.69,-151.13 666.6,-140.17" />
+<polygon fill="#63818b" stroke="#63818b" points="669.04,-140.36 667.17,-133.18 664.16,-139.96 669.04,-140.36" />
+<text text-anchor="middle" x="730" y="-151" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">already present or --install</text>
+</g>
+
+<g id="language-tools--edge9" class="edge">
+<title>ready-&gt;lang</title>
+<path fill="none" stroke="#63818b" d="M606.11,-87C572.36,-75.19 530.67,-60.61 495.91,-48.45" />
+<polygon fill="#63818b" stroke="#63818b" points="496.47,-46.05 489.05,-46.06 494.85,-50.68 496.47,-46.05" />
+<text text-anchor="middle" x="626" y="-64" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">OpenCode can find binary</text>
+</g>
+
+<g id="language-tools--node1" class="node">
+<title>start</title>
+<path fill="#d7eee6" stroke="#52737d" stroke-width="1.2" d="M393.5,-384C393.5,-384 158.5,-384 158.5,-384 152.5,-384 146.5,-378 146.5,-372 146.5,-372 146.5,-360 146.5,-360 146.5,-354 152.5,-348 158.5,-348 158.5,-348 393.5,-348 393.5,-348 399.5,-348 405.5,-354 405.5,-360 405.5,-360 405.5,-372 405.5,-372 405.5,-378 399.5,-384 393.5,-384" />
+<text text-anchor="middle" x="276" y="-362.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">1 · Read the client’s tool selections</text>
+</g>
+
+<g id="language-tools--node2" class="node">
+<title>mcp</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M236,-307C236,-307 34,-307 34,-307 28,-307 22,-301 22,-295 22,-295 22,-273 22,-273 22,-267 28,-261 34,-261 34,-261 236,-261 236,-261 242,-261 248,-267 248,-273 248,-273 248,-295 248,-295 248,-301 242,-307 236,-307" />
+<text text-anchor="middle" x="135" y="-287.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">2a · Resolve MCP registrations</text>
+<text text-anchor="middle" x="135" y="-273.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Defaults and explicit opt-ins</text>
+</g>
+
+<g id="language-tools--node3" class="node">
+<title>lsp</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M556,-307C556,-307 280,-307 280,-307 274,-307 268,-301 268,-295 268,-295 268,-273 268,-273 268,-267 274,-261 280,-261 280,-261 556,-261 556,-261 562,-261 568,-267 568,-273 568,-273 568,-295 568,-295 568,-301 562,-307 556,-307" />
+<text text-anchor="middle" x="418" y="-287.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">2b · Resolve language servers</text>
+<text text-anchor="middle" x="418" y="-273.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Commands, extensions and package pins</text>
+</g>
+
+<g id="language-tools--node4" class="node">
+<title>cfg</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M258,-220C258,-220 12,-220 12,-220 6,-220 0,-214 0,-208 0,-208 0,-186 0,-186 0,-180 6,-174 12,-174 12,-174 258,-174 258,-174 264,-174 270,-180 270,-186 270,-186 270,-208 270,-208 270,-214 264,-220 258,-220" />
+<text text-anchor="middle" x="135" y="-200.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3a · Merge native MCP settings</text>
+<text text-anchor="middle" x="135" y="-186.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Retain user registrations and toggles</text>
+</g>
+
+<g id="language-tools--node5" class="node">
+<title>native</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M512.5,-220C512.5,-220 309.5,-220 309.5,-220 303.5,-220 297.5,-214 297.5,-208 297.5,-208 297.5,-186 297.5,-186 297.5,-180 303.5,-174 309.5,-174 309.5,-174 512.5,-174 512.5,-174 518.5,-174 524.5,-180 524.5,-186 524.5,-186 524.5,-208 524.5,-208 524.5,-214 518.5,-220 512.5,-220" />
+<text text-anchor="middle" x="411" y="-200.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3b · Set native LSP commands</text>
+<text text-anchor="middle" x="411" y="-186.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">OpenCode only</text>
+</g>
+
+<g id="language-tools--node6" class="node">
+<title>provision</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M757,-220C757,-220 567,-220 567,-220 561,-220 555,-214 555,-208 555,-208 555,-186 555,-186 555,-180 561,-174 567,-174 567,-174 757,-174 757,-174 763,-174 769,-180 769,-186 769,-186 769,-208 769,-208 769,-214 763,-220 757,-220" />
+<text text-anchor="middle" x="662" y="-200.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3c · Check local executables</text>
+<text text-anchor="middle" x="662" y="-186.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">sage.py lsp CLIENT</text>
+</g>
+
+<g id="language-tools--node7" class="node">
+<title>use</title>
+<path fill="#dcebf8" stroke="#52737d" stroke-width="1.2" d="M253,-133C253,-133 17,-133 17,-133 11,-133 5,-127 5,-121 5,-121 5,-99 5,-99 5,-93 11,-87 17,-87 17,-87 253,-87 253,-87 259,-87 265,-93 265,-99 265,-99 265,-121 265,-121 265,-127 259,-133 253,-133" />
+<text text-anchor="middle" x="135" y="-113.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">4a · Invoke an enabled MCP service</text>
+<text text-anchor="middle" x="135" y="-99.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Documentation or semantic tools</text>
+</g>
+
+<g id="language-tools--node8" class="node">
+<title>ready</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M785.5,-133C785.5,-133 552.5,-133 552.5,-133 546.5,-133 540.5,-127 540.5,-121 540.5,-121 540.5,-99 540.5,-99 540.5,-93 546.5,-87 552.5,-87 552.5,-87 785.5,-87 785.5,-87 791.5,-87 797.5,-93 797.5,-99 797.5,-99 797.5,-121 797.5,-121 797.5,-127 791.5,-133 785.5,-133" />
+<text text-anchor="middle" x="669" y="-113.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">4b · Make the executable available</text>
+<text text-anchor="middle" x="669" y="-99.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Use PATH or request installation</text>
+</g>
+
+<g id="language-tools--node9" class="node">
+<title>lang</title>
+<path fill="#dcebf8" stroke="#52737d" stroke-width="1.2" d="M552,-46C552,-46 300,-46 300,-46 294,-46 288,-40 288,-34 288,-34 288,-12 288,-12 288,-6 294,0 300,0 300,0 552,0 552,0 558,0 564,-6 564,-12 564,-12 564,-34 564,-34 564,-40 558,-46 552,-46" />
+<text text-anchor="middle" x="426" y="-26.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">5 · Open a matching file in OpenCode</text>
+<text text-anchor="middle" x="426" y="-12.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Start its registered language server</text>
+</g>
+</g>
+</svg></div><footer><a href="language-tools.dot">Editable DOT</a> <a href="language-tools.svg">Full-size SVG</a> <a href="../../library/mcp/servers.json">MCP definitions</a> <a href="../../library/lsp/servers.json">LSP definitions</a> <a href="../../library/lsp/provision.py">Executable provisioning</a> <a href="../../tests/smoke_lsp.py">LSP handshake checks</a></footer></section></main></html>

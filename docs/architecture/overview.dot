@@ -1,0 +1,23 @@
+digraph "overview" {
+  graph [rankdir=TB, bgcolor="white", pad="0.22", ranksep="0.40", nodesep="0.28", outputorder="edgesfirst"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=13, fontcolor="#173341", color="#52737d", fillcolor="#eff5f7", margin="0.17,0.12", penwidth=1.2];
+  edge [fontname="Helvetica", fontsize=10, fontcolor="#315765", color="#63818b", arrowsize=0.7];
+  choose [label="1 · Choose a client\nCodex, OpenCode or Antigravity", fillcolor="#d7eee6"];
+  profile [label="2a · Read its profile\nCore, catalog, MCP and LSP", URL="index.html#selection", target="_top"];
+  lib [label="2b · Read the library\nPackages, rules and server definitions", URL="index.html#selection", target="_top"];
+  resolve [label="3 · Resolve the selection\nValidate names, rules and tool pins", URL="index.html#selection", target="_top"];
+  install [label="4 · Install in the client home\nMerge settings and journal changes", URL="index.html#activation", target="_top"];
+  session [label="5 · Start the native client\nUse its agents and permissions", fillcolor="#dcebf8"];
+  skills [label="6a · Discover relevant skills\nCore discovery and catalog routing", fillcolor="#dcebf8", URL="index.html#routing", target="_top"];
+  tools [label="6b · Use selected tools\nMCP services and language intelligence", fillcolor="#dcebf8", URL="index.html#language-tools", target="_top"];
+  { rank=same; profile; lib; }
+  { rank=same; skills; tools; }
+  choose -> profile [label="profile input"];
+  choose -> lib [label="shared input"];
+  profile -> resolve [label="selection"];
+  lib -> resolve [label="definitions"];
+  resolve -> install;
+  install -> session [label="restart"];
+  session -> skills [label="skills needed"];
+  session -> tools [label="tools needed"];
+}

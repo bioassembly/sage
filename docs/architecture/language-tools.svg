@@ -1,0 +1,133 @@
+<!-- workflow-graph source=98d2619cfcdf8573a8a4ffc751291d59620b5007ad3e20bf74f66a0312bb02d3 svg=61a92cc630f792debe8c3bf921dca88fb9aed1c4d9eb1493c48b7b5e91b01610 -->
+<svg width="829pt" height="416pt"
+ viewBox="0.00 0.00 829.18 415.68" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(15.84 399.84)">
+<title>language&#45;tools</title>
+<polygon fill="white" stroke="transparent" points="-15.84,15.84 -15.84,-399.84 813.34,-399.84 813.34,15.84 -15.84,15.84"/>
+<!-- start&#45;&gt;mcp -->
+<g id="edge1" class="edge">
+<title>start&#45;&gt;mcp</title>
+<path fill="none" stroke="#63818b" d="M245.75,-347.84C226.6,-336.97 201.5,-322.73 180.03,-310.55"/>
+<polygon fill="#63818b" stroke="#63818b" points="181.09,-308.33 173.79,-307.01 178.67,-312.59 181.09,-308.33"/>
+<text text-anchor="middle" x="252.5" y="-325" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">MCP selected</text>
+</g>
+<!-- start&#45;&gt;lsp -->
+<g id="edge2" class="edge">
+<title>start&#45;&gt;lsp</title>
+<path fill="none" stroke="#63818b" d="M306.46,-347.84C325.75,-336.97 351.03,-322.73 372.65,-310.55"/>
+<polygon fill="#63818b" stroke="#63818b" points="374.04,-312.58 378.94,-307.01 371.64,-308.31 374.04,-312.58"/>
+<text text-anchor="middle" x="383" y="-325" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">LSP selected</text>
+</g>
+<!-- mcp&#45;&gt;cfg -->
+<g id="edge3" class="edge">
+<title>mcp&#45;&gt;cfg</title>
+<path fill="none" stroke="#63818b" d="M135,-260.67C135,-250.52 135,-238.37 135,-227.48"/>
+<polygon fill="#63818b" stroke="#63818b" points="137.45,-227.18 135,-220.18 132.55,-227.18 137.45,-227.18"/>
+<text text-anchor="middle" x="150.5" y="-238" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">install</text>
+</g>
+<!-- lsp&#45;&gt;native -->
+<g id="edge4" class="edge">
+<title>lsp&#45;&gt;native</title>
+<path fill="none" stroke="#63818b" d="M416.16,-260.67C415.32,-250.42 414.31,-238.13 413.4,-227.17"/>
+<polygon fill="#63818b" stroke="#63818b" points="415.84,-226.96 412.83,-220.18 410.96,-227.36 415.84,-226.96"/>
+<text text-anchor="middle" x="457" y="-238" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">OpenCode install</text>
+</g>
+<!-- lsp&#45;&gt;provision -->
+<g id="edge5" class="edge">
+<title>lsp&#45;&gt;provision</title>
+<path fill="none" stroke="#63818b" d="M481.15,-261C515.04,-249.19 556.9,-234.61 591.8,-222.45"/>
+<polygon fill="#63818b" stroke="#63818b" points="592.88,-224.67 598.69,-220.06 591.27,-220.04 592.88,-224.67"/>
+<text text-anchor="middle" x="609.5" y="-238" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">explicit LSP command</text>
+</g>
+<!-- cfg&#45;&gt;use -->
+<g id="edge6" class="edge">
+<title>cfg&#45;&gt;use</title>
+<path fill="none" stroke="#63818b" d="M135,-173.67C135,-163.52 135,-151.37 135,-140.48"/>
+<polygon fill="#63818b" stroke="#63818b" points="137.45,-140.18 135,-133.18 132.55,-140.18 137.45,-140.18"/>
+<text text-anchor="middle" x="185.5" y="-151" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">session calls service</text>
+</g>
+<!-- native&#45;&gt;lang -->
+<g id="edge8" class="edge">
+<title>native&#45;&gt;lang</title>
+<path fill="none" stroke="#63818b" d="M412.02,-173.84C413.13,-151.79 415.13,-117.01 418,-87 419.06,-75.94 420.52,-63.83 421.91,-53.21"/>
+<polygon fill="#63818b" stroke="#63818b" points="424.36,-53.38 422.85,-46.12 419.5,-52.74 424.36,-53.38"/>
+<text text-anchor="middle" x="474" y="-107.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">file extension matches</text>
+</g>
+<!-- provision&#45;&gt;ready -->
+<g id="edge7" class="edge">
+<title>provision&#45;&gt;ready</title>
+<path fill="none" stroke="#63818b" d="M663.84,-173.67C664.68,-163.42 665.69,-151.13 666.6,-140.17"/>
+<polygon fill="#63818b" stroke="#63818b" points="669.04,-140.36 667.17,-133.18 664.16,-139.96 669.04,-140.36"/>
+<text text-anchor="middle" x="730" y="-151" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">already present or &#45;&#45;install</text>
+</g>
+<!-- ready&#45;&gt;lang -->
+<g id="edge9" class="edge">
+<title>ready&#45;&gt;lang</title>
+<path fill="none" stroke="#63818b" d="M606.11,-87C572.36,-75.19 530.67,-60.61 495.91,-48.45"/>
+<polygon fill="#63818b" stroke="#63818b" points="496.47,-46.05 489.05,-46.06 494.85,-50.68 496.47,-46.05"/>
+<text text-anchor="middle" x="626" y="-64" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#315765">OpenCode can find binary</text>
+</g>
+<!-- start -->
+<g id="node1" class="node">
+<title>start</title>
+<path fill="#d7eee6" stroke="#52737d" stroke-width="1.2" d="M393.5,-384C393.5,-384 158.5,-384 158.5,-384 152.5,-384 146.5,-378 146.5,-372 146.5,-372 146.5,-360 146.5,-360 146.5,-354 152.5,-348 158.5,-348 158.5,-348 393.5,-348 393.5,-348 399.5,-348 405.5,-354 405.5,-360 405.5,-360 405.5,-372 405.5,-372 405.5,-378 399.5,-384 393.5,-384"/>
+<text text-anchor="middle" x="276" y="-362.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">1 · Read the client’s tool selections</text>
+</g>
+<!-- mcp -->
+<g id="node2" class="node">
+<title>mcp</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M236,-307C236,-307 34,-307 34,-307 28,-307 22,-301 22,-295 22,-295 22,-273 22,-273 22,-267 28,-261 34,-261 34,-261 236,-261 236,-261 242,-261 248,-267 248,-273 248,-273 248,-295 248,-295 248,-301 242,-307 236,-307"/>
+<text text-anchor="middle" x="135" y="-287.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">2a · Resolve MCP registrations</text>
+<text text-anchor="middle" x="135" y="-273.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Defaults and explicit opt&#45;ins</text>
+</g>
+<!-- lsp -->
+<g id="node3" class="node">
+<title>lsp</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M556,-307C556,-307 280,-307 280,-307 274,-307 268,-301 268,-295 268,-295 268,-273 268,-273 268,-267 274,-261 280,-261 280,-261 556,-261 556,-261 562,-261 568,-267 568,-273 568,-273 568,-295 568,-295 568,-301 562,-307 556,-307"/>
+<text text-anchor="middle" x="418" y="-287.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">2b · Resolve language servers</text>
+<text text-anchor="middle" x="418" y="-273.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Commands, extensions and package pins</text>
+</g>
+<!-- cfg -->
+<g id="node4" class="node">
+<title>cfg</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M258,-220C258,-220 12,-220 12,-220 6,-220 0,-214 0,-208 0,-208 0,-186 0,-186 0,-180 6,-174 12,-174 12,-174 258,-174 258,-174 264,-174 270,-180 270,-186 270,-186 270,-208 270,-208 270,-214 264,-220 258,-220"/>
+<text text-anchor="middle" x="135" y="-200.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3a · Merge native MCP settings</text>
+<text text-anchor="middle" x="135" y="-186.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Retain user registrations and toggles</text>
+</g>
+<!-- native -->
+<g id="node5" class="node">
+<title>native</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M512.5,-220C512.5,-220 309.5,-220 309.5,-220 303.5,-220 297.5,-214 297.5,-208 297.5,-208 297.5,-186 297.5,-186 297.5,-180 303.5,-174 309.5,-174 309.5,-174 512.5,-174 512.5,-174 518.5,-174 524.5,-180 524.5,-186 524.5,-186 524.5,-208 524.5,-208 524.5,-214 518.5,-220 512.5,-220"/>
+<text text-anchor="middle" x="411" y="-200.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3b · Set native LSP commands</text>
+<text text-anchor="middle" x="411" y="-186.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">OpenCode only</text>
+</g>
+<!-- provision -->
+<g id="node6" class="node">
+<title>provision</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M757,-220C757,-220 567,-220 567,-220 561,-220 555,-214 555,-208 555,-208 555,-186 555,-186 555,-180 561,-174 567,-174 567,-174 757,-174 757,-174 763,-174 769,-180 769,-186 769,-186 769,-208 769,-208 769,-214 763,-220 757,-220"/>
+<text text-anchor="middle" x="662" y="-200.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">3c · Check local executables</text>
+<text text-anchor="middle" x="662" y="-186.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">sage.py lsp CLIENT</text>
+</g>
+<!-- use -->
+<g id="node7" class="node">
+<title>use</title>
+<path fill="#dcebf8" stroke="#52737d" stroke-width="1.2" d="M253,-133C253,-133 17,-133 17,-133 11,-133 5,-127 5,-121 5,-121 5,-99 5,-99 5,-93 11,-87 17,-87 17,-87 253,-87 253,-87 259,-87 265,-93 265,-99 265,-99 265,-121 265,-121 265,-127 259,-133 253,-133"/>
+<text text-anchor="middle" x="135" y="-113.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">4a · Invoke an enabled MCP service</text>
+<text text-anchor="middle" x="135" y="-99.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Documentation or semantic tools</text>
+</g>
+<!-- ready -->
+<g id="node8" class="node">
+<title>ready</title>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M785.5,-133C785.5,-133 552.5,-133 552.5,-133 546.5,-133 540.5,-127 540.5,-121 540.5,-121 540.5,-99 540.5,-99 540.5,-93 546.5,-87 552.5,-87 552.5,-87 785.5,-87 785.5,-87 791.5,-87 797.5,-93 797.5,-99 797.5,-99 797.5,-121 797.5,-121 797.5,-127 791.5,-133 785.5,-133"/>
+<text text-anchor="middle" x="669" y="-113.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">4b · Make the executable available</text>
+<text text-anchor="middle" x="669" y="-99.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Use PATH or request installation</text>
+</g>
+<!-- lang -->
+<g id="node9" class="node">
+<title>lang</title>
+<path fill="#dcebf8" stroke="#52737d" stroke-width="1.2" d="M552,-46C552,-46 300,-46 300,-46 294,-46 288,-40 288,-34 288,-34 288,-12 288,-12 288,-6 294,0 300,0 300,0 552,0 552,0 558,0 564,-6 564,-12 564,-12 564,-34 564,-34 564,-40 558,-46 552,-46"/>
+<text text-anchor="middle" x="426" y="-26.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">5 · Open a matching file in OpenCode</text>
+<text text-anchor="middle" x="426" y="-12.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Start its registered language server</text>
+</g>
+</g>
+</svg>

@@ -1,0 +1,50 @@
+{
+  "core": [
+    "ponytail",
+    "checkpoint",
+    "sage-debug",
+    "sage-design",
+    "sage-git-commit",
+    "sage-repo-maintenance",
+    "sage-review",
+    "sage-test-design",
+    "token-efficiency"
+  ],
+  "catalog": [
+    "sage-genomics",
+    "sage-sequence-analysis",
+    "sage-scientific-report",
+    "sage-fair-data",
+    "sage-results-package",
+    "sage-explain",
+    "vercel-react-best-practices",
+    "sage-webapp-testing",
+    "sage-web-scraping",
+    "sage-security-audit",
+    "differential-review",
+    "variant-analysis",
+    "domain-modeling",
+    "grill-with-docs",
+    "grilling",
+    "red-team",
+    "sage-spec",
+    "sage-tickets",
+    "sage-git-worktrees",
+    "sage-mcp-builder",
+    "sage-pdf-editing",
+    "sage-binary-inspection",
+    "sage-overnight",
+    "sage-harness-eval",
+    "workflow-graph"
+  ],
+  "mcp": [],
+  "optional_mcp": [
+    "context7",
+    "deepwiki",
+    "serena"
+  ],
+  "lsp": [
+    "pyright",
+    "typescript"
+  ]
+}

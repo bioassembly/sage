@@ -1,0 +1,82 @@
+{
+  "reviewed": "2026-11-15",
+  "note": "Reviewed upstream revisions and tool pins. The package manifest in third_party/lock.json records files, licenses and local patches.",
+  "sources": [
+    {
+      "repository": "DietrichGebert/ponytail",
+      "revision": "96608e078b2d5ea607c5c3b8b5a54d1c1fba6846",
+      "paths": [
+        "skills/ponytail/SKILL.md",
+        "LICENSE"
+      ],
+      "license": "MIT"
+    },
+    {
+      "repository": "mattpocock/skills",
+      "revision": "5863806dd4e15c63174bee4e7515a4256792ecfa",
+      "paths": [
+        "skills/engineering/grill-with-docs/SKILL.md",
+        "skills/productivity/grilling/SKILL.md",
+        "LICENSE",
+        "skills/engineering/domain-modeling"
+      ],
+      "license": "MIT"
+    },
+    {
+      "repository": "trailofbits/skills",
+      "revision": "149d7b21f4067765b82e67029730b42d228ef4b4",
+      "paths": [
+        "plugins/variant-analysis/skills/variant-analysis",
+        "plugins/differential-review/skills/differential-review",
+        "LICENSE"
+      ]
+    },
+    {
+      "repository": "vercel-labs/agent-skills",
+      "revision": "1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62",
+      "paths": [
+        "skills/react-best-practices"
+      ]
+    },
+    {
+      "repository": "rtk-ai/rtk",
+      "revision": "e288a18c04452fd26192f59132e5324a8bb6924d",
+      "paths": [
+        "README.md",
+        "hooks/codex/README.md",
+        "LICENSE"
+      ]
+    },
+    {
+      "repository": "obra/superpowers",
+      "revision": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "paths": [
+        "skills/systematic-debugging",
+        "skills/test-driven-development",
+        "skills/using-git-worktrees",
+        "skills/verification-before-completion"
+      ]
+    },
+    {
+      "repository": "anthropics/skills",
+      "revision": "1780c5e5a552fd4d1c9d6a7b0cab26b0c2bef064",
+      "paths": [
+        "skills/mcp-builder",
+        "skills/webapp-testing"
+      ]
+    },
+    {
+      "repository": "K-Dense-AI/scientific-agent-skills",
+      "revision": "2d2065fb4520fa3f3f2bcf61cff26ec8b7eba4b5",
+      "paths": [
+        "skills/biopython",
+        "skills/pysam",
+        "skills/nextflow"
+      ]
+    }
+  ],
+  "mcp_packages": {
+    "serena-agent": "2.1.0",
+    "rea-agents": "6.4.0"
+  }
+}

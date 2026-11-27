@@ -1,0 +1,23 @@
+{
+  "context7": {
+    "url": "https://mcp.context7.com/mcp",
+    "startup_seconds": 20,
+    "tool_seconds": 60
+  },
+  "deepwiki": {
+    "url": "https://mcp.deepwiki.com/mcp",
+    "startup_seconds": 20,
+    "tool_seconds": 60
+  },
+  "serena": {
+    "command": ["uvx", "--from", "serena-agent==2.1.0", "serena", "start-mcp-server", "--context", "{context}", "--agent-interface", "tools", "--open-web-dashboard", "false", "--enable-gui-log-window", "false"],
+    "startup_seconds": 90,
+    "tool_seconds": 120
+  },
+  "rea": {
+    "command": ["npx", "--yes", "rea-agents@6.4.0", "mcp"],
+    "env": {"REA_MCP_INPUT_SCHEMA_PROFILE": "compact"},
+    "startup_seconds": 90,
+    "tool_seconds": 120
+  }
+}

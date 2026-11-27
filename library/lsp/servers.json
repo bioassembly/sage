@@ -1,0 +1,46 @@
+{
+  "pyright": {
+    "command": ["pyright-langserver", "--stdio"],
+    "extensions": [".py", ".pyi"],
+    "npm": ["pyright@1.1.413"]
+  },
+  "bash": {
+    "command": ["bash-language-server", "start"],
+    "extensions": [".sh", ".bash", ".zsh"],
+    "npm": ["bash-language-server@5.6.0"]
+  },
+  "yaml": {
+    "command": ["yaml-language-server", "--stdio"],
+    "extensions": [".yaml", ".yml"],
+    "npm": ["yaml-language-server@1.24.0"]
+  },
+  "json": {
+    "command": ["vscode-json-language-server", "--stdio"],
+    "extensions": [".json", ".jsonc"],
+    "npm": ["vscode-langservers-extracted@4.10.0"]
+  },
+  "typescript": {
+    "command": ["tsc", "--lsp", "--stdio"],
+    "extensions": [".ts", ".tsx", ".js", ".jsx", ".mts", ".cts", ".mjs", ".cjs"],
+    "npm": ["typescript@7.0.2"]
+  },
+  "tailwind": {
+    "command": ["tailwindcss-language-server", "--stdio"],
+    "extensions": [".css", ".html", ".tsx", ".jsx", ".vue", ".svelte"],
+    "npm": ["@tailwindcss/language-server@0.16.0"]
+  },
+  "php": {
+    "command": ["intelephense", "--stdio"],
+    "extensions": [".php"],
+    "npm": ["intelephense@1.18.5"]
+  },
+  "marksman": {
+    "command": ["marksman", "server"],
+    "extensions": [".md", ".markdown", ".qmd"],
+    "release": "https://github.com/artempyanykh/marksman/releases/download/2026-02-08/",
+    "linux": {
+      "x86_64": ["marksman-linux-x64", "be5098e8213219269c47fc0d916a66fa31ce0602ec967475c722260aabf26087"],
+      "aarch64": ["marksman-linux-arm64", "db8e124527f7f8048e3e6c91821b9c52ef173d92c01e47d221bf1337afd962fb"]
+    }
+  }
+}
