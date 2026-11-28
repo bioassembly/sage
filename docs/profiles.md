@@ -2,7 +2,9 @@
 
 A profile selects ordered lists of core skills, catalog skills, default MCP servers, optional MCP servers and LSP servers. The three profiles inherit `core` and `catalog` from [the shared skill defaults](../library/default-skills.json). Set either list in a client's `profile.json` to replace that list for that client. Catalog skills require a routing rule. A profile can override rule fields or clear an inherited field with JSON null. The functional index reflects the resolved profiles.
 
-Core contains three short, reusable workflows for scoped implementation, checkpoints and concise work. Catalog covers task-specific workflows such as debugging, code review and token analysis. Each default profile uses one primary skill per workflow. The library includes additional variants that can be selected for a project with different needs.
+Core contains three reusable workflows for scoped implementation, checkpoints and concise work. Catalog covers task-specific workflows such as debugging, code review and token analysis. All 47 standalone skill packages are selected by the shared defaults. Supporting material such as boundary tracing and deep module design lives in references within the skill that uses it.
+
+Catalog routing recognizes the retired package names as explicit request aliases. For example, `$first-principles-explainer` selects `sage-explain`, and `$github-repo-best-practices` selects `sage-repo-maintenance`. In a custom profile, use the canonical names listed in the functional index. [Functional index](../library/INDEX.md) · [Invocation aliases](../library/routing.json)
 
 | Client | MCP defaults | Language tooling |
 | --- | --- | --- |

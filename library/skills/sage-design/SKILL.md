@@ -9,6 +9,8 @@ local. Include ordering, failure semantics, invariants, and performance in the
 interface contract. Introduce an abstraction where behavior actually varies.
 For consequential choices, sketch materially different options and compare them
 against the user's constraints, migration cost, test seams, and rollback path.
+When callers coordinate several small modules or repeat the same decisions, read
+[deepening modules](references/deepening-modules.md).
 Ask only for decisions that cannot be inferred or investigated. If the user requests
 an interview or /grill-me, work through unresolved decisions in short rounds with
 recommended defaults; otherwise proceed using documented assumptions.

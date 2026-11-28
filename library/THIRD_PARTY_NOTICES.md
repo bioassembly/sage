@@ -62,13 +62,18 @@ No RTK binary or pipeline engine is vendored in this repository.
 ## Other bundled packages
 
 The library includes Matt Pocock engineering and setup packages,
-Obra Superpowers workflows, Anthropic MCP/browser skills, and K-Dense scientific
+Obra Superpowers workflows, Anthropic MCP authoring, and K-Dense scientific
 skills. The functional index lists each package and its profile selections.
 Superpowers' MIT license is retained in `third_party/licenses/superpowers.txt`.
 Anthropic's per-package LICENSE.txt files are preserved with those packages.
 K-Dense's repository MIT license is retained in
 `third_party/licenses/scientific-agent-skills.md`; original package metadata also
 identifies the respective library licenses.
+
+SAGE's [module design guide](skills/sage-design/references/deepening-modules.md)
+and [boundary tracing guide](skills/sage-debug/references/boundary-tracing.md)
+identify their upstream material and revisions. The Matt Pocock and Superpowers
+MIT notices above apply to the respective adaptations.
 
 One Anthropic MCP evaluation helper has an explicit correctness patch to process
 all tool requests in a response. The original source hash, patched hash, and

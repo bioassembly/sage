@@ -16,16 +16,9 @@
     ],
     "patterns": [
       "\\b(?:biopython|bio\\.(?:seqio|entrez)|fasta|genbank)\\b"
-    ]
-  },
-  "codebase-design": {
-    "category": "architecture",
-    "summary": "Deep modules, interface seams, testability and AI-navigable architecture",
-    "patterns": [
-      "\\bmodule design\\b",
-      "\\barchitecture\\b",
-      "\\binterface seam\\b",
-      "\\brefactor\\b"
+    ],
+    "invocation_aliases": [
+      "sage-sequence-analysis"
     ]
   },
   "differential-review": {
@@ -58,30 +51,9 @@
     "summary": "FAIR dataset packaging, metadata dictionaries and scientific provenance",
     "patterns": [
       "\\b(?:fair data|ro-crate|metadata dictionary|dataset provenance)\\b"
-    ]
-  },
-  "first-principles-explainer": {
-    "category": "science",
-    "summary": "First-principles breakdowns of complex pipelines and discrepancies",
-    "patterns": [
-      "\\bfirst principles\\b",
-      "\\bexplain why\\b",
-      "\\bdiscrepancy\\b",
-      "\\bfrom scratch intuition\\b"
-    ]
-  },
-  "github-repo-best-practices": {
-    "category": "planning",
-    "summary": "Top-standard README, citation, community health and release layout",
-    "files": [
-      "CITATION.cff",
-      ".github/PULL_REQUEST_TEMPLATE.md"
     ],
-    "patterns": [
-      "\\baudit.*repo\\b",
-      "\\bwrite.*readme\\b",
-      "\\bcitation\\.cff\\b",
-      "\\brelease setup\\b"
+    "invocation_aliases": [
+      "sage-fair-data"
     ]
   },
   "grill-with-docs": {
@@ -109,6 +81,9 @@
     "summary": "Design and evaluate FastMCP / TypeScript MCP servers",
     "patterns": [
       "\\b(?:build|create|design|implement|develop|author|test)\\b[^\\n.!?]{0,45}\\b(?:mcp server|mcp tool|fastmcp)\\b"
+    ],
+    "invocation_aliases": [
+      "sage-mcp-builder"
     ]
   },
   "nextflow": {
@@ -124,34 +99,6 @@
     ],
     "patterns": [
       "\\b(nextflow|nf-core|dsl2|nf-test)\\b"
-    ]
-  },
-  "overnight-explorer": {
-    "category": "research",
-    "summary": "Deep unattended multi-branch exploration and reproducible logs",
-    "patterns": [
-      "\\bovernight\\b",
-      "\\bwhile i('m| am)? (away|asleep)\\b",
-      "\\bautonomous exploration\\b"
-    ]
-  },
-  "pdf-inplace-editing": {
-    "category": "documents",
-    "summary": "Zero-drift PDF editing and true anonymization/redaction",
-    "patterns": [
-      "\\bpdf\\b",
-      "\\bredact\\b",
-      "\\banonymiz"
-    ]
-  },
-  "pipeline-sketch-results": {
-    "category": "science",
-    "summary": "Package pipeline outputs into clean numbered deliverables",
-    "patterns": [
-      "\\bresults/? folder\\b",
-      "\\bclient-facing\\b",
-      "\\bpublish pipeline results\\b",
-      "\\bdeliverable\\b"
     ]
   },
   "pysam": {
@@ -192,14 +139,6 @@
       "\\b(?:stress[- ]test|red[- ]team) (?:the |this |my |our |a )?(?:implementation |migration |deployment )?plan\\b"
     ]
   },
-  "review": {
-    "category": "quality",
-    "summary": "Review a diff for concrete defects and regressions",
-    "patterns": [
-      "^/sage-review\\b",
-      "\\breview (?:the |this )?(?:diff|pull request|changes)\\b"
-    ]
-  },
   "sage-binary-inspection": {
     "category": "tooling",
     "summary": "Inspect binaries, bytecode, wheels or minified bundles cleanly",
@@ -212,7 +151,11 @@
     "summary": "Reproduce a defect and verify its root cause",
     "patterns": [
       "\\b(?:debug|diagnose|triage|reproduce|fix)\\b[^\\n.!?]{0,65}\\b(?:bug|crash|regression|race condition|flaky tests?|failing tests?|test failures?|hang|deadlock)\\b",
-      "\\broot cause\\b[^\\n.!?]{0,42}\\b(?:crash|failure|error|bug|tests?)\\b"
+      "\\broot cause\\b[^\\n.!?]{0,42}\\b(?:crash|failure|error|bug|tests?)\\b",
+      "\\b(?:trace|diagnose)\\b[^\\n.!?]{0,55}\\b(?:failure|regression)\\b[^\\n.!?]{0,25}\\bacross (?:services|components|processes)\\b"
+    ],
+    "invocation_aliases": [
+      "systematic-debugging"
     ]
   },
   "sage-design": {
@@ -220,7 +163,11 @@
     "summary": "Design or refactor a module interface and test the trade-offs",
     "patterns": [
       "\\b(?:module design|interface seams?)\\b",
-      "\\b(?:design|refactor|redesign|simplify)\\b[^\\n.!?]{0,48}\\b(?:module boundaries|module interface|subsystem|subsystems|interfaces|architecture|interfaces between)\\b"
+      "\\b(?:design|refactor|redesign|simplify)\\b[^\\n.!?]{0,48}\\b(?:module boundaries|module interface|subsystem|subsystems|interfaces|architecture|interfaces between)\\b",
+      "\\b(?:deepen (?:the |these )?modules?|deep module design)\\b"
+    ],
+    "invocation_aliases": [
+      "codebase-design"
     ]
   },
   "sage-explain": {
@@ -228,20 +175,9 @@
     "summary": "First-principles explanations of algorithms and discrepancies",
     "patterns": [
       "\\b(?:from first principles|first[- ]principles explanation)\\b"
-    ]
-  },
-  "sage-fair-data": {
-    "category": "science",
-    "summary": "FAIR data/metadata packaging and scientific reproducibility",
-    "files": [
-      "codemeta.json",
-      "ro-crate-metadata.json",
-      "datapackage.json"
     ],
-    "patterns": [
-      "\\bfair data\\b",
-      "\\bro-crate\\b",
-      "\\bmetadata dictionary\\b"
+    "invocation_aliases": [
+      "first-principles-explainer"
     ]
   },
   "sage-genomics": {
@@ -259,6 +195,9 @@
       "^\\s*(?:please\\s+)?(?:git\\s+)?(?:commit|push|stage)\\b[^\\n.!?]{0,50}\\b(?:changes|repo|branch|to origin|to github|this|everything)\\b",
       "^\\s*(?:please\\s+)?(?:git\\s+)?commit\\s+and\\s+push\\b",
       "^\\s*(?:please\\s+)?write a commit message\\b"
+    ],
+    "invocation_aliases": [
+      "git-commit-convention"
     ]
   },
   "sage-git-worktrees": {
@@ -267,6 +206,9 @@
     "patterns": [
       "\\bworktree\\b",
       "\\bisolated branch\\b"
+    ],
+    "invocation_aliases": [
+      "using-git-worktrees"
     ]
   },
   "sage-harness-eval": {
@@ -275,19 +217,9 @@
     "patterns": [
       "\\b(?:evaluate|benchmark)\\b[^\\n.!?]{0,55}\\b(?:skill|harness|router|routing)\\b",
       "\\b(?:harness eval|routing benchmark|skill evaluation)\\b"
-    ]
-  },
-  "sage-mcp-builder": {
-    "category": "tooling",
-    "summary": "MCP server design and protocol evaluation",
-    "deps": [
-      "fastmcp",
-      "@modelcontextprotocol/sdk"
     ],
-    "patterns": [
-      "\\bmcp server\\b",
-      "\\bfastmcp\\b",
-      "\\bmodel context protocol\\b"
+    "invocation_aliases": [
+      "skill-evaluation"
     ]
   },
   "sage-overnight": {
@@ -297,6 +229,9 @@
       "\\bovernight\\b",
       "\\bwhile i('m| am)? (away|asleep)\\b",
       "\\bautonomous exploration\\b"
+    ],
+    "invocation_aliases": [
+      "overnight-explorer"
     ]
   },
   "sage-pdf-editing": {
@@ -304,6 +239,9 @@
     "summary": "In-place PDF editing and true anonymization/redaction",
     "patterns": [
       "\\b(?:edit|redact|anonymi[sz]e|modify|replace text in)\\b[^\\n.!?]{0,55}\\bpdf\\b"
+    ],
+    "invocation_aliases": [
+      "pdf-inplace-editing"
     ]
   },
   "sage-repo-maintenance": {
@@ -311,6 +249,9 @@
     "summary": "Improve CI, release hygiene and contributor documentation",
     "patterns": [
       "\\b(?:audit|improve|update|fix|set up)\\b[^\\n.!?]{0,48}\\b(?:repo hygiene|ci workflow|release automation|contributor documentation|contributing guide)\\b"
+    ],
+    "invocation_aliases": [
+      "github-repo-best-practices"
     ]
   },
   "sage-results-package": {
@@ -318,6 +259,9 @@
     "summary": "Package pipeline outputs into clean client deliverables",
     "patterns": [
       "\\b(?:assemble|package|prepare|publish|deliver)\\b[^\\n.!?]{0,55}\\b(?:results package|pipeline results|results folder|research deliverables)\\b"
+    ],
+    "invocation_aliases": [
+      "pipeline-sketch-results"
     ]
   },
   "sage-review": {
@@ -347,26 +291,9 @@
     "summary": "Web/API security audit for auth, injection, XSS, CSRF and SSRF",
     "patterns": [
       "\\bsecurity (?:audit|assessment|hardening)\\b"
-    ]
-  },
-  "sage-sequence-analysis": {
-    "category": "bioinformatics",
-    "summary": "FASTA/GenBank/PDB parsing, BLAST, motifs and phylogenetics",
-    "files": [
-      "*.fasta",
-      "*.fa",
-      "*.fna",
-      "*.faa",
-      "*.gb",
-      "*.gbk",
-      "*.pdb"
     ],
-    "deps": [
-      "biopython"
-    ],
-    "patterns": [
-      "\\bbiopython\\b",
-      "\\b(fasta|genbank|pdb|blast|phylogenet|motif)\\b"
+    "invocation_aliases": [
+      "security-audit"
     ]
   },
   "sage-spec": {
@@ -397,6 +324,9 @@
     "patterns": [
       "\\bweb scrap(?:e|er|ing)\\b",
       "\\b(?:scrape|crawl|extract)\\b[^\\n.!?]{0,45}\\b(?:from a website|from the website|from a web page|from the web page|web pages|website|html pages|an html table)\\b"
+    ],
+    "invocation_aliases": [
+      "web-scraping"
     ]
   },
   "sage-webapp-testing": {
@@ -405,16 +335,9 @@
     "patterns": [
       "\\b(?:playwright|cypress|browser|e2e|end.to.end) (?:tests?|testing|suite|verification)\\b",
       "\\btest\\b[^\\n.!?]{0,55}\\b(?:in a browser|in the browser|web app|web application)\\b"
-    ]
-  },
-  "security-audit": {
-    "category": "security",
-    "summary": "OWASP Top-10 audit for auth, injection, XSS, CSRF, SSRF and secrets",
-    "patterns": [
-      "\\bsecurity (audit|review|scan)\\b",
-      "\\bowasp\\b",
-      "\\b(xss|csrf|ssrf|sql injection|idor)\\b",
-      "\\bharden\\b"
+    ],
+    "invocation_aliases": [
+      "webapp-testing"
     ]
   },
   "setup-matt-pocock-skills": {
@@ -426,18 +349,6 @@
     "summary": "Find and vet a reusable skill for a gap in the active library",
     "patterns": [
       "\\b(?:find|vet|install|acquire|search for)\\b[^\\n.!?]{0,45}\\b(?:reusable skill|agent skill|a skill for)\\b"
-    ]
-  },
-  "skill-evaluation": {
-    "category": "meta",
-    "summary": "Benchmark skills and prompts with A/B assertions",
-    "dirs": [
-      "evals"
-    ],
-    "patterns": [
-      "\\bevaluate skill\\b",
-      "\\ba/b compare\\b",
-      "\\bskill[- ]evaluation\\b"
     ]
   },
   "skill-maker": {
@@ -480,14 +391,6 @@
       "\\b(?:reduce|cut|trim)\\b[^\\n.!?]{0,48}\\b(?:tool output|context size|context overhead)\\b"
     ]
   },
-  "using-git-worktrees": {
-    "category": "git",
-    "summary": "Isolated git worktrees for parallel feature work",
-    "patterns": [
-      "\\bworktree\\b",
-      "\\bisolated branch\\b"
-    ]
-  },
   "variant-analysis": {
     "category": "security",
     "summary": "Find sibling bug variants across a codebase via patterns/CodeQL/Semgrep",
@@ -519,42 +422,6 @@
     "summary": "Run fresh checks before making a completion claim",
     "patterns": [
       "\\b(?:verify|confirm|prove)\\b[^\\n.!?]{0,40}\\b(?:the fix works|the tests pass|ready to (?:ship|merge)|before (?:finishing|merging|shipping))\\b"
-    ]
-  },
-  "web-scraping": {
-    "category": "web",
-    "summary": "Extract structured data from web pages and APIs",
-    "deps": [
-      "beautifulsoup4",
-      "scrapy",
-      "cheerio",
-      "puppeteer"
-    ],
-    "patterns": [
-      "\\bscrap(e|ing)\\b",
-      "\\bcrawl(ing|er)?\\b",
-      "\\bextract (table|data) from (web|site|html)\\b"
-    ]
-  },
-  "webapp-testing": {
-    "category": "web",
-    "summary": "Playwright browser verification, screenshots and local web UI debugging",
-    "files": [
-      "playwright.config.*",
-      "cypress.config.*"
-    ],
-    "deps": [
-      "playwright",
-      "@playwright/test",
-      "cypress"
-    ],
-    "patterns": [
-      "\\bplaywright\\b",
-      "\\bbrowser test\\b",
-      "\\bweb ?app\\b",
-      "\\be2e\\b",
-      "\\bscreenshot\\b",
-      "\\bfrontend bug\\b"
     ]
   },
   "workflow-graph": {

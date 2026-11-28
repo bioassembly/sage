@@ -51,9 +51,7 @@
       "repository": "obra/superpowers",
       "revision": "22f0b463e7a5e579904dd6211a520321035526f7",
       "paths": [
-        "skills/systematic-debugging",
         "skills/test-driven-development",
-        "skills/using-git-worktrees",
         "skills/verification-before-completion"
       ]
     },
@@ -61,8 +59,7 @@
       "repository": "anthropics/skills",
       "revision": "1780c5e5a552fd4d1c9d6a7b0cab26b0c2bef064",
       "paths": [
-        "skills/mcp-builder",
-        "skills/webapp-testing"
+        "skills/mcp-builder"
       ]
     },
     {

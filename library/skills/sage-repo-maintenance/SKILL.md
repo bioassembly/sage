@@ -9,6 +9,8 @@ requirements and maintained source locations discoverable. Keep secrets, machine
 paths, caches, and generated outputs outside source control.
 Match existing structure and licensing. Add CI for meaningful supported checks,
 pin executable dependencies appropriately, and document how to review updates.
+For repositories that publish research software, match citation metadata to the
+release and verify that the linked artifact or permanent identifier resolves.
 Check links, examples, configuration preservation, and failure recovery. Include
 provenance for third-party material and distinguish modified adaptations from
 upstream distributions. Do not invent release claims, benchmark improvements,

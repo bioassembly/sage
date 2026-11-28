@@ -5,9 +5,9 @@ The package manifest records the repository, revision, file hashes and license i
 | Source | Material used in SAGE |
 | --- | --- |
 | DietrichGebert/ponytail | Ponytail implementation and response guidance. |
-| mattpocock/skills | Design interviews, domain modeling, specifications, tickets, codebase design and project setup. The pinned `grill-with-docs` package uses both `grilling` and `domain-modeling`. |
-| obra/superpowers | Debugging, test-driven development, worktrees and verification. |
-| anthropics/skills | MCP authoring and browser testing. The MCP evaluation helper contains a recorded patch to return a result for every tool request. |
+| mattpocock/skills | Design interviews, domain modeling, specifications, tickets and project setup. The pinned `grill-with-docs` package uses both `grilling` and `domain-modeling`. SAGE adapts codebase design guidance in the [module design reference](skills/sage-design/references/deepening-modules.md). |
+| obra/superpowers | Test-driven development and verification. SAGE adapts systematic-debugging guidance in the [boundary tracing reference](skills/sage-debug/references/boundary-tracing.md). |
+| anthropics/skills | MCP authoring. The MCP evaluation helper contains a recorded patch to return a result for every tool request. |
 | K-Dense-AI/scientific-agent-skills | Nextflow, pysam and Biopython workflows. |
 | trailofbits/skills | Differential review and variant analysis. |
 | vercel-labs/agent-skills | React performance guidance. The manifest records compatibility file aliases. |

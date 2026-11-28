@@ -8,6 +8,12 @@ from library import index, profiles
 
 
 class FunctionalIndexTests(unittest.TestCase):
+    def test_each_bundled_skill_is_reachable_from_a_shipped_profile(self):
+        rows = index.rows(profiles.ROOT)
+        unselected = sorted(name for _, kind, name, _, _, modes in rows
+                            if kind == 'skill' and all(mode == '—' for mode in modes.values()))
+        self.assertEqual(unselected, [])
+
     def test_index_is_complete_current_and_searchable_by_function(self):
         self.assertFalse(index.sync())
         entries = index.rows(profiles.ROOT)

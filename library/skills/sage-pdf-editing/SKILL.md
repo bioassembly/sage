@@ -16,5 +16,7 @@ Inspect raster text, metadata, annotations, hidden layers, and attachments withi
 the requested scope. Do not claim secure removal from a visual comparison alone.
 
 Render before/after pages at the same resolution and inspect changed regions.
+For layout-sensitive edits, compare page dimensions and rotation, then check
+pixel differences outside the approved edit regions using the same renderer.
 Check extracted text and relevant metadata for residual content, then reopen the
 saved result. Report the checks actually performed and any unresolved scope.

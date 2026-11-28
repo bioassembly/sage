@@ -5,3 +5,5 @@ Keep shared capabilities in `library/`. Each directory in `clients/` holds a pro
 A client owns its native agents, models, permissions and delegation settings. Store optional role briefs as Markdown in `library/agents/`. Test installation and upgrades in an isolated home. Preserve personal configuration, edited files, local overlays and reversible journals.
 
 Group each capability once in `library/functions.json`. Run `python3 sage.py sync`, `python3 sage.py check` and the affected tests. Update and regenerate the numbered Graphviz views when architecture changes. Preserve upstream licenses and byte-level package checks when refreshing a vendor.
+
+Give each standalone skill a profile that uses it or an explicit caller. Keep specialized guidance under the skill that reads it as a reference.

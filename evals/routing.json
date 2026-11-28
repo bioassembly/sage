@@ -55,5 +55,11 @@
   {"id": "quoted-prompt", "prompt": "Summarize this quoted request:\n> Review the working diff.", "expect": []},
   {"id": "fenced-log", "prompt": "Explain this log excerpt.\n```text\nStress-test this plan.\n```", "expect": []},
   {"id": "embedded-request", "prompt": "~~~\nRun a design interview.\n~~~\nFix the README typo.", "expect": []},
-  {"id": "real-request-after-quote", "prompt": "> The sample instruction says to review the working diff.\nUse sage-pdf-editing here.", "expect": ["sage-pdf-editing"]}
+  {"id": "real-request-after-quote", "prompt": "> The sample instruction says to review the working diff.\nUse sage-pdf-editing here.", "expect": ["sage-pdf-editing"]},
+  {"id": "retired-explainer", "prompt": "$first-principles-explainer", "expect": ["sage-explain"]},
+  {"id": "retired-repository-audit", "prompt": "Use github-repo-best-practices for the release.", "expect": ["sage-repo-maintenance"]},
+  {"id": "retired-design-skill", "prompt": "/codebase-design", "expect": ["sage-design"]},
+  {"id": "retired-debugging-skill", "prompt": "$systematic-debugging", "expect": ["sage-debug"]},
+  {"id": "trace-boundaries", "prompt": "Trace the failure across services.", "expect": ["sage-debug"]},
+  {"id": "deepen-module", "prompt": "Deepen these modules in the order service.", "expect": ["sage-design"]}
 ]

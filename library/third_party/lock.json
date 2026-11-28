@@ -168,18 +168,6 @@
     },
     {
       "repository": "mattpocock/skills",
-      "path": "skills/engineering/codebase-design",
-      "name": "codebase-design",
-      "revision": "5863806dd4e15c63174bee4e7515a4256792ecfa",
-      "files": {
-        "DEEPENING.md": "cd94075cfd754d147555c5d747a16431ed4c7dd8",
-        "DESIGN-IT-TWICE.md": "aebdc9f8c05b40d7832de38e2fd8380e1e5507ac",
-        "SKILL.md": "3f63c8146dd2604b419c929e9876b90c30d410e9",
-        "agents/openai.yaml": "3180715edb37f6e96bec42f92f00169faa8886ef"
-      }
-    },
-    {
-      "repository": "mattpocock/skills",
       "path": "skills/engineering/domain-modeling",
       "name": "domain-modeling",
       "revision": "5863806dd4e15c63174bee4e7515a4256792ecfa",
@@ -227,35 +215,12 @@
     },
     {
       "repository": "obra/superpowers",
-      "path": "skills/systematic-debugging",
-      "name": "systematic-debugging",
-      "revision": "22f0b463e7a5e579904dd6211a520321035526f7",
-      "files": {
-        "SKILL.md": "62fc752aaef59a8bbed5d305f4cadc60f8ae07ed",
-        "condition-based-waiting-example.ts": "703a06b653160d060bbf46ab5c6e0cd7446bd592",
-        "condition-based-waiting.md": "70994f777c586f7d4c43033aac34c7cf0da6688b",
-        "defense-in-depth.md": "e2483354dc2b62478a2624e34ca18bc0efe887b2",
-        "find-polluter.sh": "985f5d08ccf8a3f2d40739cfcaf4413bb24bf1cb",
-        "root-cause-tracing.md": "0e72e8f9566b7ef85e814633d1feacad9d0c5868"
-      }
-    },
-    {
-      "repository": "obra/superpowers",
       "path": "skills/test-driven-development",
       "name": "test-driven-development",
       "revision": "22f0b463e7a5e579904dd6211a520321035526f7",
       "files": {
         "SKILL.md": "46838cc9e893c06259e3bdad0fc2425b36242f15",
         "writing-good-tests.md": "d3c4482fd30b4f9084bb61545fe73939a7502c28"
-      }
-    },
-    {
-      "repository": "obra/superpowers",
-      "path": "skills/using-git-worktrees",
-      "name": "using-git-worktrees",
-      "revision": "22f0b463e7a5e579904dd6211a520321035526f7",
-      "files": {
-        "SKILL.md": "1381dacb3516b94382dd6ec736ede21ee8ede2b3"
       }
     },
     {
@@ -289,20 +254,6 @@
         "scripts/evaluation.py": "fd74779df82bc59d701d95c23092a9e8a80faf08"
       },
       "patch_note": "Process all tool_use blocks and return every result, including failures; patches/mcp-evaluation-parallel.patch"
-    },
-    {
-      "repository": "anthropics/skills",
-      "path": "skills/webapp-testing",
-      "name": "webapp-testing",
-      "revision": "1780c5e5a552fd4d1c9d6a7b0cab26b0c2bef064",
-      "files": {
-        "LICENSE.txt": "4f881c52d1f72f4cfb720e339e2d35c3058d01a9",
-        "SKILL.md": "4726215301db64a0cc4d41fc3219c61f37a30f4a",
-        "examples/console_logging.py": "9329b5e232ed53d944bfe95e750070117d31b9ab",
-        "examples/element_discovery.py": "917ba72f52421a1b324f93ae8e38af72010a87b9",
-        "examples/static_html_automation.py": "90bbedcc08cdb345c74fb938ebad02c0baf56603",
-        "scripts/with_server.py": "431f2eba16b268b7f3e2ae4daae9db41c0289b6d"
-      }
     },
     {
       "repository": "K-Dense-AI/scientific-agent-skills",

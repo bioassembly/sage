@@ -8,6 +8,8 @@ failure. Inspect the closest implementation, callers, and recent relevant change
 Reduce to a small reproducer and state a falsifiable hypothesis before patching.
 Change one causal variable, then rerun the reproducer. For intermittent behavior,
 record seeds, ordering, timing, and resource conditions; passing once is weak evidence.
+When the failure crosses service or process boundaries, or several tests affect
+each other, use [boundary tracing](references/boundary-tracing.md).
 After two unsuccessful fixes, revisit assumptions and isolate a smaller case or
 seek a bounded independent diagnosis. Do not keep stacking speculative fixes.
 Add a regression test at the observable interface when it protects useful behavior.
