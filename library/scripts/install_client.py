@@ -30,6 +30,10 @@ def install(root, user_home, client, key=None, base_url=None, with_rea=False, di
     # Antigravity creates an empty MCP file on the first native CLI invocation.
     content = config.read_text() if config.exists() else ''
     current = json.loads(content) if content.strip() else {}
+    routing = None if all_skills else profiles.routing(plan, library)
+    public = {name: library / 'skills' / name for name in plan['core'] + plan['catalog']}
+    local = {p.parent.name: p.parent.resolve() for p in (source / 'skills.local').glob('*/SKILL.md')}
+    core_names = set(public if all_skills else plan['core']) | local.keys()
     replacements = {'__UNSLOTH_API_KEY__': key or 'local-opencode', '__BASE_URL__': base_url or 'http://127.0.0.1:8080/v1',
                     '__MEMORY_PATH__': str(target / 'memory.json')}
     template = profiles.native_config(client, plan, root)
@@ -100,24 +104,27 @@ def install(root, user_home, client, key=None, base_url=None, with_rea=False, di
         else:
             raise ValueError(f'Personal path collision preserved: {destination}')
 
-    routing = None if all_skills else profiles.routing(plan, library)
-    core_names = set(plan['core'])
-    public = {name: library / 'skills' / name for name in plan['core'] + plan['catalog']}
-    local_dir = source / 'skills.local'
-    local = {}
-    if local_dir.exists():
-        for skill in local_dir.iterdir():
-            if (skill / 'SKILL.md').is_file():
-                local[skill.name] = skill.resolve()
     for name, skill in sorted(public.items()):
         if name in local:
             continue
-        if routing is None or name in core_names:
-            add_tree(skill, target / 'skills' / name)
+        if name in core_names:
+            if client == 'antigravity':
+                add_tree(skill, target / 'skills' / name)
         else:
             add_tree(skill, target / 'skills-catalog' / name)
-    for name, skill in sorted(local.items()):
-        add_tree(skill, target / 'skills' / name, override=True)
+    if client == 'antigravity':
+        for name, skill in sorted(local.items()):
+            add_tree(skill, target / 'skills' / name, override=True)
+    if client == 'opencode':
+        # Register real source paths with the native editor, below existing skills.
+        sources = {**public, **local}
+        routing = routing or {'version': 1, 'rules': []}
+        routing['core'] = sorted(core_names)
+        routing['core_packages'] = {
+            name: {'path': str(sources[name] / 'SKILL.md'),
+                   'explicit_only': profiles.requires_invocation(sources[name])}
+            for name in sorted(core_names)
+        }
     if routing is not None:
         plans[target / 'skills-catalog/routing.json'] = harness.file_state(
             json.dumps(routing, indent=2) + '\n', mode=0o644)

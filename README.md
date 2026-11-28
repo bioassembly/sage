@@ -45,14 +45,14 @@ Replace `codex` with `opencode` or `antigravity` to activate that client. Restar
 
 | Location | What to change |
 | --- | --- |
-| [Client profiles](clients/) | Set `core`, `catalog`, `mcp`, `optional_mcp` and `lsp` in the relevant `profile.json`. |
+| [Shared skill defaults](library/default-skills.json) and [client profiles](clients/) | Set shared `core` and `catalog` lists. Each client can replace either list and sets its own `mcp`, `optional_mcp` and `lsp` selections. |
 | [Skills](library/skills/) and [routing rules](library/routing.json) | Edit one package for every client selecting it. A profile can override that client's routing signals. |
 | [Functional groups](library/functions.json) | Give each capability a purpose and one primary group. |
 | [MCP services](library/mcp/servers.json) and [language servers](library/lsp/servers.json) | Edit native transports, commands, extensions and package pins. |
 | [Optional specialist briefs](library/agents/) | Read a brief in the current session or supply it to a native agent of your choice. Briefs are plain Markdown and activate manually. |
 | [Evaluation cases](evals/README.md) | Compare a profile change on a fixed workload. |
 
-The checkout contains ordinary files. The installer links selected skill directories in the client home directly to the library, so a skill edit has one source. Keep the checkout at a stable path and rerun installation after changing selections or moving it. For machine-local skill packages, use the ignored `clients/<client>/skills.local/<name>/` overlay.
+The checkout contains ordinary files. OpenCode's native skill editor reads startup skills directly from the library. Catalog paths and the other clients use links in the client home. Keep the checkout at a stable path and rerun installation after changing selections or moving it. For machine-local skill packages, use the ignored `clients/<client>/skills.local/<name>/` overlay.
 
 For an existing deployment, rerun `install` once after updating the checkout to this layout. An upgrade uses the install journals to retire earlier agent overrides and recover any personal agent files they replaced. If you restore a journal that points to older source paths, use the corresponding checkout revision to resolve those paths.
 

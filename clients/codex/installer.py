@@ -72,25 +72,28 @@ def mcp_templates() -> dict:
     return {name: {'mcp_servers': {name: body}} for name, body in servers.items()}
 
 
-def migrated_skill_settings(live, previous, core_dir):
+def migrated_skill_settings(live, previous, core_dir, catalog_dir, skill_links):
     entries = live.get('skills', {}).get('config', [])
     additions = []
-    for name in ('checkpoint', 'token-efficiency'):
-        old = core_dir / ('sage-' + name)
-        if not old.is_symlink() or previous.get(str(old)) != fingerprint(snapshot(old)):
-            continue
-        old_file = old / 'SKILL.md'
-        new_file = core_dir / name / 'SKILL.md'
-        new_source = LIBRARY / 'skills' / name / 'SKILL.md'
+    for destination, source in skill_links.items():
+        name = destination.name
+        new_file = destination / 'SKILL.md'
+        new_source = source / 'SKILL.md'
         if any(e.get('name') == name or e.get('path') in (str(new_file), str(new_source)) for e in entries):
             continue
+        candidates = [core_dir / name, catalog_dir / name]
+        if name in ('checkpoint', 'token-efficiency'):
+            candidates.append(core_dir / ('sage-' + name))
+        old_links = [path for path in candidates if path != destination and path.is_symlink()
+                     and previous.get(str(path)) == fingerprint(snapshot(path))]
+        old_paths = {str(p) for link in old_links for p in (link / 'SKILL.md', link.resolve() / 'SKILL.md')}
         for entry in entries:
             if entry.get('enabled') is not False:
                 continue
-            if entry.get('name') == old.name:
+            if any(link.name != name and entry.get('name') == link.name for link in old_links):
                 additions.append({'name': name, 'enabled': False})
                 break
-            if entry.get('path') in (str(old_file), str(old_file.resolve())):
+            if entry.get('path') in old_paths:
                 additions.append({'path': str(new_source), 'enabled': False})
                 break
     return {'skills': {'config': [*entries, *additions]}} if additions else {}
@@ -305,8 +308,22 @@ def install(args: argparse.Namespace) -> Path | None:
     current = global_agents.read_text() if global_agents.exists() else ""
     for marker in ('start', 'end'):
         current = current.replace(f'<!-- codex-sage:{marker} -->', f'<!-- sage-harness:{marker} -->')
+    all_skills = getattr(args, 'all_skills', False)
+    plan = profiles.profile('codex')
+    core_dir = args.skills_dir.resolve()
+    catalog_dir = codex_home / 'skills-catalog'
+    local = CLIENT / 'skills.local'
+    overlays = {p.parent.name: p.parent for p in local.glob('*/SKILL.md')}
+    skill_links = {}
+    for name in sorted(set(plan['core'] + plan['catalog']) | overlays.keys()):
+        skill = overlays.get(name, LIBRARY / 'skills' / name)
+        directory = core_dir if all_skills or name in plan['core'] or name in overlays else catalog_dir
+        dest = directory / name
+        if dest.is_symlink() and dest.resolve() != skill.resolve() and previous.get(str(dest)) != fingerprint(snapshot(dest)):
+            raise ValueError(f'Personal skill link preserved: {dest}')
+        skill_links[dest] = skill
     config_text = config.read_text() if config.exists() else ''
-    config_settings = {**settings, **migrated_skill_settings(live_config, previous, args.skills_dir.resolve())}
+    config_settings = {**settings, **migrated_skill_settings(live_config, previous, core_dir, catalog_dir, skill_links)}
     if old_agent_settings and history and 'agents' in live_config:
         agents = agent_migration.original_section(config, 'agents', live_config['agents'], history, tomllib.loads)
         staged = stage_config(config_text, config_settings, retire_agents=True, agents=agents)
@@ -318,18 +335,8 @@ def install(args: argparse.Namespace) -> Path | None:
         codex_home / "sage/managed-config.json": file_state(json.dumps(settings, indent=2) + "\n"),
         global_agents: file_state(merge_instructions(current, (LIBRARY / "guidance.md").read_text())),
     }
-    all_skills = getattr(args, "all_skills", False)
-    plan = profiles.profile('codex')
+    plans.update({dest: {'kind': 'symlink', 'target': str(skill)} for dest, skill in skill_links.items()})
     routing = None if all_skills else profiles.routing(plan, LIBRARY)
-    local = CLIENT / 'skills.local'
-    overlays = {p.parent.name: p.parent for p in local.glob('*/SKILL.md')}
-    for name in sorted(set(plan['core'] + plan['catalog']) | overlays.keys()):
-        skill = overlays.get(name, LIBRARY / 'skills' / name)
-        directory = args.skills_dir.resolve() if all_skills or name in plan['core'] or name in overlays else codex_home / 'skills-catalog'
-        dest = directory / name
-        if dest.is_symlink() and dest.resolve() != skill.resolve() and previous.get(str(dest)) != fingerprint(snapshot(dest)):
-            raise ValueError(f'Personal skill link preserved: {dest}')
-        plans[dest] = {'kind': 'symlink', 'target': str(skill)}
     if routing is not None:
         plans[codex_home / "skills-catalog/routing.json"] = file_state(json.dumps(routing, indent=2) + "\n", 0o644)
         router_dest = codex_home / "sage/route_skills.py"

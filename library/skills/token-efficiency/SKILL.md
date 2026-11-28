@@ -3,10 +3,10 @@ name: token-efficiency
 description: Diagnose excessive token usage or reduce context overhead in a harness or long task.
 ---
 
-Measure before changing behavior. The [local audit script](../../scripts/token_audit.py)
-summarizes recorded usage without exposing prompt contents; its totals are not a
-bill or subscription-quota formula. Distinguish input, cached input, output, and
-reasoning. Do not double-count repeated cumulative usage events.
+Measure before changing behavior. Use the client's available session metrics.
+For Codex, the [local audit script](../../scripts/token_audit.py) summarizes usage
+without exposing prompt contents. In each client, distinguish input, cached input,
+output, and reasoning when reported. Avoid double-counting cumulative events.
 Preserve the user's model and reasoning level unless they request a change.
 Target unnecessary work: repeated retrieval, large unfiltered outputs, duplicate
 tool representations, oversized global instructions, and irrelevant skill loads.

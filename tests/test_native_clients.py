@@ -1,12 +1,17 @@
 """Offline discovery checks for installed OpenCode and Antigravity CLIs."""
+import base64
 import json
 import os
 from pathlib import Path
 import shutil
+import socket
 import subprocess
 import sys
 import tempfile
+import time
 import unittest
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 
 from library import profiles
 
@@ -54,6 +59,48 @@ class NativeClientTests(unittest.TestCase):
         self.assertEqual(set(info['mcp']['servers']), set(source['mcp']))
         for name in profiles.profile('opencode')['lsp']:
             self.assertEqual(info['lsp'][name]['command'], source['lsp'][name]['command'])
+
+    @unittest.skipUnless(shutil.which('opencode'), 'OpenCode CLI is optional')
+    def test_opencode_discovers_core_sources_and_workspace_skills(self):
+        target = self.activate('opencode', '.config/opencode')
+        self.env['OPENCODE_CONFIG_DIR'] = str(target)
+        self.invoke('git', 'init', '-q', str(self.home))
+        (self.home / 'main.nf').write_text('nextflow.enable.dsl=2\n')
+        personal = self.home / '.opencode/skills/ponytail/SKILL.md'
+        personal.parent.mkdir(parents=True)
+        personal.write_text('---\nname: ponytail\ndescription: Personal fixture.\n---\nProject instructions.\n')
+        self.env['OPENCODE_SERVER_PASSWORD'] = 'temporary-local-fixture'
+        with socket.socket() as port_socket:
+            port_socket.bind(('127.0.0.1', 0))
+            port = port_socket.getsockname()[1]
+        query = urlencode({'location[directory]': str(self.home)})
+        auth = base64.b64encode(b'opencode:temporary-local-fixture').decode()
+        request = Request(f'http://127.0.0.1:{port}/api/skill?{query}', headers={'Authorization': f'Basic {auth}'})
+        expected = set(profiles.profile('opencode')['core']) | {'nextflow'}
+        skills = {}
+        with subprocess.Popen(['opencode', 'serve', '--hostname', '127.0.0.1', '--port', str(port)],
+                              cwd=self.home, env=self.env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) as process:
+            try:
+                deadline = time.monotonic() + 35
+                while process.poll() is None and time.monotonic() < deadline:
+                    try:
+                        with urlopen(request, timeout=2) as response:
+                            skills = {skill['id']: skill for skill in json.load(response)['data']}
+                        if expected <= skills.keys() and skills['ponytail']['description'] == 'Personal fixture.':
+                            break
+                    except OSError:
+                        pass
+                    time.sleep(.4)
+            finally:
+                if process.poll() is None:
+                    process.terminate()
+                    try:
+                        process.wait(timeout=5)
+                    except subprocess.TimeoutExpired:
+                        process.kill()
+        self.assertLessEqual(expected, skills.keys())
+        self.assertEqual(skills['ponytail']['description'], 'Personal fixture.')
+        self.assertNotIn('sage-review', skills)
 
     @unittest.skipUnless(shutil.which('agy'), 'Antigravity CLI is optional')
     def test_antigravity_discovers_servers_and_hook_with_native_agents_intact(self):

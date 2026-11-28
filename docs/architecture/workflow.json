@@ -24,11 +24,15 @@
     {
       "id": "selection",
       "title": "Select capabilities by purpose",
-      "description": "A maintainer can start with the functional index and edit one client profile. Catalog entries also need a routing rule. The index shows the resulting availability across clients, and the installer reads the profile directly.",
+      "description": "The functional index shows which capabilities each client uses. Shared skill defaults supply the initial core and catalog lists. Each client can override those lists and selects its MCP and language tools. Catalog entries also need a routing rule.",
       "evidence": [
         {
           "label": "Functional groups",
           "path": "../../library/functions.json"
+        },
+        {
+          "label": "Shared skill defaults",
+          "path": "../../library/default-skills.json"
         },
         {
           "label": "Profile validation",
@@ -70,7 +74,7 @@
     {
       "id": "routing",
       "title": "Discover skills during a session",
-      "description": "The default install exposes core skills at launch. Each client routes workspace signals and user prompts. Explicit-only skills require a direct request, which can also activate their companion skills.",
+      "description": "The default install exposes core skills at launch. Each client routes bounded workspace signals and user prompt prose. Explicit skill requests can activate companions. Codex restores active skill hints after compaction.",
       "evidence": [
         {
           "label": "Match rules",

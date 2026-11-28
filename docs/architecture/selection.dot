@@ -3,8 +3,8 @@ digraph "selection" {
   node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=13, fontcolor="#173341", color="#52737d", fillcolor="#eff5f7", margin="0.17,0.12", penwidth=1.2];
   edge [fontname="Helvetica", fontsize=10, fontcolor="#315765", color="#63818b", arrowsize=0.7];
   browse [label="1 · Find the capability by purpose\nlibrary/INDEX.md", fillcolor="#d7eee6"];
-  select [label="2 · Edit a client profile\nChoose tiers and tool selections"];
-  rules [label="3a · Resolve core and catalog\nApply client-specific routing overrides"];
+  select [label="2 · Choose shared skill defaults\nSelect tools in the client profile"];
+  rules [label="3a · Resolve core and catalog\nApply skill list and routing overrides"];
   servers [label="3b · Resolve selected tools\nCheck MCP pins and LSP definitions", URL="index.html#language-tools", target="_top"];
   sync [label="4 · Refresh and check the index\nsage.py sync, then sage.py check"];
   active [label="5 · Activate the selected profile\nsage.py install CLIENT", fillcolor="#dcebf8", URL="index.html#activation", target="_top"];

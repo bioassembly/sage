@@ -38,7 +38,10 @@ def merge(template, current, previous, client, disable_hybrid=False):
         if name == 'hybrid-sage' or name in template.get(key, {}):
             continue
         live = servers.get(name)
-        if isinstance(live, dict) and isinstance(old, dict) and all(live.get(k) == old.get(k) for k in ('type', 'command', 'args', 'url')):
+        if not isinstance(live, dict) or not isinstance(old, dict):
+            continue
+        flag, default = ('enabled', True) if client == 'opencode' else ('disabled', False)
+        if {flag: default, **live} == {flag: default, **old}:
             servers.pop(name, None)
     if disable_hybrid and isinstance(servers.get('hybrid-sage'), dict):
         servers['hybrid-sage']['enabled' if client == 'opencode' else 'disabled'] = client != 'opencode'

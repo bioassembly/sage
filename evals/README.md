@@ -8,6 +8,19 @@ Run `python3 sage.py eval-routing` for all three profiles or append one client n
 
 Add both a matching request and a plausible near miss when tuning a route. Use the model-run protocol below to measure task success, latency and token use.
 
+The shared-defaults audit replayed the same 53 cases per client against the publication at `1d3197d` and the revised profiles. Exact skill-set matches rose from 22 to 53 in Codex and from 25 to 53 in both OpenCode and Antigravity. On an empty workspace the measured SAGE catalog intro went from 914–1,006 bytes to 149 bytes with the catalog path normalized. Those counts describe the routed skill set and SAGE's intro text.
+
+Four quote and code-block cases raise coverage to 57 cases per client. On the same inputs, the preceding router scored 162/171 and the revised router scored 171/171. The hook tests also exercise compaction, workspace changes, and a repeated explicit request on a later turn.
+
+Run `python3 evals/router_benchmark.py` to measure the actual workspace matchers and warm prompt routing with a fixed 32 MiB manifest. Pass `--root PATH` to measure another SAGE checkout with the same workload. The benchmark reports medians across seven samples. It measures local routing, while the model-run protocol below covers final task outcomes.
+
+| Local workload | Before | Revised |
+| --- | ---: | ---: |
+| Python workspace scan | 262.3 ms | 9.8 ms |
+| OpenCode workspace scan | 196.7 ms | 0.8 ms |
+| Python prompt matching, 1,000 prompts | 699.8 ms | 380.0 ms |
+| OpenCode prompt matching, 1,000 prompts | 260.1 ms | 70.9 ms |
+
 ## Protocol
 
 1. **Freeze** — record before running:

@@ -18,7 +18,10 @@ def formatted(value):
 
 
 def profile(client, root=ROOT):
-    return read(root / 'clients' / client / 'profile.json')
+    plan = read(root / 'clients' / client / 'profile.json')
+    if 'core' not in plan or 'catalog' not in plan:
+        return {**read(root / 'library/default-skills.json'), **plan}
+    return plan
 
 
 def native_mcp(client, spec):
@@ -65,8 +68,10 @@ def invocation_patterns(name, aliases):
     commands = '|'.join(re.escape(n) for n in names if ' ' not in n)
     phrases = '|'.join(re.escape(n).replace(r'\ ', r'\s+') for n in names)
     end = r'`?(?=$|[\s,!?:;]|\.(?:\s|$))'
-    return [rf'^\s*`?[/$](?:{commands}){end}', rf'^\s*\[\$(?:{commands})\]\([^\n)]+\)',
-            rf'^\s*(?:please\s+)?(?:use|run|apply|invoke|start|conduct)\s+(?:(?:a|an|the)\s+)?`?[/$]?(?:{phrases}){end}']
+    command = rf'`?[/$](?:{commands}){end}'
+    link = rf'\[\$(?:{commands})\]\([^\n)]+\)'
+    request = rf'(?:please\s+)?(?:use|run|apply|invoke|start|conduct)\s+(?:(?:a|an|the)\s+)?`?[/$]?(?:{phrases}){end}'
+    return [rf'^\s*(?:{command}|{link}|{request})']
 
 
 def routing(plan, library):
@@ -86,13 +91,11 @@ def routing(plan, library):
         if manual.intersection(rule.get('companions', [])):
             raise ValueError(f'{name} cannot activate an explicit-only companion')
         aliases = rule.pop('invocation_aliases', [])
+        rule['requests'] = invocation_patterns(name, aliases)
         if name in manual:
-            for key in ('files', 'dirs', 'deps'):
+            for key in ('files', 'dirs', 'deps', 'patterns'):
                 rule.pop(key, None)
-            rule['patterns'] = invocation_patterns(name, aliases)
             rule['explicit_only'] = True
-        elif aliases:
-            raise ValueError(f'{name} needs explicit-only policy to declare invocation aliases')
         for pattern in rule.get('patterns', []):
             re.compile(pattern)
         entries.append({'skill': name, **rule})

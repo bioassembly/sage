@@ -45,7 +45,8 @@ class InstallationTests(unittest.TestCase):
             self.assertEqual(config[key], value)
         self.assertIn('# Keep this comment', self.config.read_text())
         self.assertEqual(auth.read_text(), '"test auth sentinel"')
-        self.assertTrue((self.args.skills_dir / "sage-design" / "SKILL.md").is_file())
+        self.assertTrue((self.args.skills_dir / "checkpoint" / "SKILL.md").is_file())
+        self.assertTrue((self.args.codex_home / "skills-catalog/sage-design/SKILL.md").is_file())
         self.assertFalse((self.args.skills_dir / "sage-genomics").exists())
         self.assertTrue((self.args.codex_home / "skills-catalog/sage-genomics/SKILL.md").is_file())
         self.assertTrue((self.args.codex_home / "skills-catalog/routing.json").is_file())
@@ -61,7 +62,7 @@ class InstallationTests(unittest.TestCase):
         self.assertEqual(agents.read_text(), "Personal instructions.\n")
         self.assertFalse((self.args.codex_home / "sage.config.toml").exists())
         self.assertEqual(self.config.read_bytes(), self.original)
-        self.assertFalse((self.args.skills_dir / "sage-design").is_symlink())
+        self.assertFalse((self.args.codex_home / "skills-catalog/sage-design").is_symlink())
         self.assertFalse((self.args.codex_home / "hooks.json").exists())
         self.assertEqual((unrelated / "SKILL.md").read_text(), "private skill")
 
@@ -110,7 +111,7 @@ class InstallationTests(unittest.TestCase):
         self.assertFalse((self.args.codex_home / "sage").exists())
 
     def test_real_directory_collision_is_preserved(self):
-        collision = self.args.skills_dir / "sage-design"
+        collision = self.args.skills_dir / "checkpoint"
         collision.mkdir(parents=True)
         (collision / "SKILL.md").write_text("User authored")
         with self.assertRaisesRegex(ValueError, "directory"):
@@ -380,6 +381,9 @@ enabled = false
         self.assertEqual(json.loads(hooks_path.read_text()), existing)
 
     def test_upgrade_carries_disabled_core_aliases_and_respects_new_choices(self):
+        core, catalog = self.args.skills_dir, self.args.codex_home / 'skills-catalog'
+        skill_links = {destination / name: harness.LIBRARY / 'skills' / name
+                       for destination, name in [(core, 'checkpoint'), (catalog, 'token-efficiency')]}
         previous = {}
         for name in ('checkpoint', 'token-efficiency'):
             old = self.args.skills_dir / ('sage-' + name)
@@ -390,12 +394,29 @@ enabled = false
             {'name': 'sage-checkpoint', 'enabled': False},
             {'path': str(self.root / 'old-skills/sage-token-efficiency/SKILL.md'), 'enabled': False},
         ]}}
-        entries = harness.migrated_skill_settings(live, previous, self.args.skills_dir)['skills']['config']
+        entries = harness.migrated_skill_settings(live, previous, core, catalog, skill_links)['skills']['config']
         self.assertIn({'name': 'checkpoint', 'enabled': False}, entries)
         self.assertIn({'path': str(harness.LIBRARY / 'skills/token-efficiency/SKILL.md'), 'enabled': False}, entries)
         live['skills']['config'].append({'name': 'checkpoint', 'enabled': True})
         del previous[str(self.args.skills_dir / 'sage-token-efficiency')]
-        self.assertEqual(harness.migrated_skill_settings(live, previous, self.args.skills_dir), {})
+        self.assertEqual(harness.migrated_skill_settings(live, previous, core, catalog, skill_links), {})
+
+    def test_upgrade_preserves_path_disabled_skill_when_moved_to_catalog(self):
+        core, catalog = self.args.skills_dir, self.args.codex_home / 'skills-catalog'
+        old = core / 'sage-design'
+        core.mkdir()
+        old.symlink_to(harness.LIBRARY / 'skills/sage-design')
+        state = self.args.codex_home / 'sage/latest.json'
+        state.parent.mkdir()
+        state.write_text(json.dumps({str(old): harness.fingerprint(harness.snapshot(old))}))
+        self.config.write_text(f'[[skills.config]]\npath = "{old / "SKILL.md"}"\nenabled = false\n')
+        journal = harness.install(self.args)
+        self.assertFalse(old.is_symlink())
+        self.assertTrue((catalog / old.name).is_symlink())
+        entries = tomllib.loads(self.config.read_text())['skills']['config']
+        self.assertIn({'path': str(harness.LIBRARY / 'skills/sage-design/SKILL.md'), 'enabled': False}, entries)
+        harness.restore(journal)
+        self.assertTrue(old.is_symlink())
 
     def test_prompt_hook_retains_personal_options_on_reinstall(self):
         path = self.args.codex_home / 'hooks.json'
@@ -447,7 +468,7 @@ enabled = false
         harness.install(self.args)
         self.assertFalse((self.args.skills_dir / 'model-router').is_symlink())
         self.assertFalse((self.args.skills_dir / 'sage').is_symlink())
-        self.assertTrue((self.args.skills_dir / 'sage-design').is_symlink())
+        self.assertTrue((self.args.skills_dir / 'checkpoint').is_symlink())
         self.assertFalse(tomllib.loads(self.config.read_text())['mcp_servers']['hybrid-sage']['enabled'])
 
 

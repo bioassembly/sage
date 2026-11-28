@@ -15,9 +15,7 @@
       "biopython"
     ],
     "patterns": [
-      "\\bbiopython\\b",
-      "\\bbio\\.entrez\\b",
-      "\\b(fasta|genbank|pdb|blast|phylogenet|motif)\\b"
+      "\\b(?:biopython|bio\\.(?:seqio|entrez)|fasta|genbank)\\b"
     ]
   },
   "codebase-design": {
@@ -34,10 +32,7 @@
     "category": "security",
     "summary": "Security-focused diff, blast radius and git blame regression review",
     "patterns": [
-      "\\bdifferential review\\b",
-      "\\bdiff review\\b",
-      "\\bblast radius\\b",
-      "\\bpr security\\b"
+      "\\b(?:differential review|pr security review|security impact of (?:the |this )?(?:diff|change|pr))\\b"
     ]
   },
   "doctor": {
@@ -61,16 +56,8 @@
   "fair-data-principles": {
     "category": "bioinformatics",
     "summary": "FAIR dataset packaging, metadata dictionaries and scientific provenance",
-    "files": [
-      "codemeta.json",
-      "ro-crate-metadata.json",
-      "datapackage.json"
-    ],
     "patterns": [
-      "\\bfair data\\b",
-      "\\bro-crate\\b",
-      "\\bmetadata dictionary\\b",
-      "\\b(zenodo|figshare|ena|sra)\\b"
+      "\\b(?:fair data|ro-crate|metadata dictionary|dataset provenance)\\b"
     ]
   },
   "first-principles-explainer": {
@@ -113,22 +100,15 @@
     "category": "architecture",
     "summary": "Interactive design questioning to resolve tradeoffs",
     "patterns": [
-      "\\bgrill me\\b",
-      "\\bgrilling\\b"
+      "^\\s*(?:please\\s+)?grill me\\b",
+      "^\\s*[/$]grilling(?=$|\\s)"
     ]
   },
   "mcp-builder": {
     "category": "tooling",
     "summary": "Design and evaluate FastMCP / TypeScript MCP servers",
-    "deps": [
-      "fastmcp",
-      "@modelcontextprotocol/sdk"
-    ],
     "patterns": [
-      "\\bmcp server\\b",
-      "\\bfastmcp\\b",
-      "\\bmodel context protocol\\b",
-      "\\bmcp tool\\b"
+      "\\b(?:build|create|design|implement|develop|author|test)\\b[^\\n.!?]{0,45}\\b(?:mcp server|mcp tool|fastmcp)\\b"
     ]
   },
   "nextflow": {
@@ -137,25 +117,13 @@
     "files": [
       "*.nf",
       "nextflow.config",
-      "nf-test.config",
-      "modules.json"
-    ],
-    "dirs": [
-      "subworkflows",
-      "conf"
+      "nf-test.config"
     ],
     "deps": [
       "nextflow"
     ],
     "patterns": [
-      "\\bnextflow\\b",
-      "\\bnf-core\\b",
-      "\\bdsl2\\b",
-      "\\bnf-test\\b",
-      "\\bslurm\\b"
-    ],
-    "companions": [
-      "fair-data-principles"
+      "\\b(nextflow|nf-core|dsl2|nf-test)\\b"
     ]
   },
   "overnight-explorer": {
@@ -189,19 +157,6 @@
   "pysam": {
     "category": "bioinformatics",
     "summary": "SAM/BAM/CRAM, VCF/BCF, FASTQ, tabix, pileup and coverage workflows",
-    "files": [
-      "*.bam",
-      "*.cram",
-      "*.sam",
-      "*.vcf",
-      "*.vcf.gz",
-      "*.bcf",
-      "*.fastq",
-      "*.fastq.gz",
-      "*.fq",
-      "*.fq.gz",
-      "*.bed"
-    ],
     "deps": [
       "pysam",
       "cyvcf2",
@@ -210,10 +165,14 @@
     "patterns": [
       "\\bpysam\\b",
       "\\bhtslib\\b",
-      "\\b(bam|cram|sam|vcf|bcf|fastq|tabix|pileup)\\b",
-      "\\bpromethion\\b",
-      "\\brev(io)?\\b",
-      "\\bepi2me\\b"
+      "\\b(bam|cram|vcf|bcf|tabix|pileup)\\b"
+    ],
+    "files": [
+      "*.bam",
+      "*.cram",
+      "*.vcf",
+      "*.vcf.gz",
+      "*.bcf"
     ]
   },
   "read-only": {
@@ -229,9 +188,8 @@
     "category": "meta",
     "summary": "Check an implementation plan for failure modes and untested assumptions",
     "patterns": [
-      "^/(?:sage-)?red-team\\b",
-      "\\bstress[- ]test (?:the |this )?plan\\b",
-      "\\bred[- ]team (?:the |this )?plan\\b"
+      "^\\s*/(?:sage-)?red-team(?=$|\\s)",
+      "\\b(?:stress[- ]test|red[- ]team) (?:the |this |my |our |a )?(?:implementation |migration |deployment )?plan\\b"
     ]
   },
   "review": {
@@ -246,20 +204,30 @@
     "category": "tooling",
     "summary": "Inspect binaries, bytecode, wheels or minified bundles cleanly",
     "patterns": [
-      "\\breverse[- ]engineer\\b",
-      "\\bdecompil",
-      "\\bdisassembl",
-      "\\bbytecode\\b",
-      "\\bminified bundle\\b"
+      "\\b(?:inspect|analy[sz]e|identify)\\b[^\\n.!?]{0,55}\\b(?:binary|executable|opaque artifact|minified bundle|bytecode)\\b"
+    ]
+  },
+  "sage-debug": {
+    "category": "engineering",
+    "summary": "Reproduce a defect and verify its root cause",
+    "patterns": [
+      "\\b(?:debug|diagnose|triage|reproduce|fix)\\b[^\\n.!?]{0,65}\\b(?:bug|crash|regression|race condition|flaky tests?|failing tests?|test failures?|hang|deadlock)\\b",
+      "\\broot cause\\b[^\\n.!?]{0,42}\\b(?:crash|failure|error|bug|tests?)\\b"
+    ]
+  },
+  "sage-design": {
+    "category": "architecture",
+    "summary": "Design or refactor a module interface and test the trade-offs",
+    "patterns": [
+      "\\b(?:module design|interface seams?)\\b",
+      "\\b(?:design|refactor|redesign|simplify)\\b[^\\n.!?]{0,48}\\b(?:module boundaries|module interface|subsystem|subsystems|interfaces|architecture|interfaces between)\\b"
     ]
   },
   "sage-explain": {
     "category": "science",
     "summary": "First-principles explanations of algorithms and discrepancies",
     "patterns": [
-      "\\bfirst principles\\b",
-      "\\bexplain why\\b",
-      "\\bdiscrepancy\\b"
+      "\\b(?:from first principles|first[- ]principles explanation)\\b"
     ]
   },
   "sage-fair-data": {
@@ -279,33 +247,18 @@
   "sage-genomics": {
     "category": "bioinformatics",
     "summary": "Nextflow/nf-core, BAM/CRAM/VCF/FASTQ and QC genomics workflows",
-    "files": [
-      "*.nf",
-      "nextflow.config",
-      "nf-test.config",
-      "*.bam",
-      "*.cram",
-      "*.vcf",
-      "*.vcf.gz",
-      "*.fastq",
-      "*.fastq.gz",
-      "*.fq",
-      "*.fq.gz"
-    ],
-    "deps": [
-      "nextflow",
-      "pysam",
-      "cyvcf2"
-    ],
     "patterns": [
-      "\\bnextflow\\b",
-      "\\bnf-core\\b",
-      "\\bpysam\\b",
-      "\\b(bam|cram|vcf|fastq|pileup|slurm)\\b",
-      "\\bpromethion\\b"
-    ],
-    "companions": [
-      "sage-fair-data"
+      "\\b(?:sequencing|read alignment|resequencing) (?:qc|quality control)\\b",
+      "\\bsequencing (?:analysis pipeline|qc report)\\b"
+    ]
+  },
+  "sage-git-commit": {
+    "category": "engineering",
+    "summary": "Prepare an authorized commit or push using repository conventions",
+    "patterns": [
+      "^\\s*(?:please\\s+)?(?:git\\s+)?(?:commit|push|stage)\\b[^\\n.!?]{0,50}\\b(?:changes|repo|branch|to origin|to github|this|everything)\\b",
+      "^\\s*(?:please\\s+)?(?:git\\s+)?commit\\s+and\\s+push\\b",
+      "^\\s*(?:please\\s+)?write a commit message\\b"
     ]
   },
   "sage-git-worktrees": {
@@ -319,17 +272,9 @@
   "sage-harness-eval": {
     "category": "meta",
     "summary": "Evaluate harness and prompt changes with assertions",
-    "dirs": [
-      "evals"
-    ],
-    "files": [
-      "SKILL.md",
-      "third_party/lock.json"
-    ],
     "patterns": [
-      "\\bevaluate skill\\b",
-      "\\ba/b compare\\b",
-      "\\bharness eval\\b"
+      "\\b(?:evaluate|benchmark)\\b[^\\n.!?]{0,55}\\b(?:skill|harness|router|routing)\\b",
+      "\\b(?:harness eval|routing benchmark|skill evaluation)\\b"
     ]
   },
   "sage-mcp-builder": {
@@ -358,52 +303,50 @@
     "category": "documents",
     "summary": "In-place PDF editing and true anonymization/redaction",
     "patterns": [
-      "\\bpdf\\b",
-      "\\bredact\\b",
-      "\\banonymiz"
+      "\\b(?:edit|redact|anonymi[sz]e|modify|replace text in)\\b[^\\n.!?]{0,55}\\bpdf\\b"
+    ]
+  },
+  "sage-repo-maintenance": {
+    "category": "engineering",
+    "summary": "Improve CI, release hygiene and contributor documentation",
+    "patterns": [
+      "\\b(?:audit|improve|update|fix|set up)\\b[^\\n.!?]{0,48}\\b(?:repo hygiene|ci workflow|release automation|contributor documentation|contributing guide)\\b"
     ]
   },
   "sage-results-package": {
     "category": "science",
     "summary": "Package pipeline outputs into clean client deliverables",
     "patterns": [
-      "\\bresults/? folder\\b",
-      "\\bclient-facing\\b",
-      "\\bdeliverable\\b"
+      "\\b(?:assemble|package|prepare|publish|deliver)\\b[^\\n.!?]{0,55}\\b(?:results package|pipeline results|results folder|research deliverables)\\b"
+    ]
+  },
+  "sage-review": {
+    "category": "engineering",
+    "summary": "Find actionable defects and regressions in a code change",
+    "patterns": [
+      "^\\s*/(?:sage-)?review(?=$|\\s)",
+      "\\bapply\\s+the\\s+`sage-review`\\s+skill\\b",
+      "\\b(?:review|inspect) (?:the |this |my |our |a )?(?:working diff|diff|pull request|code changes|changes|pr)\\b"
+    ],
+    "invocation_aliases": [
+      "review"
     ]
   },
   "sage-scientific-report": {
     "category": "science",
     "summary": "Statistical figures, Quarto/scientific report QC and bias checks",
-    "files": [
-      "*.qmd",
-      "*.Rmd",
-      "_quarto.yml"
-    ],
-    "deps": [
-      "matplotlib",
-      "seaborn",
-      "plotly",
-      "scipy",
-      "statsmodels"
-    ],
     "patterns": [
-      "\\bquarto\\b",
-      "\\b\\.qmd\\b",
-      "\\b(volcano|heatmap|boxplot|violin|p[- ]?value)\\b",
-      "\\bscientific report\\b"
+      "\\b(?:write|draft|compile|generate|edit|render|prepare)\\b[^\\n.!?]{0,55}\\b(?:scientific report|quarto report|r markdown report)\\b"
     ],
     "companions": [
-      "sage-fair-data"
+      "fair-data-principles"
     ]
   },
   "sage-security-audit": {
     "category": "security",
     "summary": "Web/API security audit for auth, injection, XSS, CSRF and SSRF",
     "patterns": [
-      "\\bsecurity (audit|review|scan)\\b",
-      "\\bowasp\\b",
-      "\\b(xss|csrf|ssrf|sql injection)\\b"
+      "\\bsecurity (?:audit|assessment|hardening)\\b"
     ]
   },
   "sage-sequence-analysis": {
@@ -429,57 +372,39 @@
   "sage-spec": {
     "category": "planning",
     "summary": "Requirements and functional specifications",
-    "files": [
-      "PRD.md",
-      "SPEC.md"
-    ],
     "patterns": [
-      "\\bwrite a spec\\b",
-      "\\bprd\\b",
-      "\\bfunctional spec\\b"
+      "\\b(?:write|draft|define|create)\\b[^\\n.!?]{0,45}\\b(?:specification|functional spec|prd|a spec)\\b"
+    ]
+  },
+  "sage-test-design": {
+    "category": "engineering",
+    "summary": "Choose behavior-focused tests and regression checks",
+    "patterns": [
+      "\\btest (?:design|plan|coverage|strategy)\\b",
+      "\\b(?:choose|design|plan|add|write)\\b[^\\n.!?]{0,45}\\b(?:regression tests?|test cases|behavioral tests?)\\b"
     ]
   },
   "sage-tickets": {
     "category": "planning",
     "summary": "Vertical-slice task and issue breakdown",
     "patterns": [
-      "\\bbreak into tickets\\b",
-      "\\bvertical slice\\b",
-      "\\bgithub issues\\b"
+      "\\b(?:draft|create|split|break down|break)\\b[^\\n.!?]{0,60}\\b(?:tickets|work items|implementation issues)\\b"
     ]
   },
   "sage-web-scraping": {
     "category": "web",
     "summary": "Structured extraction from web pages and APIs",
-    "deps": [
-      "beautifulsoup4",
-      "scrapy",
-      "cheerio",
-      "puppeteer"
-    ],
     "patterns": [
-      "\\bscrap(e|ing)\\b",
-      "\\bcrawl(ing|er)?\\b"
+      "\\bweb scrap(?:e|er|ing)\\b",
+      "\\b(?:scrape|crawl|extract)\\b[^\\n.!?]{0,45}\\b(?:from a website|from the website|from a web page|from the web page|web pages|website|html pages|an html table)\\b"
     ]
   },
   "sage-webapp-testing": {
     "category": "web",
     "summary": "Local browser UI verification and Playwright debugging",
-    "files": [
-      "playwright.config.*",
-      "cypress.config.*"
-    ],
-    "deps": [
-      "playwright",
-      "@playwright/test",
-      "cypress"
-    ],
     "patterns": [
-      "\\bplaywright\\b",
-      "\\bbrowser test\\b",
-      "\\bweb ?app\\b",
-      "\\be2e\\b",
-      "\\bscreenshot\\b"
+      "\\b(?:playwright|cypress|browser|e2e|end.to.end) (?:tests?|testing|suite|verification)\\b",
+      "\\btest\\b[^\\n.!?]{0,55}\\b(?:in a browser|in the browser|web app|web application)\\b"
     ]
   },
   "security-audit": {
@@ -496,6 +421,13 @@
     "category": "planning",
     "summary": "Initialize project workflow labels/conventions for spec-to-issue flow"
   },
+  "skill-acquisition": {
+    "category": "meta",
+    "summary": "Find and vet a reusable skill for a gap in the active library",
+    "patterns": [
+      "\\b(?:find|vet|install|acquire|search for)\\b[^\\n.!?]{0,45}\\b(?:reusable skill|agent skill|a skill for)\\b"
+    ]
+  },
   "skill-evaluation": {
     "category": "meta",
     "summary": "Benchmark skills and prompts with A/B assertions",
@@ -511,10 +443,6 @@
   "skill-maker": {
     "category": "meta",
     "summary": "Author or refine skills with focused triggers and validation",
-    "files": [
-      "SKILL.md",
-      "third_party/lock.json"
-    ],
     "patterns": [
       "\\b(author|create|write|improve) a? ?skill\\b",
       "\\bskill[- ]maker\\b"
@@ -523,24 +451,15 @@
   "statistical-data-visualization": {
     "category": "science",
     "summary": "Statistical plot correctness, bias checks and bioinformatics figures",
-    "files": [
-      "*.qmd",
-      "*.Rmd",
-      "_quarto.yml"
-    ],
-    "deps": [
-      "matplotlib",
-      "seaborn",
-      "plotly",
-      "ggplot2",
-      "scipy",
-      "statsmodels"
-    ],
     "patterns": [
-      "\\b(volcano|heatmap|boxplot|violin|scatter|pca|umap)\\b",
-      "\\bvisuali[sz]ation\\b",
-      "\\bquarto\\b",
-      "\\bp[- ]?value\\b"
+      "\\b(?:draw|plot|visualize|visualise|generate|create|make|design)\\b[^\\n.!?]{0,55}\\b(?:scatter plot|pca plot|umap plot|violin plot|boxplot|heatmap|volcano plot|statistical plots?|visuali[sz]ation of the data)\\b"
+    ]
+  },
+  "test-driven-development": {
+    "category": "engineering",
+    "summary": "Implement a requested change through a failing test and a passing fix",
+    "patterns": [
+      "\\b(?:test[- ]driven development|test[- ]first|red[- ]green[- ]refactor|use tdd)\\b"
     ]
   },
   "to-spec": {
@@ -554,15 +473,11 @@
   "token-efficiency": {
     "category": "meta",
     "summary": "Diagnose context bloat and reduce harness token overhead",
-    "files": [
-      "token_audit.py",
-      "shared-sync.json"
-    ],
     "patterns": [
-      "\\btoken efficiency\\b",
-      "\\btoken overhead\\b",
-      "\\bburning tokens\\b",
-      "\\bcontext bloat\\b"
+      "\\btoken (?:efficiency|overhead|usage|savings)\\b",
+      "\\b(?:burning|save|saving) (?:too many |more )?tokens\\b",
+      "\\bcontext bloat\\b",
+      "\\b(?:reduce|cut|trim)\\b[^\\n.!?]{0,48}\\b(?:tool output|context size|context overhead)\\b"
     ]
   },
   "using-git-worktrees": {
@@ -576,17 +491,9 @@
   "variant-analysis": {
     "category": "security",
     "summary": "Find sibling bug variants across a codebase via patterns/CodeQL/Semgrep",
-    "files": [
-      "*.ql",
-      ".semgrep.yml",
-      ".semgrep.yaml"
-    ],
     "patterns": [
       "\\bvariant analysis\\b",
-      "\\bother instances\\b",
-      "\\bsame bug\\b",
-      "\\bcodeql\\b",
-      "\\bsemgrep\\b"
+      "\\b(?:find|search for|check for)\\b[^\\n.!?]{0,55}\\b(?:other instances|same bug|similar defects)\\b"
     ]
   },
   "vercel-react-best-practices": {
@@ -605,6 +512,13 @@
       "\\bhydration\\b",
       "\\bserver component\\b",
       "\\buseeffect\\b"
+    ]
+  },
+  "verification-before-completion": {
+    "category": "engineering",
+    "summary": "Run fresh checks before making a completion claim",
+    "patterns": [
+      "\\b(?:verify|confirm|prove)\\b[^\\n.!?]{0,40}\\b(?:the fix works|the tests pass|ready to (?:ship|merge)|before (?:finishing|merging|shipping))\\b"
     ]
   },
   "web-scraping": {
@@ -646,10 +560,6 @@
   "workflow-graph": {
     "category": "architecture",
     "summary": "Trace repository workflows into editable Graphviz diagrams and offline SVG previews",
-    "files": [
-      "*.dot",
-      "*.gv"
-    ],
     "patterns": [
       "\\bgraphviz\\b",
       "\\b(workflow|architecture|pipeline|control.flow|data.flow)\\s+(graph|diagram)s?\\b",

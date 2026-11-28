@@ -1,12 +1,13 @@
 import test from "node:test"
 import assert from "node:assert/strict"
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs"
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import SageSkillRouterPlugin, {
   createRouter,
   extractLatestUserText,
+  matchWorkspace,
   parseFrontmatter,
 } from "./router.ts"
 
@@ -82,7 +83,13 @@ test("workspace and prompt routing only select matching skills plus companions",
     // Local override in coreDir prevents shadowing by catalog.
     mkdirSync(join(coreDir, "pdf-inplace-editing"), { recursive: true })
     writeFileSync(join(coreDir, "pdf-inplace-editing", "SKILL.md"), "---\nname: pdf-inplace-editing\ndescription: local\n---\n")
-    assert.deepEqual(router.activatePrompt("please redact this pdf"), [])
+    assert.deepEqual(router.matchCatalogPrompt("please redact this pdf"), [])
+    rmSync(join(coreDir, "pdf-inplace-editing"), { recursive: true })
+    router.registerIntoEditor({
+      add: () => {},
+      get: (id) => id === "pdf-inplace-editing" ? { path: join(workDir, "pdf/SKILL.md") } : undefined,
+    })
+    assert.deepEqual(router.matchCatalogPrompt("please redact this pdf"), [])
 
     // A direct request can use a bundle without registering it for other sessions.
     const manual = { skill: "interview", explicit_only: true, patterns: ["^/interview"], companions: ["notes"] }
@@ -94,9 +101,9 @@ test("workspace and prompt routing only select matching skills plus companions",
       ...SAMPLE_ROUTING, rules: [...SAMPLE_ROUTING.rules, manual, { skill: "notes" }],
     }))
     const session = createRouter({ coreDir, catalogDir })
-    assert.deepEqual(session.activatePrompt("/interview"), ["interview", "notes"])
+    assert.deepEqual(session.matchCatalogPrompt("/interview"), ["interview", "notes"])
     assert.equal(session.active.size, 0)
-    assert.deepEqual(session.activatePrompt("Fix a typo"), [])
+    assert.deepEqual(session.matchCatalogPrompt("Fix a typo"), [])
   } finally {
     rmSync(root, { recursive: true, force: true })
   }
@@ -114,7 +121,31 @@ test("extractLatestUserText handles v2 parts and string messages", () => {
   assert.equal(typeof SageSkillRouterPlugin.server, "function")
 })
 
-test("setup(ctx) registers workspace skills, reloads on prompt match, and injects system context", async () => {
+test("workspace scans limit manifest reads and ignore symlink targets", () => {
+  const root = mkdtempSync(join(tmpdir(), "sage-workspace-"))
+  try {
+    const workspace = join(root, "project")
+    const external = join(root, "external")
+    mkdirSync(workspace)
+    mkdirSync(external)
+    writeFileSync(join(external, "outside.nf"), "")
+    writeFileSync(join(external, "pyproject.toml"), "nextflow")
+    symlinkSync(external, join(workspace, "link"))
+    const manifest = join(workspace, "pyproject.toml")
+    symlinkSync(join(external, "pyproject.toml"), manifest)
+    const rules = [{ skill: "nextflow", files: ["*.nf"], deps: ["nextflow"] }]
+    assert.deepEqual(matchWorkspace([workspace], rules), [])
+    rmSync(manifest)
+    writeFileSync(manifest, " ".repeat(16384) + "nextflow")
+    assert.deepEqual(matchWorkspace([workspace], rules), [])
+    writeFileSync(manifest, "nextflow")
+    assert.deepEqual(matchWorkspace([workspace], rules), ["nextflow"])
+  } finally {
+    rmSync(root, { recursive: true, force: true })
+  }
+})
+
+test("setup(ctx) registers workspace skills and keeps prompt matches scoped to each request", async () => {
   const root = mkdtempSync(join(tmpdir(), "sage-router-setup-"))
   const prevEnv = process.env.SAGE_ROUTER_CATALOG
   try {
@@ -133,7 +164,6 @@ test("setup(ctx) registers workspace skills, reloads on prompt match, and inject
     process.env.SAGE_ROUTER_CATALOG = catalogDir
     let transformFn
     let contextHook
-    let reloadCount = 0
     let registeredIds = []
 
     const runTransform = async () => {
@@ -147,10 +177,6 @@ test("setup(ctx) registers workspace skills, reloads on prompt match, and inject
       skill: {
         transform: async (cb) => {
           transformFn = cb
-          await runTransform()
-        },
-        reload: async () => {
-          reloadCount++
           await runTransform()
         },
       },
@@ -169,10 +195,13 @@ test("setup(ctx) registers workspace skills, reloads on prompt match, and inject
       messages: [{ role: "user", parts: [{ type: "text", text: "please redact this pdf" }] }],
     }
     await contextHook(event1)
-    assert.equal(reloadCount, 1)
-    assert.deepEqual(registeredIds, ["nextflow", "fair-data-principles", "pdf-inplace-editing"])
+    await runTransform()
+    assert.deepEqual(registeredIds, ["nextflow", "fair-data-principles"])
     assert.ok(event1.system.some((line) => typeof line === "string" && line.includes("[SAGE Auto-Skill Router]")))
     assert.ok(event1.system.some((line) => typeof line === "string" && line.includes("pdf-inplace-editing")))
+    const otherSession = { system: [], messages: [{ role: "user", content: "Fix a typo" }] }
+    await contextHook(otherSession)
+    assert.ok(otherSession.system.every((line) => !line.includes("pdf-inplace-editing")))
   } finally {
     if (prevEnv === undefined) delete process.env.SAGE_ROUTER_CATALOG
     else process.env.SAGE_ROUTER_CATALOG = prevEnv
@@ -183,7 +212,10 @@ test("setup(ctx) registers workspace skills, reloads on prompt match, and inject
 test("the client profile selects disjoint real library packages", () => {
   const client = dirname(fileURLToPath(import.meta.url))
   const library = resolve(client, "../../library")
-  const profile = JSON.parse(readFileSync(join(client, "profile.json"), "utf8"))
+  const profile = {
+    ...JSON.parse(readFileSync(join(library, "default-skills.json"), "utf8")),
+    ...JSON.parse(readFileSync(join(client, "profile.json"), "utf8")),
+  }
   const rules = JSON.parse(readFileSync(join(library, "routing.json"), "utf8"))
   const selected = [...profile.core, ...profile.catalog]
   assert.equal(new Set(selected).size, selected.length)

@@ -69,8 +69,11 @@ def main():
             if result.returncode:
                 raise RuntimeError(result.stderr)
             json.loads(result.stdout)
-            for name in ('ponytail', 'sage-design', 'token-efficiency', 'sage-review'):
-                assert name in result.stdout, f"Native core skill discovery failed: {name}"
+            catalog = asyncio.run(skill_catalog(binary, env, root))
+            for name in ('agentic-coding', 'checkpoint', 'ponytail'):
+                assert catalog.get(name, {}).get('enabled'), f"Native core skill discovery failed: {name}"
+            for name in ('sage-design', 'token-efficiency', 'sage-review'):
+                assert name not in catalog, f"Catalog skill appeared in the native startup list: {name}"
             assert "personal-reader" in result.stdout, "Native personal agent discovery failed"
             assert list(personal.parent.iterdir()) == [personal]
             assert not (args.skills_dir / "sage-genomics").exists(), "Catalog skill should be lazy-routed by default"
@@ -81,7 +84,7 @@ def main():
                 input=json.dumps({"cwd": str(root), "session_id": "smoke", "hook_event_name": "SessionStart"}),
                 capture_output=True, text=True, check=True, timeout=15,
             )
-            assert "sage-genomics" in hook_proc.stdout, f"Skill router failed on .nf workspace: {hook_proc.stdout}"
+            assert '`nextflow`' in hook_proc.stdout, f"Skill router failed on .nf workspace: {hook_proc.stdout}"
             hooks = json.loads((args.codex_home / "hooks.json").read_text())['hooks']
             prompt_command = hooks['UserPromptSubmit'][-1]['hooks'][0]['command']
             prompt = {'cwd': str(root), 'session_id': 'smoke', 'hook_event_name': 'UserPromptSubmit',
@@ -105,7 +108,7 @@ def main():
                 raise RuntimeError(result.stderr)
             json.loads(result.stdout)
             assert "sage-genomics" in result.stdout, "Native skill discovery failed"
-            for name in ('ponytail', 'grilling', 'domain-modeling', 'sage-mcp-builder', 'token-efficiency',
+            for name in ('ponytail', 'grilling', 'domain-modeling', 'mcp-builder', 'token-efficiency',
                          'variant-analysis', 'differential-review', 'vercel-react-best-practices'):
                 assert name in result.stdout, f"Native skill discovery failed: {name}"
             catalog = asyncio.run(skill_catalog(binary, env, root))

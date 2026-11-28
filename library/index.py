@@ -68,11 +68,22 @@ def render(root=profiles.ROOT, query='', client=None):
     lines = ['# SAGE library index', '']
     if not groups:
         return f'No capabilities match {query!r}' + (f' in {client}.\n' if client else '.\n')
-    lines += ['**Core** skills are visible at startup. **Catalog** skills load on demand. '
-              '**Explicit** skills require a direct request. '
-              '**Default** MCP servers are selected at install. **Optional** entries require an explicit opt-in. '
-              '**Native** LSP entries have an OpenCode registration. **Provision** means SAGE can install the executable for that profile. '
-              '**Manual** entries are read or run on request. A dash means the profile omits that capability.', '']
+    lines += [
+        '## Status legend',
+        '',
+        '- **Core** skills are visible at startup.',
+        '- **Catalog** skills load on demand.',
+        '- **Explicit** skills require a direct request.',
+        '- **Default** MCP servers are selected at install.',
+        '- **Optional** entries require an explicit opt-in.',
+        '- **Native** LSP entries have an OpenCode registration.',
+        '- **Provision** means SAGE can install the executable for that profile.',
+        '- **Manual** entries are read or run on request.',
+        '- A dash (**—**) means the profile omits that capability.',
+        '',
+        '## Browse by purpose',
+        '',
+    ]
     for group in groups:
         anchor = re.sub(r'[^a-z0-9 -]', '', group.lower()).replace(' ', '-')
         lines.append(f'- [{group}](#{anchor})')

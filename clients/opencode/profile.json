@@ -1,54 +1,10 @@
 {
-  "core": [
-    "agentic-coding",
-    "checkpoint",
-    "git-commit-convention",
-    "ponytail",
-    "skill-acquisition",
-    "systematic-debugging",
-    "test-driven-development",
-    "verification-before-completion"
-  ],
-  "catalog": [
-    "nextflow",
-    "pysam",
-    "biopython",
-    "fair-data-principles",
-    "statistical-data-visualization",
-    "pipeline-sketch-results",
-    "first-principles-explainer",
-    "vercel-react-best-practices",
-    "webapp-testing",
-    "web-scraping",
-    "security-audit",
-    "differential-review",
-    "variant-analysis",
-    "codebase-design",
-    "domain-modeling",
-    "grill-with-docs",
-    "grilling",
-    "to-spec",
-    "to-tickets",
-    "setup-matt-pocock-skills",
-    "github-repo-best-practices",
-    "using-git-worktrees",
-    "mcp-builder",
-    "pdf-inplace-editing",
-    "sage-binary-inspection",
-    "overnight-explorer",
-    "skill-maker",
-    "skill-evaluation",
-    "token-efficiency",
-    "workflow-graph",
-    "review",
-    "red-team"
-  ],
   "mcp": [
-    "context7",
-    "deepwiki",
-    "serena"
+    "context7"
   ],
   "optional_mcp": [
+    "deepwiki",
+    "serena",
     "rea"
   ],
   "lsp": [

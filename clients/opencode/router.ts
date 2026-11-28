@@ -1,4 +1,4 @@
-import { existsSync, readdirSync, readFileSync, statSync } from "node:fs"
+import { closeSync, constants, existsSync, fstatSync, openSync, readdirSync, readFileSync, readSync, realpathSync, statSync } from "node:fs"
 import { dirname, join, relative, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -10,6 +10,7 @@ export type RoutingRule = {
   dirs?: string[]
   deps?: string[]
   patterns?: string[]
+  requests?: string[]
   companions?: string[]
   explicit_only?: boolean
 }
@@ -17,6 +18,7 @@ export type RoutingRule = {
 export type RoutingConfig = {
   version: number
   core: string[]
+  core_packages?: Record<string, { path: string; explicit_only: boolean }>
   rules: RoutingRule[]
 }
 
@@ -92,6 +94,18 @@ function globToRegExp(glob: string): RegExp {
   return new RegExp(`^${escaped}$`)
 }
 
+function manifestPrefix(path: string): string {
+  const fd = openSync(path, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0) | (constants.O_NONBLOCK ?? 0))
+  try {
+    if (!fstatSync(fd).isFile()) return ""
+    const buffer = Buffer.alloc(16384)
+    const bytes = readSync(fd, buffer, 0, buffer.length, 0)
+    return buffer.toString("utf8", 0, bytes).toLowerCase()
+  } finally {
+    closeSync(fd)
+  }
+}
+
 export function collectWorkspaceSignals(
   roots: string[],
   maxDepth = 2,
@@ -107,7 +121,7 @@ export function collectWorkspaceSignals(
     if (!rawRoot) continue
     let root: string
     try {
-      root = resolve(rawRoot)
+      root = realpathSync(rawRoot)
       if (!statSync(root).isDirectory() || seenRoots.has(root)) continue
     } catch {
       continue
@@ -134,11 +148,11 @@ export function collectWorkspaceSignals(
         relPaths.add(rel)
         if (entry.isDirectory()) {
           if (depth < maxDepth) queue.push([full, depth + 1])
-        } else {
+        } else if (entry.isFile()) {
           files.add(name)
           if (depth === 0 && (MANIFEST_NAMES.has(name) || (/^requirements.*\.txt$/).test(name))) {
             try {
-              manifests.push(readFileSync(full, "utf8").slice(0, 16384).toLowerCase())
+              manifests.push(manifestPrefix(full))
             } catch {
               // ignore unreadable manifest
             }
@@ -168,6 +182,7 @@ export function resolveCompanions(skills: string[], rules: RoutingRule[]): strin
 }
 
 export function matchWorkspace(roots: string[], rules: RoutingRule[]): string[] {
+  if (!rules.some((rule) => rule.files?.length || rule.dirs?.length || rule.deps?.length)) return []
   const { files, relPaths, manifestText } = collectWorkspaceSignals(roots)
   const fileList = Array.from(files)
   const relList = Array.from(relPaths)
@@ -192,23 +207,41 @@ export function matchWorkspace(roots: string[], rules: RoutingRule[]): string[] 
   return resolveCompanions(matched, rules)
 }
 
-export function matchPrompt(text: string, rules: RoutingRule[]): string[] {
-  if (!text.trim()) return []
-  const matched: RoutingRule[] = []
-  for (const rule of rules) {
-    for (const pat of rule.patterns ?? []) {
-      try {
-        if (new RegExp(pat, "i").test(text)) {
-          matched.push(rule)
-          break
-        }
-      } catch {
-        // ignore invalid regex
-      }
+function promptProse(text: string): string {
+  if (!/[\u0060~>]/.test(text)) return text
+  const lines: string[] = []
+  let fence = ""
+  for (const line of text.split(/\r?\n/)) {
+    const marker = line.match(/^ {0,3}(\u0060{3,}|~{3,})(.*)$/)
+    if (fence) {
+      if (marker?.[1].startsWith(fence) && !marker[2].trim()) fence = ""
+    } else if (marker) {
+      fence = marker[1]
+    } else if (!line.trimStart().startsWith(">")) {
+      lines.push(line)
     }
   }
-  const requested = matched.filter((rule) => rule.explicit_only)
-  return resolveCompanions((requested.length ? requested : matched).map((rule) => rule.skill), rules)
+  return lines.join("\n")
+}
+
+function createPromptMatcher(rules: RoutingRule[]) {
+  const compile = (patterns: string[] = []) => patterns.flatMap((pattern) => {
+    try { return [new RegExp(pattern, "i")] } catch { return [] }
+  })
+  const compiled = rules.map((rule) => ({ rule, requests: compile(rule.requests), patterns: compile(rule.patterns) }))
+  return (raw: string): string[] => {
+    const text = promptProse(raw)
+    if (!text.trim()) return []
+    const requested = compiled.filter((entry) => entry.requests.some((pattern) => pattern.test(text)))
+    if (requested.length) return resolveCompanions(requested.map(({ rule }) => rule.skill), rules)
+    const matched = compiled.filter((entry) => entry.patterns.some((pattern) => pattern.test(text)))
+    const legacyExplicit = matched.filter(({ rule }) => rule.explicit_only)
+    return resolveCompanions((legacyExplicit.length ? legacyExplicit : matched).map(({ rule }) => rule.skill), rules)
+  }
+}
+
+export function matchPrompt(text: string, rules: RoutingRule[]): string[] {
+  return createPromptMatcher(rules)(text)
 }
 
 export function extractLatestUserText(messages: unknown): string {
@@ -225,18 +258,6 @@ export function extractLatestUserText(messages: unknown): string {
     if (texts.length > 0) return texts.join("\n")
   }
   return ""
-}
-
-export function formatCatalogSummary(rules: RoutingRule[]): string {
-  const grouped = new Map<string, string[]>()
-  for (const rule of rules) {
-    const cat = rule.explicit_only ? "explicit request only" : rule.category ?? "other"
-    if (!grouped.has(cat)) grouped.set(cat, [])
-    grouped.get(cat)!.push(rule.skill)
-  }
-  return Array.from(grouped.entries())
-    .map(([cat, names]) => `${cat}: ${names.join(", ")}`)
-    .join("; ")
 }
 
 function appendSystem(system: unknown[], text: string): void {
@@ -266,18 +287,19 @@ export function createRouter(dirs = defaultBaseDirs()) {
     ? JSON.parse(readFileSync(routingPath, "utf8"))
     : { version: 1, core: [], rules: [] }
   const rules = routing.rules ?? []
+  const selectPrompt = createPromptMatcher(rules)
   const coreSet = new Set(routing.core ?? [])
-  const explicitOnly = new Set(rules.filter((rule) => rule.explicit_only).map((rule) => rule.skill))
   const active = new Set<string>()
+  const nativeOverrides = new Set<string>()
 
-  const isCoreOrLocal = (id: string) => coreSet.has(id) || existsSync(join(dirs.coreDir, id, "SKILL.md"))
+  const isCoreOrLocal = (id: string) =>
+    coreSet.has(id) || nativeOverrides.has(id) || existsSync(join(dirs.coreDir, id, "SKILL.md"))
 
-  const readCatalogSkill = (id: string) => {
-    const skillPath = join(dirs.catalogDir, id, "SKILL.md")
-    if (!existsSync(skillPath) || isCoreOrLocal(id)) return null
+  const readSkill = (id: string, skillPath: string, explicitOnly = false) => {
+    if (!existsSync(skillPath)) return null
     const raw = readFileSync(skillPath, "utf8")
     const parsed = parseFrontmatter(raw, id)
-    return { id, path: skillPath, ...parsed }
+    return { id, path: skillPath, ...parsed, ...(explicitOnly ? { autoinvoke: false } : {}) }
   }
 
   return {
@@ -293,24 +315,25 @@ export function createRouter(dirs = defaultBaseDirs()) {
       }
       return added
     },
-    activatePrompt(text: string): string[] {
-      const matched = matchPrompt(text, rules)
-      if (matched.some((id) => explicitOnly.has(id))) {
-        // The registry is workspace-wide. Supply a requested bundle to this prompt only.
-        return matched.filter((id) => !isCoreOrLocal(id) && existsSync(join(dirs.catalogDir, id, "SKILL.md")))
-      }
-      const added: string[] = []
-      for (const id of matched) {
-        if (!active.has(id) && !isCoreOrLocal(id) && existsSync(join(dirs.catalogDir, id, "SKILL.md"))) {
-          active.add(id)
-          added.push(id)
-        }
-      }
-      return added
+    matchCatalogPrompt(text: string): string[] {
+      return selectPrompt(text).filter(
+        (id) => !isCoreOrLocal(id) && existsSync(join(dirs.catalogDir, id, "SKILL.md")),
+      )
     },
     registerIntoEditor(editor: any) {
+      nativeOverrides.clear()
+      for (const { skill: id } of rules) {
+        const existing = editor.get?.(id)
+        if (existing && existing.path !== join(dirs.catalogDir, id, "SKILL.md")) nativeOverrides.add(id)
+      }
+      for (const [id, entry] of Object.entries(routing.core_packages ?? {})) {
+        if (editor.get?.(id)) continue
+        const loaded = readSkill(id, entry.path, entry.explicit_only)
+        if (loaded) editor.add(loaded)
+      }
       for (const id of active) {
-        const loaded = readCatalogSkill(id)
+        if (editor.get?.(id) || isCoreOrLocal(id)) continue
+        const loaded = readSkill(id, join(dirs.catalogDir, id, "SKILL.md"))
         if (loaded) editor.add(loaded)
       }
     },
@@ -319,9 +342,7 @@ export function createRouter(dirs = defaultBaseDirs()) {
       const loadedList = active.size > 0 ? `Auto-loaded for this project: ${Array.from(active).join(", ")}. ` : ""
       return (
         `[SAGE Auto-Skill Router] ${loadedList}` +
-        `Additional on-demand skills in ${dirs.catalogDir}/<name>/SKILL.md (${formatCatalogSummary(rules)}). ` +
-        `Read applicable skills and honor explicit-only entries. For a repeatable gap in the library, ` +
-        `consult the skill-acquisition workflow when adding a reusable skill is in scope.`
+        `Use ${routingPath} to find other relevant skills. Read matched SKILL.md files and honor explicit-only entries.`
       )
     },
   }
@@ -338,31 +359,22 @@ const SageSkillRouterPlugin = {
     if (roots.length === 0) roots.push(process.cwd())
     router.activateWorkspace(roots)
 
-    let registeredCount = 0
     if (ctx.skill?.transform) {
       await ctx.skill.transform((editor: any) => {
         router.registerIntoEditor(editor)
-        registeredCount = router.active.size
       })
     }
 
     if (ctx.session?.hook) {
       await ctx.session.hook("context", async (event: any) => {
         const userText = extractLatestUserText(event?.messages)
-        const newlyMatched = router.activatePrompt(userText)
-        if (newlyMatched.length > 0 && router.active.size > registeredCount && ctx.skill?.reload) {
-          registeredCount = router.active.size
-          try {
-            await ctx.skill.reload()
-          } catch {
-            // fallback instruction below points directly to SKILL.md paths
-          }
-        }
+        // OpenCode's registry is workspace-wide. Keep prompt matches within the current request.
+        const matched = router.matchCatalogPrompt(userText)
         if (Array.isArray(event?.system)) {
           const intro = router.buildIntro()
           if (intro) appendSystem(event.system, intro)
-          if (newlyMatched.length > 0) {
-            const paths = newlyMatched
+          if (matched.length > 0) {
+            const paths = matched
               .map((id) => `\`${id}\` (${join(dirs.catalogDir, id, "SKILL.md")})`)
               .join(", ")
             appendSystem(event.system, `[SAGE Auto-Skill Router] Matched task skill(s): ${paths}. Read and follow now.`)

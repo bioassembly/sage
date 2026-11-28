@@ -1,4 +1,4 @@
-<!-- workflow-graph source=89cab6209eaffa14274f98fbf89ed04c70984374c7fa4251e5605ca05e2f5e88 svg=9a3e8d8937f1acf185a8294e8a8ba348956f9e3bec6ea047b8413cee812f93bb -->
+<!-- workflow-graph source=f859c207da50545c848f15f2eaca7abd0738a5ec80a6633865e5643de4fb2ce8 svg=4b3a03f87f2a7d35e3d8c10533ef01076c02234f391d020cde03fa785192fb4c -->
 <svg width="974pt" height="483pt"
  viewBox="0.00 0.00 974.18 482.68" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(15.84 466.84)">
@@ -127,8 +127,8 @@
 <!-- match -->
 <g id="node7" class="node">
 <title>match</title>
-<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M665,-220C665,-220 367,-220 367,-220 361,-220 355,-214 355,-208 355,-208 355,-186 355,-186 355,-180 361,-174 367,-174 367,-174 665,-174 665,-174 671,-174 677,-180 677,-186 677,-186 677,-208 677,-208 677,-214 671,-220 665,-220"/>
-<text text-anchor="middle" x="516" y="-200.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">4 · Match requests and workspace signals</text>
+<path fill="#eff5f7" stroke="#52737d" stroke-width="1.2" d="M702.5,-220C702.5,-220 329.5,-220 329.5,-220 323.5,-220 317.5,-214 317.5,-208 317.5,-208 317.5,-186 317.5,-186 317.5,-180 323.5,-174 329.5,-174 329.5,-174 702.5,-174 702.5,-174 708.5,-174 714.5,-180 714.5,-186 714.5,-186 714.5,-208 714.5,-208 714.5,-214 708.5,-220 702.5,-220"/>
+<text text-anchor="middle" x="516" y="-200.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">4 · Match prompt prose and bounded workspace signals</text>
 <text text-anchor="middle" x="516" y="-186.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#173341">Apply invocation policy and add companions</text>
 </g>
 <!-- none -->

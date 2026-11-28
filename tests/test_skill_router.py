@@ -129,6 +129,59 @@ class SkillRoutingTests(unittest.TestCase):
         self.assertNotIn('pdf-edit', result['additionalContext'])
         self.assertNotIn('fair-data', result['additionalContext'])
 
+    def test_compaction_restores_last_prompt_skill_and_clear_starts_fresh(self):
+        payload = {'session_id': 'continues', 'hook_event_name': 'UserPromptSubmit',
+                   'cwd': str(self.root), 'turn_id': 't1', 'prompt': 'redact this PDF'}
+        script = self.root / 'sage/route_skills.py'
+        self.assertIn('pdf-edit', route_skills.route_hook(payload, 'codex', True, script)['hookSpecificOutput']['additionalContext'])
+        self.assertEqual(route_skills.route_hook(payload, 'codex', True, script), {})
+        before_compact = {'session_id': 'continues', 'hook_event_name': 'SessionStart', 'cwd': str(self.root)}
+        resumed = route_skills.route_hook({**before_compact, 'source': 'compact'}, 'codex', False, script)
+        self.assertIn('pdf-edit', resumed['hookSpecificOutput']['additionalContext'])
+        cleared = route_skills.route_hook({**before_compact, 'source': 'clear'}, 'codex', False, script)
+        self.assertNotIn('pdf-edit', cleared['hookSpecificOutput']['additionalContext'])
+
+    def test_explicit_skill_can_be_requested_again_on_a_new_turn(self):
+        self.routing['rules'][-1]['requests'] = [r'^\$pdf-edit$']
+        (self.catalog / 'routing.json').write_text(json.dumps(self.routing))
+        payload = {'session_id': 'reissue', 'hook_event_name': 'UserPromptSubmit',
+                   'prompt': '$pdf-edit', 'turn_id': 'a'}
+        script = self.root / 'sage/route_skills.py'
+        first = route_skills.route_hook(payload, 'codex', True, script)
+        self.assertIn('pdf-edit', first['hookSpecificOutput']['additionalContext'])
+        self.assertEqual(route_skills.route_hook(payload, 'codex', True, script), {})
+        second = route_skills.route_hook({**payload, 'turn_id': 'b'}, 'codex', True, script)
+        self.assertIn('pdf-edit', second['hookSpecificOutput']['additionalContext'])
+
+    def test_prompt_detects_workspace_changes_in_the_same_conversation(self):
+        first, second = self.root / 'first', self.root / 'second'
+        first.mkdir()
+        second.mkdir()
+        (second / 'main.nf').touch()
+        hook = self.root / 'plugins/sage-skill-router/route_skills.py'
+        payload = {'common': {'conversationId': 'moves', 'workspacePaths': [str(first)]}}
+        route_skills.route_hook(payload, 'antigravity', True, hook)
+        payload['common']['workspacePaths'] = [str(second)]
+        output = route_skills.route_hook(payload, 'antigravity', True, hook)
+        self.assertIn('nextflow', output['injectSteps'][0]['systemMessage']['systemMessage'])
+
+    def test_workspace_scan_bounds_and_ignores_symlink_targets(self):
+        workspace, unrelated = self.root / 'work', self.root / 'unrelated'
+        workspace.mkdir()
+        unrelated.mkdir()
+        (unrelated / 'external.nf').touch()
+        (workspace / 'linked').symlink_to(unrelated)
+        manifest = unrelated / 'pyproject.toml'
+        manifest.write_text('nextflow\n')
+        link = workspace / 'pyproject.toml'
+        link.symlink_to(manifest)
+        self.assertEqual(route_skills.match_workspace([workspace], self.routing['rules']), [])
+        link.unlink()
+        link.write_text(' ' * 16384 + 'nextflow')
+        self.assertEqual(route_skills.match_workspace([workspace], self.routing['rules']), [])
+        link.write_text('nextflow')
+        self.assertEqual(route_skills.match_workspace([workspace], self.routing['rules']), ['nextflow', 'fair-data'])
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -8,7 +8,7 @@ digraph "routing" {
   codex [label="3a · Codex\nSessionStart and UserPromptSubmit"];
   open [label="3b · OpenCode\nWorkspace and prompt plugin events"];
   agy [label="3c · Antigravity\nSessionStart and PreInvocation"];
-  match [label="4 · Match requests and workspace signals\nApply invocation policy and add companions"];
+  match [label="4 · Match prompt prose and bounded workspace signals\nApply invocation policy and add companions"];
   none [label="5a · Continue the session\nNo new matching skill", fillcolor="#fcf1d9"];
   found [label="5b · Surface matching catalog skills"];
   use [label="6 · Read the applicable skill\nOpen supporting files as needed", fillcolor="#dcebf8"];

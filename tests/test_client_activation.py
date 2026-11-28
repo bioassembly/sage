@@ -110,7 +110,8 @@ class ClientActivationTests(unittest.TestCase):
         (local / 'SKILL.md').write_text('private local skill')
         first = installer.install(repo, home, 'opencode')
         second = installer.install(repo, home, 'opencode')
-        self.assertEqual((target / 'skills/example').resolve(), local.resolve())
+        routes = json.loads((target / 'skills-catalog/routing.json').read_text())
+        self.assertEqual(routes['core_packages']['example']['path'], str(local / 'SKILL.md'))
         installer.harness.restore(second)
         installer.harness.restore(first)
 

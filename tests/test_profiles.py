@@ -75,11 +75,11 @@ class ProfileTests(unittest.TestCase):
             root = Path(tmp) / 'another checkout'
             shutil.copytree(ROOT, root, symlinks=True, ignore=shutil.ignore_patterns('.git', '.state', '__pycache__'))
             file = root / 'clients/opencode/profile.json'
-            plan = profiles.read(file)
+            plan = profiles.profile('opencode', root)
             plan['catalog'].remove('workflow-graph')
             plan['core'].append('workflow-graph')
-            plan['catalog'].remove('web-scraping')
-            plan['mcp'].remove('deepwiki')
+            plan['catalog'].remove('sage-web-scraping')
+            plan['mcp'].remove('context7')
             plan['lsp'] = ['pyright']
             file.write_text(profiles.formatted(plan))
             with self.assertRaisesRegex(ValueError, 'Stale library'):
@@ -87,14 +87,16 @@ class ProfileTests(unittest.TestCase):
             profiles.validate(root=root)
             index.sync(root, write=True)
             self.assertFalse(index.sync(root))
-            self.assertIn('web-scraping', profiles.profile('antigravity', root)['catalog'])
+            self.assertIn('sage-web-scraping', profiles.profile('antigravity', root)['catalog'])
             home = Path(tmp) / 'test user'
             subprocess.run([sys.executable, root / 'sage.py', 'install', 'opencode', '--home', home], check=True, capture_output=True)
             installed = home / '.config/opencode'
-            self.assertTrue((installed / 'skills/workflow-graph/SKILL.md').samefile(root / 'library/skills/workflow-graph/SKILL.md'))
             config = profiles.read(installed / 'opencode.json')
+            routes = profiles.read(installed / 'skills-catalog/routing.json')
+            self.assertEqual(routes['core_packages']['workflow-graph']['path'],
+                             str(root / 'library/skills/workflow-graph/SKILL.md'))
             self.assertEqual(set(config['lsp']), {'pyright'})
-            self.assertNotIn('deepwiki', config['mcp'])
+            self.assertNotIn('context7', config['mcp'])
             self.assertFalse((installed / 'skills-catalog/web-scraping').exists())
             plan['catalog'].append('missing-skill')
             file.write_text(profiles.formatted(plan))
@@ -167,7 +169,13 @@ class ProfileTests(unittest.TestCase):
                 self.assertFalse((target / 'sage/backups').exists())
                 subprocess.run(cli, check=True, capture_output=True)
                 catalog = target / 'skills-catalog'
-                self.assertTrue((link / 'SKILL.md').samefile(ROOT / 'library/skills/ponytail/SKILL.md'))
+                if client == 'opencode':
+                    self.assertFalse(link.is_symlink())
+                    routes = profiles.read(catalog / 'routing.json')
+                    self.assertEqual(routes['core_packages']['ponytail']['path'],
+                                     str(ROOT / 'library/skills/ponytail/SKILL.md'))
+                else:
+                    self.assertTrue((link / 'SKILL.md').samefile(ROOT / 'library/skills/ponytail/SKILL.md'))
                 self.assertTrue((catalog / 'workflow-graph/SKILL.md').samefile(ROOT / 'library/skills/workflow-graph/SKILL.md'))
                 self.assertFalse((skill_dir / 'workflow-graph').exists())
                 self.assertEqual(len(list(catalog.glob('*/SKILL.md'))), len(profiles.profile(client)['catalog']))
@@ -177,7 +185,8 @@ class ProfileTests(unittest.TestCase):
                     project.mkdir()
                     (project / 'example.dot').write_text('digraph { a -> b }')
                     reply = subprocess.run([sys.executable, hook, '--client', client], check=True, capture_output=True,
-                                           text=True, input=json.dumps({'cwd': str(project), 'session_id': 'test'}),
+                                           text=True, input=json.dumps({'cwd': str(project), 'session_id': 'test',
+                                                                        'prompt': 'Draw a workflow graph.'}),
                                            env={**os.environ, 'SAGE_ROUTER_CATALOG': str(catalog)})
                     self.assertIn(str(catalog / 'workflow-graph/SKILL.md'), reply.stdout)
                 journal, = (target / 'sage/backups').glob('*.json')

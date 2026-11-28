@@ -68,6 +68,16 @@ class ClientConfigTests(unittest.TestCase):
         self.assertIn('private-lab', result['mcp'])
         self.assertEqual(result['compaction'], {'auto': True, 'keep': {'tokens': 15000}, 'buffer': 32000})
 
+    def test_removing_default_mcp_preserves_edited_registration(self):
+        for client, key, toggle in [('opencode', 'mcp', {'enabled': False}),
+                                    ('antigravity', 'mcpServers', {'disabled': True})]:
+            with self.subTest(client=client):
+                definitions = {'deepwiki': {'url': 'https://example.com/wiki'}, 'serena': {'command': 'serena'}}
+                live = {key: {'deepwiki': {**definitions['deepwiki'], **toggle},
+                              'serena': definitions['serena']}}
+                result = module.merge({key: {}}, live, {key: definitions}, client)
+                self.assertEqual(result[key], {'deepwiki': live[key]['deepwiki']})
+
 
 if __name__ == '__main__':
     unittest.main()
